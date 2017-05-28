@@ -1,1 +1,1 @@
-# mafia-itacademy-jd2
+# Mafia. Final JD2 project.
