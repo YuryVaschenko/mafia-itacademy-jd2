@@ -16,10 +16,13 @@ public class LocationsHandler {
         return daoImplementation.saveNew(location);
     }
 
-    public Location getLocationById(Long id){
+    public Location getLocation(Long id){
         DaoImplementation daoImplementation = new DaoImplementation();
-        return daoImplementation.get(id);
+        return daoImplementation.getById(id);
     }
-
+    public Location getLocation(String name){
+        DaoImplementation daoImplementation = new DaoImplementation();
+        return daoImplementation.getByName(name);
+    }
 
 }

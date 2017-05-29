@@ -5,6 +5,9 @@ import by.itacademy.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
+import java.util.List;
+
 /**
  * Created by Yury V. on 28.05.17.
  */
@@ -21,7 +24,7 @@ public class DaoImplementation implements DaoInterface<Location> {
         return id;
     }
 
-    public Location get(Long id) {
+    public Location getById(Long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Location location = session.get(Location.class, id);
@@ -29,6 +32,22 @@ public class DaoImplementation implements DaoInterface<Location> {
         session.close();
         return location;
     }
+
+    public Location getByName(String name) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        String hql = "SELECT L FROM Location L WHERE L.name='Minsk'";
+        Query query = session.createQuery(hql);
+        List<Location> locationsList = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        if (locationsList.size() > 0) {
+            return locationsList.get(0);
+        } else {
+            return null;
+        }
+    }
+
 
     public void update(Location location) {
         Session session = sessionFactory.openSession();

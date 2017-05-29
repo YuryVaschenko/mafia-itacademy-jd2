@@ -26,10 +26,10 @@ public class MainPageController extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/db_connection_test.jsp");
 
         LocationsHandler locationsHandler = new LocationsHandler();
-        Location location = locationsHandler.getLocationById(1L);
+        Location location = locationsHandler.getLocation("Minsk");
         if (location == null) {
-            locationsHandler.addNewLocationInDatabase("Minsk", "27.525773, 53.89079");
-            location = locationsHandler.getLocationById(1L);
+            locationsHandler.addNewLocationInDatabase("Minsk", "53.902257, 27.561831");
+            location = locationsHandler.getLocation(1L);
         }
         req.setAttribute("location", location);
 

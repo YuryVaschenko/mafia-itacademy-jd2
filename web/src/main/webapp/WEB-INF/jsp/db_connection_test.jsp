@@ -10,6 +10,20 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="css/mainstyle.css" rel="stylesheet">
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        var myMap;
+        ymaps.ready(init);
+
+        function init () {
+
+            myMap = new ymaps.Map('map', {
+                center: [${requestScope.location.coords}],
+                zoom: 11,
+                controls: ['zoomControl', 'typeSelector']
+            });
+        }
+    </script>
 </head>
 <body>
 
@@ -38,6 +52,8 @@
         <br/>
         <strong>Coords:</strong>
         <h2>${requestScope.location.coords}</h2>
+        <br/>
+        <div id="map" style="width: 350px; height: 350px"/>
     </main><!-- .content -->
 </div><!-- .wrapper -->
 
@@ -46,5 +62,6 @@
     <hr/>
     <strong>Mafia:</strong> ItAcademy final JD2 project. Copyright &#169; Yury Vaschenko 2017
 </footer><!-- .footer -->
+
 </body>
 </html>
