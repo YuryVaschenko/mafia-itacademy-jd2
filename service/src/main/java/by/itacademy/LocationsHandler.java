@@ -1,7 +1,7 @@
 package by.itacademy;
 
 import by.itacademy.dao.DaoImplementation;
-import by.itacademy.pojos.Location;
+import by.itacademy.entity.Location;
 
 /**
  * Created by Yury V. on 29.05.17.
@@ -16,13 +16,13 @@ public class LocationsHandler {
         return daoImplementation.saveNew(location);
     }
 
-    public Location getLocation(Long id){
+    public Location findLocation(Long id){
         DaoImplementation daoImplementation = new DaoImplementation();
-        return daoImplementation.getById(id);
+        return daoImplementation.findById(id);
     }
-    public Location getLocation(String name){
+    public Location findLocation(String name){
         DaoImplementation daoImplementation = new DaoImplementation();
-        return daoImplementation.getByName(name);
+        return daoImplementation.findByName(name);
     }
 
 }

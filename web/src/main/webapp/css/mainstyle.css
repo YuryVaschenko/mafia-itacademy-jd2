@@ -13,7 +13,6 @@ body {
 	margin: 0 auto;
 	min-height: 100%;
 	height: auto !important;
-	height: 100%;
 }
 hr {
 	clear: both;
@@ -54,7 +53,7 @@ hr {
 .navigation {
 	overflow: hidden;
 	height: 40px;
-    box-shadow: 0px 0px 0px #777, 0 0px 0 #666 inset;
+    box-shadow: 0 0 0 #777, 0 0 0 #666 inset;
 	
 }
 .navigation ul{
@@ -73,7 +72,7 @@ hr {
     float: left;
     width: 120px;
     background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 0px #777, 1px 0px 0px #666 inset;
+    box-shadow: 0 0 0 #777, 1px 0 0 #666 inset;
 	text-align: center;
 }
 .navigation a{
@@ -91,7 +90,7 @@ hr {
 
 /* Content --------------------------------------------------------------------*/
 .content {
-	box-shadow: 3px 3px 2px #777, 0px 0px 0px #666 inset;
+	box-shadow: 3px 3px 2px #777, 0 0 0 #666 inset;
 	background-color:rgba(0, 0, 0, 0.3);
 	padding: 15px;
 	margin: auto;
@@ -103,7 +102,7 @@ hr {
 .footer {
 	text-align: center;
 	width: 1000px;
-	margin: 0px auto 0;
+	margin: 0 auto 0;
 	height: 50px;
 	position: relative;
 }

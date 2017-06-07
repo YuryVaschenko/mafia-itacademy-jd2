@@ -1,4 +1,4 @@
-package by.itacademy.pojos;
+package by.itacademy.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +20,7 @@ import javax.persistence.Table;
 @Table(name = "locations")
 @ToString
 @NoArgsConstructor
-public class Location {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private Long id;
+public class Location extends BaseEntity {
 
     @Column (name = "name")
     @Getter

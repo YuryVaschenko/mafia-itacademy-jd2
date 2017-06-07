@@ -1,9 +1,0 @@
-﻿DROP DATABASE IF EXISTS mafia_july2017_jd2;
-
-CREATE DATABASE mafia_july2017_jd2;
-
-USE mafia_july2017_jd2;
-
-DROP TABLE IF EXISTS locations;
-
-CREATE TABLE locations (id INT AUTO_INCREMENT, name VARCHAR (50), coords VARCHAR (50), PRIMARY KEY (id));
