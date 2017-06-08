@@ -1,8 +1,5 @@
 package by.itacademy.controllers;
 
-import by.itacademy.LocationsHandler;
-import by.itacademy.entity.Location;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,13 +22,13 @@ public class MainPageController extends HttpServlet {
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/db_connection_test.jsp");
 
-        LocationsHandler locationsHandler = new LocationsHandler();
-        Location location = locationsHandler.findLocation("Minsk");
+      /*  LocationsHandler locationsHandler = new LocationsHandler();
+        GlobalCoords location = locationsHandler.findLocation("Minsk");
         if (location == null) {
-            locationsHandler.addNewLocationInDatabase("Minsk", "53.902257, 27.561831");
+            slocationsHandler.addNewLocationInDatabase("Minsk", "53.902257, 27.561831");
             location = locationsHandler.findLocation(1L);
         }
-        req.setAttribute("location", location);
+        req.setAttribute("location", location);*/
 
         dispatcher.forward(req, resp);
 

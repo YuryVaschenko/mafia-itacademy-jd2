@@ -7,9 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,19 +15,24 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "locations")
-@ToString
+@Table(name = "location")
+@ToString(exclude = {"address"})
 @NoArgsConstructor
 public class Location extends BaseEntity {
 
-    @Column (name = "name")
+    @Column(name = "latitude", nullable = false)
     @Getter
     @Setter
-    private String name;
+    private String latitude;
 
-    @Column (name = "coords")
+    @Column(name = "longitude", nullable = false)
     @Getter
     @Setter
-    private String coords;
+    private String longitude;
+
+    @OneToOne(mappedBy = "location")
+    @Getter
+    @Setter
+    private Address address;
 
 }

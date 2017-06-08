@@ -1,6 +1,7 @@
 package by.itacademy.dao;
 
 import by.itacademy.entity.Location;
+import by.itacademy.entity.Location;
 import by.itacademy.utils.HibernateUtil;
 import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.hibernate.Session;
@@ -69,21 +70,6 @@ public class DaoImplementation implements GenericDAO<Location, ID> {
             return locationsList;
         } else {
             return new ArrayList<>();
-        }
-    }
-
-    public Location findByName(String name) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        String hql = "SELECT L FROM Location L WHERE L.name='Minsk'";
-        Query query = session.createQuery(hql);
-        List<Location> locationsList = query.getResultList();
-        session.getTransaction().commit();
-        session.close();
-        if (locationsList.size() > 0) {
-            return locationsList.get(0);
-        } else {
-            return null;
         }
     }
 

@@ -22,7 +22,7 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false, columnDefinition = "INT UNSIGNED")
+    @Column(name = "id", nullable = false, updatable = false, unique = true, columnDefinition = "INT UNSIGNED")
     @Getter
     @Setter
     private long id;

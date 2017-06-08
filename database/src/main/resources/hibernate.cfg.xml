@@ -20,5 +20,6 @@
         <property name="hibernate.connection.useUnicode">true</property>
 
         <mapping class="by.itacademy.entity.Location" />
+        <mapping class="by.itacademy.entity.Address" />
     </session-factory>
 </hibernate-configuration>
