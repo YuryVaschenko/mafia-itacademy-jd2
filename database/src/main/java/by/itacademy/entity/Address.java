@@ -41,7 +41,7 @@ public class Address extends BaseEntity{
     @Column(name = "house")
     @Getter
     @Setter
-    private Integer house;
+    private String house;
 
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "location_id", unique = true)

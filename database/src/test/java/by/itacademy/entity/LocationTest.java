@@ -12,7 +12,7 @@ import org.junit.Test;
  * Created by Yury V. on 08.06.17.
  */
 
-public class AddressTest {
+public class LocationTest {
 
 
     private static SessionFactory SESSION_FACTORY;
@@ -23,59 +23,57 @@ public class AddressTest {
     }
 
     @Test
-    public void addressSaveAndRetrieveTest(){
+    public void locationSaveAndRetrieveTest(){
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        Address address = new Address();
-        address.setCountry("Belarus");
-        address.setCity("Minsk");
-        address.setStreet("Kolasa");
-        address.setHouse("55a");
-        Long id = (Long) session.save(address);
-        Address retrievedAddress = session.load(Address.class, id);
+        Location location = new Location();
+        location.setLatitude("55.55");
+        location.setLongitude("55.55");
+        Long id = (Long) session.save(location);
+        Location retrievedLocation = session.load(Location.class, id);
         session.getTransaction().commit();
         session.close();
 
-        Assert.assertEquals(address, retrievedAddress);
+        Assert.assertEquals(location, retrievedLocation);
     }
 
     @Test
-    public void locationThroughAddressSaveAndRetrieveTest(){
+    public void AddressThroughLocationSaveAndRetrieveTest(){
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        Address address = new Address();
         Location location = new Location();
         location.setLatitude("77.7777");
         location.setLongitude("55.5555");
-        address.setLocation(location);
+        Address address = new Address();
         location.setAddress(address);
-        Long id = (Long) session.save(address);
-        Address retrievedAddress = session.load(Address.class, id);
+        address.setLocation(location);
+        Long id = (Long) session.save(location);
+        Location retrievedLocation = session.load(Location.class, id);
         session.getTransaction().commit();
         session.close();
 
-        Assert.assertEquals(address.getLocation(), retrievedAddress.getLocation());
+        Assert.assertEquals(location.getAddress(), retrievedLocation.getAddress());
     }
 
     @Test
-    public void cascadeDeletingAddressAndLocationTest(){
+    public void cascadeDeletingLocationAndAddressTest(){
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
-        Address address = new Address();
-        address.setCountry("Belarus");
         Location location = new Location();
         location.setLongitude("55.555");
         location.setLatitude("55.555");
-        address.setLocation(location);
+        Address address = new Address();
+        address.setCountry("Belarus");
         location.setAddress(address);
-        Long id = (Long) session.save(address);
-        session.delete(address);
+        address.setLocation(location);
+        Long id = (Long) session.save(location);
+        session.delete(location);
 
-        Address retrievedAddress = session.get(Address.class, id);
-        Location retrievedLocation = session.get(Location.class, 1L);
+        Location retrievedLocation = session.get(Location.class, id);
+        Address retrievedAddress = session.get(Address.class, 1L);
         session.getTransaction().commit();
         session.close();
 

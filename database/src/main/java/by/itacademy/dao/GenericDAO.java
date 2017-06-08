@@ -1,13 +1,12 @@
 package by.itacademy.dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Yury V. on 28.05.17.
  */
 
-public interface GenericDAO<T, ID extends Serializable> {
+public interface GenericDAO<T> {
 
     Long saveNew(T t);
 

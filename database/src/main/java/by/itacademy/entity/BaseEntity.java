@@ -25,6 +25,6 @@ public abstract class BaseEntity {
     @Column(name = "id", nullable = false, updatable = false, unique = true, columnDefinition = "INT UNSIGNED")
     @Getter
     @Setter
-    private long id;
+    private Long id;
 
 }

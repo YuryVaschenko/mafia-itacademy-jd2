@@ -1,9 +1,7 @@
 package by.itacademy.dao;
 
 import by.itacademy.entity.Location;
-import by.itacademy.entity.Location;
 import by.itacademy.utils.HibernateUtil;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -14,7 +12,8 @@ import java.util.List;
 /**
  * Created by Yury V. on 28.05.17.
  */
-public class DaoImplementation implements GenericDAO<Location, ID> {
+
+public class DaoImplementation implements GenericDAO<Location> {
 
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -63,7 +62,8 @@ public class DaoImplementation implements GenericDAO<Location, ID> {
         session.beginTransaction();
         String hql = "SELECT L FROM Location L";
         Query query = session.createQuery(hql);
-        List<Location> locationsList = query.getResultList();
+        @SuppressWarnings("unchecked")
+        List<Location> locationsList = (List<Location>) query.getResultList();
         session.getTransaction().commit();
         session.close();
         if (locationsList.size() > 0) {

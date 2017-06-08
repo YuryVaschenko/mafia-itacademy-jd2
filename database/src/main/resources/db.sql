@@ -18,7 +18,7 @@ CREATE TABLE addresses (
   country     VARCHAR(30),
   city        VARCHAR(30),
   street      VARCHAR(30),
-  house       SMALLINT UNSIGNED,
+  house       VARCHAR(10),
   location_id INT UNSIGNED UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (location_id) REFERENCES location (id)
