@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "addresses")
 @ToString(exclude = {"location"}, callSuper = true)
 @NoArgsConstructor
-public class Address extends BaseEntity{
+public class Address extends BaseEntity {
 
 
     @Column(name = "country")
@@ -43,10 +43,15 @@ public class Address extends BaseEntity{
     @Setter
     private String house;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "location_id", unique = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id", unique = true)
     @Getter
     @Setter
     private Location location;
+
+    @OneToOne(mappedBy = "address")
+    @Getter
+    @Setter
+    private Clan clan;
 
 }

@@ -24,5 +24,12 @@ CREATE TABLE addresses (
   FOREIGN KEY (location_id) REFERENCES location (id)
 )
   DEFAULT CHARSET = utf8;
-
+CREATE TABLE clans (
+  id         INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  name       VARCHAR(20)  NOT NULL,
+  address_id INT UNSIGNED UNIQUE,
+  PRIMARY KEY (id),
+  FOREIGN KEY (address_id) REFERENCES addresses (id)
+)
+  DEFAULT CHARSET = utf8;
 

@@ -21,5 +21,6 @@
 
         <mapping class="by.itacademy.entity.Location" />
         <mapping class="by.itacademy.entity.Address" />
+        <mapping class="by.itacademy.entity.Clan" />
     </session-factory>
 </hibernate-configuration>
