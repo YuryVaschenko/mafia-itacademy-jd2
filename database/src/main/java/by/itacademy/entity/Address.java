@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "addresses")
-@ToString(exclude = {"location"}, callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 public class Address extends BaseEntity {
 

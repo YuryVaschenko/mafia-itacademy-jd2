@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "debtors")
 @NoArgsConstructor
-@ToString
+@ToString (callSuper = true)
 public class Debtor extends BaseEntity {
 
     @Embedded

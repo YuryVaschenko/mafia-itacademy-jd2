@@ -23,6 +23,7 @@
         <mapping class="by.itacademy.entity.Address" />
         <mapping class="by.itacademy.entity.Clan" />
         <mapping class="by.itacademy.entity.Debtor" />
+        <mapping class="by.itacademy.entity.Member" />
 
     </session-factory>
 </hibernate-configuration>

@@ -47,4 +47,17 @@ CREATE TABLE debtors (
   FOREIGN KEY (address_id) REFERENCES addresses (id)
 )
   DEFAULT CHARSET = utf8;
+CREATE TABLE members (
+  id          INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  first_name  VARCHAR(30),
+  middle_name VARCHAR(30),
+  last_name   VARCHAR(30),
+  nickname    VARCHAR(30),
+  status      VARCHAR(30)  NOT NULL,
+  clan_id     INT UNSIGNED NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (clan_id) REFERENCES clans (id)
+)
+  DEFAULT CHARSET = utf8;
+
 
