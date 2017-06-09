@@ -1,7 +1,6 @@
 package by.itacademy;
 
-import by.itacademy.dao.DaoImplementation;
-import by.itacademy.entity.Location;
+import by.itacademy.dao.LocationDAO;
 import by.itacademy.entity.Location;
 
 /**
@@ -9,17 +8,9 @@ import by.itacademy.entity.Location;
  */
 public class LocationsHandler {
 
-  /*  public Long addNewLocationInDatabase(String name, String coords){
-        DaoImplementation daoImplementation = new DaoImplementation();
-        GlobalCoords location = new GlobalCoords();
-        location.setName(name);
-        location.setCoords(coords);
-        return daoImplementation.saveNew(location);
-    }*/
-
     public Location findLocation(Long id){
-        DaoImplementation daoImplementation = new DaoImplementation();
-        return daoImplementation.findById(id);
+        LocationDAO locationDAO = new LocationDAO();
+        return locationDAO.findById(id);
     }
 
 }

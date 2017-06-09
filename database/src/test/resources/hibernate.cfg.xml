@@ -22,5 +22,6 @@
         <mapping class="by.itacademy.entity.Location" />
         <mapping class="by.itacademy.entity.Address" />
         <mapping class="by.itacademy.entity.Clan" />
+        <mapping class="by.itacademy.entity.Debtor" />
     </session-factory>
 </hibernate-configuration>

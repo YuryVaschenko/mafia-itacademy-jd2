@@ -49,9 +49,4 @@ public class Address extends BaseEntity {
     @Setter
     private Location location;
 
-    @OneToOne(mappedBy = "address")
-    @Getter
-    @Setter
-    private Clan clan;
-
 }
