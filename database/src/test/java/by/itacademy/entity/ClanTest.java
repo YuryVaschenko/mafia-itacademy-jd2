@@ -14,7 +14,6 @@ import org.junit.Test;
 
 public class ClanTest {
 
-
     private static SessionFactory SESSION_FACTORY;
 
     @Before

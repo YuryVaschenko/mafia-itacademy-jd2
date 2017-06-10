@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 
 import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,11 +66,8 @@ public abstract class AbstractGenericDAO<T extends DAOEntity> implements Generic
         List<T> resultList = (List<T>) query.getResultList();
         session.getTransaction().commit();
         session.close();
-        if (resultList.size() > 0) {
-            return resultList;
-        } else {
-            return new ArrayList<>();
-        }
+
+        return resultList;
     }
 
 }

@@ -1,5 +1,6 @@
 package by.itacademy.entity;
 
+import by.itacademy.entity.enums.MemberStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
