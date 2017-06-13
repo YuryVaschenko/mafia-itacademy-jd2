@@ -13,6 +13,7 @@ import org.junit.Test;
 /**
  * Created by Yury V. on 10.06.17.
  */
+
 public class AbstractGenericDAOTest {
 
     private static SessionFactory SESSION_FACTORY;
@@ -30,7 +31,7 @@ public class AbstractGenericDAOTest {
         Location location = new Location();
         location.setLatitude("55.55");
         location.setLongitude("55.55");
-        LocationDAO locationDAO = new LocationDAO();
+        LocationDAO locationDAO = new LocationDAO(session);
         Long id_location = locationDAO.saveNew(location);
 
         Location secondLocation = new Location();
@@ -40,7 +41,7 @@ public class AbstractGenericDAOTest {
 
         Address address = new Address();
         address.setCountry("Belarus");
-        AddressDAO addressDAO = new AddressDAO();
+        AddressDAO addressDAO = new AddressDAO(session);
         Long id_address = addressDAO.saveNew(address);
 
         Location retrievedLocation = session.get(Location.class, id_location);
@@ -74,14 +75,14 @@ public class AbstractGenericDAOTest {
         address.setCountry("Belarus");
         Long address_id = (Long) session.save(address);
 
-        //session.flush();
-        session.getTransaction().commit();
-        session.close();
-        LocationDAO locationDAO = new LocationDAO();
-        AddressDAO addressDAO = new AddressDAO();
+        LocationDAO locationDAO = new LocationDAO(session);
         Location retrievedLocation = locationDAO.findById(location_id);
         Location retrievedSecondLocation = locationDAO.findById(secondLocation_id);
+        AddressDAO addressDAO = new AddressDAO(session);
         Address retrievedAddress = addressDAO.findById(address_id);
+
+        session.getTransaction().commit();
+        session.close();
 
 
         Assert.assertEquals(location, retrievedLocation);

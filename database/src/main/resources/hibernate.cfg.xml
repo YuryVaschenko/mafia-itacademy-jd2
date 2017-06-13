@@ -10,6 +10,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mafia_july2017_jd2</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.current_session_context_class">thread</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
