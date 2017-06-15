@@ -42,7 +42,6 @@ public abstract class AbstractGenericDAO<T extends DAOEntity> implements Generic
     public List<T> findAll() {
         String hql = String.format("SELECT L FROM %s L", entityClass.getSimpleName());
         Query query = session.createQuery(hql);
-
         //noinspection unchecked
         return (List<T>) query.getResultList();
     }

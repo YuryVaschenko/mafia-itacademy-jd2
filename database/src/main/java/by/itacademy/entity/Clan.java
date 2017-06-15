@@ -35,6 +35,8 @@ public class Clan extends BaseEntity {
     @Setter
     private Address address;
 
+
+
     @OneToMany(mappedBy = "clan")
     @Getter
     @Setter

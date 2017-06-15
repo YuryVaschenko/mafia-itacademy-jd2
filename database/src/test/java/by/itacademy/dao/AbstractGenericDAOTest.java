@@ -87,9 +87,10 @@ public class AbstractGenericDAOTest {
         session.getTransaction().rollback();
     }
 
-    /*@After
-    public void destroy() {
-        SESSION_FACTORY.close();
-    }
-*/
+    /*
+        @After
+        public void destroy() {
+            SESSION_FACTORY.close();
+        }
+    */
 }

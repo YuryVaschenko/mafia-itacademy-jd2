@@ -25,9 +25,9 @@ CREATE TABLE addresses (
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE clans (
-  id         INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-  name       VARCHAR(30)  NOT NULL,
-  address_id INT UNSIGNED UNIQUE,
+  id           INT UNSIGNED        NOT NULL UNIQUE AUTO_INCREMENT,
+  name         VARCHAR(30)         NOT NULL,
+  address_id   INT UNSIGNED UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (address_id) REFERENCES addresses (id)
 )
@@ -59,19 +59,34 @@ CREATE TABLE members (
   FOREIGN KEY (clan_id) REFERENCES clans (id)
 )
   DEFAULT CHARSET = utf8;
+CREATE TABLE groups (
+  id      INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  clan_id INT UNSIGNED NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (clan_id) REFERENCES clans (id)
+)
+  DEFAULT CHARSET = utf8;
 CREATE TABLE caporegimes (
   member_id INT UNSIGNED NOT NULL,
   email     VARCHAR(50)  NOT NULL,
-  FOREIGN KEY (member_id) REFERENCES members (id)
+  group_id  INT UNSIGNED,
+  FOREIGN KEY (member_id) REFERENCES members (id),
+  FOREIGN KEY (group_id) REFERENCES groups (id)
 )
   DEFAULT CHARSET = utf8;
-CREATE TABLE groups (
-  id            INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-  clan_id       INT UNSIGNED NOT NULL,
-  caporegime_id INT UNSIGNED NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (clan_id) REFERENCES clans (id),
-  FOREIGN KEY (caporegime_id) REFERENCES caporegimes (member_id)
+CREATE TABLE soldiers (
+  member_id      INT UNSIGNED NOT NULL,
+  specialization VARCHAR(50)  NOT NULL,
+  group_id       INT UNSIGNED,
+  FOREIGN KEY (member_id) REFERENCES members (id),
+  FOREIGN KEY (group_id) REFERENCES groups (id)
+)
+  DEFAULT CHARSET = utf8;
+CREATE TABLE authorities (
+  member_id INT UNSIGNED NOT NULL,
+  votes     INT          NOT NULL DEFAULT 0,
+  is_boss SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+  FOREIGN KEY (member_id) REFERENCES members (id)
 )
   DEFAULT CHARSET = utf8;
 
