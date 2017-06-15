@@ -28,7 +28,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "member_id")
 public class Soldier extends Member {
 
-    @Column(name = "specializacion")
+    @Column(name = "specialization", nullable = false)
     @Getter
     @Setter
     @Enumerated (EnumType.STRING)

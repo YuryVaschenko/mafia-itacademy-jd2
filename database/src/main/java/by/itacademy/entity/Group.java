@@ -24,7 +24,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class Group extends BaseEntity {
 
-    @Column(name = "clan_id")
     @Getter
     @Setter
     @ManyToOne

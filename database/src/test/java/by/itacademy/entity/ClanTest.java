@@ -51,7 +51,7 @@ public class ClanTest {
         session.getTransaction().commit();
         session.close();
 
-        Assert.assertEquals(null, retrievedClan);
+        Assert.assertNull(retrievedClan);
     }
 
     @Test
@@ -72,8 +72,8 @@ public class ClanTest {
         session.getTransaction().commit();
         session.close();
 
-        Assert.assertEquals(null, retrievedClan);
-        Assert.assertEquals(null, retrievedAddress);
+        Assert.assertNull(retrievedClan);
+        Assert.assertNull(retrievedAddress);
     }
 
     @After

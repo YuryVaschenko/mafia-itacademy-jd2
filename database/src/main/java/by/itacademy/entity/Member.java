@@ -32,7 +32,7 @@ public abstract class Member extends BaseEntity {
     @Setter
     private NameDetails nameDetails;
 
-    @Column (name = "status")
+    @Column (name = "status", nullable = false)
     @Enumerated
     @Getter
     @Setter

@@ -20,10 +20,14 @@
         <property name="hibernate.connection.useUnicode">true</property>
         <property name="hbm2ddl.auto">create-drop</property>
 
-        <mapping class="by.itacademy.entity.Location" />
         <mapping class="by.itacademy.entity.Address" />
+        <mapping class="by.itacademy.entity.Authority" />
+        <mapping class="by.itacademy.entity.Caporegime" />
         <mapping class="by.itacademy.entity.Clan" />
         <mapping class="by.itacademy.entity.Debtor" />
+        <mapping class="by.itacademy.entity.Group" />
+        <mapping class="by.itacademy.entity.Location" />
         <mapping class="by.itacademy.entity.Member" />
+        <mapping class="by.itacademy.entity.Soldier" />
     </session-factory>
 </hibernate-configuration>
