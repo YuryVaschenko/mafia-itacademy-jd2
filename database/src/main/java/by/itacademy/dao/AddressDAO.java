@@ -9,10 +9,4 @@ import org.hibernate.Session;
 
 public class AddressDAO extends AbstractGenericDAO<Address> {
 
-    public AddressDAO() {
-    }
-
-    public AddressDAO(Session session) {
-        super(session);
-    }
 }

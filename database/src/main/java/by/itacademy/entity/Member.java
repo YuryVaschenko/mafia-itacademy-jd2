@@ -22,9 +22,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "members")
-@ToString
+@ToString (callSuper = true)
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Member extends BaseEntity {
 
     @Embedded
