@@ -29,5 +29,11 @@
         <mapping class="by.itacademy.entity.Location" />
         <mapping class="by.itacademy.entity.Member" />
         <mapping class="by.itacademy.entity.Soldier" />
+        <mapping class="by.itacademy.entity.BlackList" />
+        <mapping class="by.itacademy.entity.Affair" />
+        <mapping class="by.itacademy.entity.Report" />
+        <!--
+        <mapping class="by.itacademy.entity.MemberTest$MemberForTest" />
+        -->
     </session-factory>
 </hibernate-configuration>

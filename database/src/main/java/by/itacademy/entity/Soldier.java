@@ -29,15 +29,15 @@ import javax.persistence.Table;
 public class Soldier extends Member {
 
     @Column(name = "specialization", nullable = false)
+    @Enumerated (EnumType.STRING)
     @Getter
     @Setter
-    @Enumerated (EnumType.STRING)
     private Specialization specialization;
 
     @ManyToOne
+    @JoinColumn (name = "group_id")
     @Getter
     @Setter
-    @JoinColumn (name = "group_id")
     private Group group;
 
 }

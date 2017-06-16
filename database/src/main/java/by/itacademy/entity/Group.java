@@ -5,13 +5,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -24,21 +28,27 @@ import java.util.Set;
 @NoArgsConstructor
 public class Group extends BaseEntity {
 
-    @Getter
-    @Setter
     @ManyToOne
     @JoinColumn(name = "clan_id")
+    @Getter
+    @Setter
     private Clan clan;
 
-    @OneToOne (mappedBy = "group")
+    @OneToOne(mappedBy = "group")
     @Getter
     @Setter
     private Caporegime caporegime;
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "group")
     @Getter
     @Setter
-    private Set<Soldier> soldiers;
+    private Set<Soldier> soldiers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "groups", cascade = CascadeType.REMOVE)
+    @Getter
+    @Setter
+    private Set<Affair> affairs = new HashSet<>();
+
 
 }

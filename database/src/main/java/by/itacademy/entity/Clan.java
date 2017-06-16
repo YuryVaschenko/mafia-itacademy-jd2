@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -19,27 +20,30 @@ import java.util.Set;
  */
 
 @Entity
-@ToString(exclude = {"members"}, callSuper = true)
+@ToString(exclude = {"members", "groups"}, callSuper = true)
 @NoArgsConstructor
 @Table(name = "clans")
 public class Clan extends BaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     @Getter
     @Setter
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "address_id")
     @Getter
     @Setter
     private Address address;
 
-
-
-    @OneToMany(mappedBy = "clan")
+    @OneToMany(mappedBy = "clan", cascade = CascadeType.REMOVE)
     @Getter
     @Setter
-    private Set<Member> members;
+    private Set<Group> groups;
+
+    @OneToMany(mappedBy = "clan", cascade = CascadeType.REMOVE)
+    @Getter
+    @Setter
+    private Set<Member> members = new HashSet<>();
 
 }

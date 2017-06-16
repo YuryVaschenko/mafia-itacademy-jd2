@@ -25,9 +25,9 @@ CREATE TABLE addresses (
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE clans (
-  id           INT UNSIGNED        NOT NULL UNIQUE AUTO_INCREMENT,
-  name         VARCHAR(30)         NOT NULL,
-  address_id   INT UNSIGNED UNIQUE,
+  id         INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  name       VARCHAR(30)  NOT NULL,
+  address_id INT UNSIGNED UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (address_id) REFERENCES addresses (id)
 )
@@ -83,10 +83,55 @@ CREATE TABLE soldiers (
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE authorities (
-  member_id INT UNSIGNED NOT NULL,
-  votes     INT          NOT NULL DEFAULT 0,
-  is_boss SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+  member_id INT UNSIGNED      NOT NULL,
+  votes     INT               NOT NULL DEFAULT 0,
+  is_boss   SMALLINT UNSIGNED NOT NULL DEFAULT 0,
   FOREIGN KEY (member_id) REFERENCES members (id)
+)
+  DEFAULT CHARSET = utf8;
+CREATE TABLE black_list (
+  id          INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  first_name  VARCHAR(50),
+  middle_name VARCHAR(50),
+  last_name   VARCHAR(50),
+  nickname    VARCHAR(50),
+  status      VARCHAR(40),
+  location_id INT UNSIGNED,
+  PRIMARY KEY (id),
+  FOREIGN KEY (location_id) REFERENCES locations (id)
+)
+  DEFAULT CHARSET = utf8;
+CREATE TABLE affairs (
+  id            INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  title         VARCHAR(50)  NOT NULL,
+  description   TEXT,
+  exp_date      DATE,
+  status        VARCHAR(40) NOT NULL,
+  debtor_id     INT UNSIGNED,
+  black_list_id INT UNSIGNED,
+  location_id   INT UNSIGNED,
+  PRIMARY KEY (id),
+  FOREIGN KEY (debtor_id) REFERENCES debtors (id),
+  FOREIGN KEY (black_list_id) REFERENCES black_list (id),
+  FOREIGN KEY (location_id) REFERENCES locations (id)
+)
+  DEFAULT CHARSET = utf8;
+CREATE TABLE affairs_in_groups (
+  affair_id INT UNSIGNED NOT NULL,
+  group_id  INT UNSIGNED NOT NULL,
+  PRIMARY KEY (affair_id, group_id),
+  FOREIGN KEY (affair_id) REFERENCES affairs (id),
+  FOREIGN KEY (group_id) REFERENCES groups (id)
+)
+  DEFAULT CHARSET = utf8;
+CREATE TABLE reports (
+  id            INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  affair_id     INT UNSIGNED NOT NULL,
+  caporegime_id INT UNSIGNED NOT NULL,
+  content       TEXT         NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (affair_id) REFERENCES affairs (id),
+  FOREIGN KEY (caporegime_id) REFERENCES caporegimes (member_id)
 )
   DEFAULT CHARSET = utf8;
 

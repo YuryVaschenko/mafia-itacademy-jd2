@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -30,7 +31,7 @@ public class Location extends BaseEntity {
     @Setter
     private String longitude;
 
-    @OneToOne(mappedBy = "location")
+    @OneToOne(mappedBy = "location", cascade = CascadeType.REMOVE)
     @Getter
     @Setter
     private Address address;
