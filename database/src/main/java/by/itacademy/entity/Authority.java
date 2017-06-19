@@ -30,26 +30,8 @@ public class Authority extends Member {
     private Integer votes;
 
     @Column(name = "is_boss")
-    private Integer isBoss;
-
-    public boolean getIsBoss() {
-        return isBoss != 0;
-    }
-
-    public void setIsBoss(boolean isBoss) {
-        if (isBoss) {
-            this.isBoss = 1;
-        } else {
-            this.isBoss = 0;
-        }
-    }
-
-    /*
-    // ask later
-    @Transient
-    public boolean isBoss() {
-        return isBoss != 0;
-    }
-    */
+    @Getter
+    @Setter
+    private boolean isBoss;
 
 }

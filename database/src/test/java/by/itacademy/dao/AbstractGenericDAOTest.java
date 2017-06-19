@@ -4,9 +4,7 @@ import by.itacademy.entity.Address;
 import by.itacademy.entity.Location;
 import by.itacademy.utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -15,16 +13,9 @@ import org.junit.Test;
 
 public class AbstractGenericDAOTest {
 
-    private static SessionFactory SESSION_FACTORY;
-
-    @BeforeClass
-    public static void init() {
-        SESSION_FACTORY = HibernateUtil.getSessionFactory();
-    }
-
     @Test
     public void saveNewTest() {
-        Session session = SESSION_FACTORY.getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Location location = new Location();
@@ -57,7 +48,7 @@ public class AbstractGenericDAOTest {
 
     @Test
     public void findByIdTest() {
-        Session session = SESSION_FACTORY.getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         Location location = new Location();
@@ -87,10 +78,4 @@ public class AbstractGenericDAOTest {
         session.getTransaction().rollback();
     }
 
-    /*
-        @After
-        public void destroy() {
-            SESSION_FACTORY.close();
-        }
-    */
 }

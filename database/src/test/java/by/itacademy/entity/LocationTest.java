@@ -23,7 +23,7 @@ public class LocationTest {
     }
 
     @Test
-    public void locationSaveAndRetrieveTest(){
+    public void locationSaveAndRetrieveTest() {
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
@@ -39,7 +39,7 @@ public class LocationTest {
     }
 
     @Test
-    public void AddressThroughLocationSaveAndRetrieveTest(){
+    public void AddressThroughLocationSaveAndRetrieveTest() {
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
@@ -58,7 +58,7 @@ public class LocationTest {
     }
 
     @Test
-    public void cascadeDeletingLocationAndAddressTest(){
+    public void cascadeDeletingLocationAndAddressTest() {
         Session session = SESSION_FACTORY.openSession();
         session.beginTransaction();
 
@@ -77,8 +77,8 @@ public class LocationTest {
         session.getTransaction().commit();
         session.close();
 
-        Assert.assertEquals(null, retrievedAddress);
-        Assert.assertEquals(null, retrievedLocation);
+        Assert.assertNull(retrievedAddress);
+        Assert.assertNull(retrievedLocation);
     }
 
     @After

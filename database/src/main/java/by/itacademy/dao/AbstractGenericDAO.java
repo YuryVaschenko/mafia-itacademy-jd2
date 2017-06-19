@@ -18,30 +18,40 @@ public abstract class AbstractGenericDAO<T extends DAOEntity> implements Generic
 
     @SuppressWarnings("WeakerAccess")
     public AbstractGenericDAO() {
-        this.session = HibernateUtil.getSessionFactory().getCurrentSession();
         //noinspection unchecked
         entityClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Session getSession() {
+        if (session == null) {
+            return HibernateUtil.getSessionFactory().getCurrentSession();
+        }
+        return session;
+    }
+
     public Long saveNew(T t) {
-        return (Long) session.save(t);
+        return (Long) getSession().save(t);
     }
 
     public T findById(Long id) {
-        return session.get(entityClass, id);
+        return getSession().get(entityClass, id);
     }
 
     public void update(T t) {
-        session.merge(t);
+        getSession().merge(t);
     }
 
     public void delete(T t) {
-        session.delete(t);
+        getSession().delete(t);
     }
 
     public List<T> findAll() {
         String hql = String.format("SELECT L FROM %s L", entityClass.getSimpleName());
-        Query query = session.createQuery(hql);
+        Query query = getSession().createQuery(hql);
         //noinspection unchecked
         return (List<T>) query.getResultList();
     }

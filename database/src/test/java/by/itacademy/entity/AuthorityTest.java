@@ -9,8 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.Serializable;
-
 /**
  * Created by Yury V. on 15.06.17.
  */
@@ -32,7 +30,7 @@ public class AuthorityTest {
         clan.setName("Carioka");
         session.save(clan);
         Authority authority = new Authority();
-        authority.setIsBoss(true);
+        authority.setBoss(true);
         authority.setClan(clan);
         authority.setMemberStatus(MemberStatus.AVAILABLE);
 
@@ -54,7 +52,7 @@ public class AuthorityTest {
         clan.setName("Carioka");
         session.save(clan);
         Authority authority = new Authority();
-        authority.setIsBoss(true);
+        authority.setBoss(true);
         authority.setClan(clan);
         authority.setMemberStatus(MemberStatus.IN_JAIL);
 
