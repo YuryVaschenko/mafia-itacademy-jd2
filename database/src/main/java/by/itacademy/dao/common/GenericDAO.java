@@ -1,4 +1,4 @@
-package by.itacademy.dao;
+package by.itacademy.dao.common;
 
 import java.util.List;
 

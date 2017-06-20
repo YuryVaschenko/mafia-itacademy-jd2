@@ -1,11 +1,12 @@
 package by.itacademy.dao;
 
+import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.entity.Location;
 
 /**
- * Created by Yury V. on 28.05.17.
+ * Created by Yury V. on 20.06.17.
  */
 
-public class LocationDAO extends AbstractGenericDAO<Location> {
+public interface LocationDAO extends GenericDAO<Location> {
 
 }

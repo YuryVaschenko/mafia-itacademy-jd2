@@ -1,11 +1,12 @@
 package by.itacademy.dao;
 
+import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.entity.BlackList;
 
 /**
- * Created by Yury V. on 19.06.17.
+ * Created by Yury V. on 20.06.17.
  */
 
-public class BlackListDAO extends AbstractGenericDAO<BlackList> {
+public interface BlackListDAO extends GenericDAO<BlackList> {
 
 }

@@ -1,12 +1,9 @@
 package by.itacademy.dao;
 
 import by.itacademy.entity.Address;
-import by.itacademy.entity.Location;
 import by.itacademy.utils.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -24,7 +21,7 @@ public class AddressDAOTest {
         Address address = new Address();
         address.setCountry("Belarus");
         address.setCity("Minsk");
-        AddressDAO addressDAO = new AddressDAO();
+        AddressDAOImpl addressDAO = new AddressDAOImpl();
         addressDAO.saveNew(address);
 
         List<Address> retrievedAddresses = addressDAO.getAddressByCityName("Minsk");

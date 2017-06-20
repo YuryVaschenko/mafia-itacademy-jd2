@@ -1,6 +1,6 @@
 package by.itacademy;
 
-import by.itacademy.dao.LocationDAO;
+import by.itacademy.dao.LocationDAOImpl;
 import by.itacademy.entity.Location;
 
 /**
@@ -9,7 +9,7 @@ import by.itacademy.entity.Location;
 public class LocationsHandler {
 
     public Location findLocation(Long id){
-        LocationDAO locationDAO = new LocationDAO();
+        LocationDAOImpl locationDAO = new LocationDAOImpl();
         return locationDAO.findById(id);
     }
 

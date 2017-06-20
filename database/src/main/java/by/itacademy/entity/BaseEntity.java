@@ -1,6 +1,6 @@
 package by.itacademy.entity;
 
-import by.itacademy.dao.DAOEntity;
+import by.itacademy.dao.common.DAOEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

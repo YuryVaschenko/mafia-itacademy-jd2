@@ -1,4 +1,4 @@
-package by.itacademy.dao;
+package by.itacademy.dao.common;
 
 /**
  * Created by Yury V. on 10.06.17.
