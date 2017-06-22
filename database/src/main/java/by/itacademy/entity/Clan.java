@@ -25,7 +25,7 @@ import java.util.Set;
 @Table(name = "clans")
 public class Clan extends BaseEntity {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     @Getter
     @Setter
     private String name;

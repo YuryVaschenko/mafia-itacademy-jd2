@@ -9,4 +9,6 @@ import by.itacademy.entity.Clan;
 
 public interface ClanDAO extends GenericDAO<Clan> {
 
+    Clan findClanByName(String clanName);
+
 }

@@ -11,10 +11,11 @@ import java.util.List;
 /**
  * Created by Yury V. on 19.06.17.
  */
+
 public class AddressDAOTest {
 
     @Test
-    public void getAddressesByCityNameTest() {
+    public void findAddressesByCityNameTest() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -24,7 +25,7 @@ public class AddressDAOTest {
         AddressDAOImpl addressDAO = new AddressDAOImpl();
         addressDAO.saveNew(address);
 
-        List<Address> retrievedAddresses = addressDAO.getAddressByCityName("Minsk");
+        List<Address> retrievedAddresses = addressDAO.findAddressesByCityName("Minsk");
 
         session.getTransaction().rollback();
 

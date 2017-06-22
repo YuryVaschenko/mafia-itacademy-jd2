@@ -11,6 +11,6 @@ import java.util.List;
 
 public interface AddressDAO extends GenericDAO<Address> {
 
-    List<Address> getAddressByCityName(String city);
+    List<Address> findAddressesByCityName(String city);
 
 }

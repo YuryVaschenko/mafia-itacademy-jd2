@@ -17,7 +17,7 @@ import java.util.List;
 public class AddressDAOImpl extends AbstractGenericDAOImpl<Address> implements AddressDAO {
 
     @Override
-    public List<Address> getAddressByCityName(String city) {
+    public List<Address> findAddressesByCityName(String city) {
 
         CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<Address> criteria = cb.createQuery(Address.class);
