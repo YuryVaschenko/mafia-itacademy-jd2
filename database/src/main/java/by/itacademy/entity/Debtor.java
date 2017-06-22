@@ -24,7 +24,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "debtors")
 @NoArgsConstructor
-@ToString (callSuper = true)
+@ToString(callSuper = true)
 public class Debtor extends BaseEntity {
 
     @Embedded
@@ -37,7 +37,7 @@ public class Debtor extends BaseEntity {
     @Setter
     private Integer debtAmount;
 
-    @Column(name = "exp_date")
+    @Column(name = "exp_date", nullable = false)
     @Getter
     @Setter
     private LocalDate expDate;
@@ -53,7 +53,7 @@ public class Debtor extends BaseEntity {
     @Setter
     private Frequency frequency;
 
-    @ManyToOne (cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "address_id")
     @Getter
     @Setter

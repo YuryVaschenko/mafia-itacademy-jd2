@@ -1,8 +1,10 @@
 package by.itacademy.dao;
 
-import by.itacademy.dao.common.AbstractGenericDAOImpl;
+import by.itacademy.dao.common.GenericDAOImpl;
 import by.itacademy.entity.Address;
 import by.itacademy.entity.Address_;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,12 +16,14 @@ import java.util.List;
  * Created by Yury V. on 28.05.17.
  */
 
-public class AddressDAOImpl extends AbstractGenericDAOImpl<Address> implements AddressDAO {
+@Repository
+public class AddressDAOImpl extends GenericDAOImpl<Address> implements AddressDAO {
 
     @Override
     public List<Address> findAddressesByCityName(String city) {
 
-        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        Session session = getSessionFactory().getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Address> criteria = cb.createQuery(Address.class);
         Root<Address> address = criteria.from(Address.class);
         Path<String> cityName = address.get(Address_.city);
@@ -27,7 +31,7 @@ public class AddressDAOImpl extends AbstractGenericDAOImpl<Address> implements A
         criteria.select(address)
                 .where(cb.equal(cityName, city));
 
-        return getSession().createQuery(criteria).getResultList();
+        return session.createQuery(criteria).getResultList();
     }
 
 }

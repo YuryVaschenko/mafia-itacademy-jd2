@@ -43,8 +43,8 @@ public class Config {
     @Value("${hibernate.show_sql}")
     private String showSql;
 
-    @Value("${hibernate.creating_policy}")
-    private String creatingPolicy;
+    @Value("${hibernate.creation_policy}")
+    private String creationPolicy;
 
     @Bean
     public DriverManagerDataSource dataSource() {
@@ -61,19 +61,19 @@ public class Config {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("by.itacademy.enitity");
+        sessionFactory.setPackagesToScan("by.itacademy.entity");
         sessionFactory.setHibernateProperties(properties());
 
         return sessionFactory;
     }
 
     @Bean
-    private Properties properties() {
+    public Properties properties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", dialect);
         properties.setProperty("hibernate.show_sql", showSql);
         properties.setProperty("hibernate.format_sql", formatSql);
-        properties.setProperty("hibernate.hbm2ddl.auto", creatingPolicy);
+        properties.setProperty("hibernate.hbm2ddl.auto", creationPolicy);
 
         return properties;
     }

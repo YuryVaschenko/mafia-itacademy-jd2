@@ -1,8 +1,10 @@
 package by.itacademy.dao;
 
-import by.itacademy.dao.common.AbstractGenericDAOImpl;
+import by.itacademy.dao.common.GenericDAOImpl;
 import by.itacademy.entity.Clan;
 import by.itacademy.entity.Clan_;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,12 +16,14 @@ import java.util.List;
  * Created by Yury V. on 19.06.17.
  */
 
-public class ClanDAOImpl extends AbstractGenericDAOImpl<Clan> implements ClanDAO {
+@Repository
+public class ClanDAOImpl extends GenericDAOImpl<Clan> implements ClanDAO {
 
     @Override
     public Clan findClanByName(String clanName) {
 
-        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        Session session = getSessionFactory().getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Clan> criteria = cb.createQuery(Clan.class);
         Root<Clan> clan = criteria.from(Clan.class);
         Path<String> dbClanName = clan.get(Clan_.name);
@@ -27,7 +31,7 @@ public class ClanDAOImpl extends AbstractGenericDAOImpl<Clan> implements ClanDAO
         criteria.select(clan)
                 .where(cb.equal(dbClanName, clanName));
 
-        List<Clan> resultList = getSession().createQuery(criteria).getResultList();
+        List<Clan> resultList = session.createQuery(criteria).getResultList();
 
         if (resultList.size() > 0) {
             return resultList.get(0);

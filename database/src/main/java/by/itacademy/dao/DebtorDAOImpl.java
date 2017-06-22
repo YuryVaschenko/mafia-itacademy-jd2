@@ -1,8 +1,10 @@
 package by.itacademy.dao;
 
-import by.itacademy.dao.common.AbstractGenericDAOImpl;
+import by.itacademy.dao.common.GenericDAOImpl;
 import by.itacademy.entity.Debtor;
 import by.itacademy.entity.Debtor_;
+import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,11 +17,13 @@ import java.util.List;
  * Created by Yury V. on 19.06.17.
  */
 
-public class DebtorDAOImpl extends AbstractGenericDAOImpl<Debtor> implements DebtorDAO {
+@Repository
+public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
 
     @Override
     public List<Debtor> findLimitedDebtorsOrderedByExpDate(int limit) {
-        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        Session session = getSessionFactory().getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Debtor> criteria = cb.createQuery(Debtor.class);
 
         Root<Debtor> debtor = criteria.from(Debtor.class);
@@ -28,13 +32,14 @@ public class DebtorDAOImpl extends AbstractGenericDAOImpl<Debtor> implements Deb
         criteria.select(debtor)
                 .orderBy(cb.asc(date));
 
-        return getSession().createQuery(criteria).setMaxResults(limit).getResultList();
+        return session.createQuery(criteria).setMaxResults(limit).getResultList();
     }
 
     @Override
     public List<Debtor> findOverdueDebtors() {
 
-        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        Session session = getSessionFactory().getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Debtor> criteria = cb.createQuery(Debtor.class);
 
         Root<Debtor> debtor = criteria.from(Debtor.class);
@@ -42,7 +47,7 @@ public class DebtorDAOImpl extends AbstractGenericDAOImpl<Debtor> implements Deb
 
         criteria.select(debtor).where(cb.lessThan(expDate, LocalDate.now()));
 
-        return getSession().createQuery(criteria).getResultList();
+        return session.createQuery(criteria).getResultList();
     }
 
 }

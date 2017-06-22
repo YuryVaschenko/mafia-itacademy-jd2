@@ -1,12 +1,14 @@
 package by.itacademy.dao;
 
-import by.itacademy.dao.common.AbstractGenericDAOImpl;
+import by.itacademy.dao.common.GenericDAOImpl;
 import by.itacademy.entity.Location;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Yury V. on 28.05.17.
  */
 
-public class LocationDAOImpl extends AbstractGenericDAOImpl<Location> implements LocationDAO {
+@Repository
+public class LocationDAOImpl extends GenericDAOImpl<Location> implements LocationDAO {
 
 }
