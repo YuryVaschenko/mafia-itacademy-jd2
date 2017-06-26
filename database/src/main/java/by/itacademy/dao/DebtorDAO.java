@@ -13,6 +13,6 @@ public interface DebtorDAO extends GenericDAO<Debtor> {
 
     List<Debtor> findLimitedDebtorsOrderedByExpDate(int limit);
 
-    List<Debtor> findOverdueDebtors();
+    List<Debtor> findOverdueDebtorsOrderedByExpDate();
 
 }

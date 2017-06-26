@@ -1,84 +1,67 @@
 package by.itacademy.entity;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
+import by.itacademy.config.TestConfig;
+import by.itacademy.dao.AddressDAO;
+import by.itacademy.dao.ClanDAO;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Yury V. on 08.06.17.
  */
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
+@Transactional
 public class ClanTest {
 
-    private static SessionFactory SESSION_FACTORY;
-
-    @Before
-    public void init() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-    }
+    @Autowired
+    private ClanDAO clanDAO;
+    @Autowired
+    private AddressDAO addressDAO;
 
     @Test
     public void clanSaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carleone");
-        Long id = (Long) session.save(clan);
-        Clan retrievedClan = session.load(Clan.class, id);
-        session.getTransaction().commit();
-        session.close();
+        Long id = clanDAO.saveNew(clan);
+        Clan retrievedClan = clanDAO.findById(id);
 
         Assert.assertEquals(clan, retrievedClan);
-
     }
 
     @Test
     public void clanDeletingTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carleone");
-        Long id = (Long) session.save(clan);
-        session.delete(clan);
+        Long id = clanDAO.saveNew(clan);
+        clanDAO.delete(clan);
 
-        Clan retrievedClan = session.get(Clan.class, id);
-        session.getTransaction().commit();
-        session.close();
+        Clan retrievedClan = clanDAO.findById(id);
 
         Assert.assertNull(retrievedClan);
     }
 
     @Test
     public void cascadeDeletingClanAndAddressTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Address address = new Address();
         address.setCountry("Belarus");
         Clan clan = new Clan();
         clan.setName("Carleone");
         clan.setAddress(address);
-        Long id = (Long) session.save(clan);
-        session.delete(clan);
+        Long id = clanDAO.saveNew(clan);
+        clanDAO.delete(clan);
 
-        Clan retrievedClan = session.get(Clan.class, id);
-        Address retrievedAddress = session.get(Address.class, 1L);
-        session.getTransaction().commit();
-        session.close();
+        Clan retrievedClan = clanDAO.findById(id);
+        Address retrievedAddress = addressDAO.findById(1L);
 
         Assert.assertNull(retrievedClan);
         Assert.assertNull(retrievedAddress);
-    }
-
-    @After
-    public void destroy() {
-        SESSION_FACTORY.close();
     }
 
 }

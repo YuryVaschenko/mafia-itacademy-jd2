@@ -1,84 +1,75 @@
 package by.itacademy.entity;
 
+import by.itacademy.config.TestConfig;
+import by.itacademy.dao.CaporegimeDAO;
+import by.itacademy.dao.ClanDAO;
+import by.itacademy.dao.GroupDAO;
 import by.itacademy.entity.enums.MemberStatus;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Yury V. on 15.06.17.
  */
+
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
+@Transactional
 public class CaporegimeTest {
 
-    private static SessionFactory SESSION_FACTORY;
+    @Autowired
+    private ClanDAO clanDAO;
+    @Autowired
+    private GroupDAO groupDAO;
+    @Autowired
+    private CaporegimeDAO caporegimeDAO;
 
-    @Before
-    public void init() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-    }
 
     @Test
     public void soldierSaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carioka");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Group group = new Group();
         group.setClan(clan);
-        session.save(group);
+        groupDAO.saveNew(group);
         Caporegime caporegime = new Caporegime();
         caporegime.setClan(clan);
         caporegime.setGroup(group);
         caporegime.setEmail("xxx@xxx.com");
         caporegime.setMemberStatus(MemberStatus.DEAD);
 
-        Long id = (Long) session.save(caporegime);
+        Long id = caporegimeDAO.saveNew(caporegime);
 
-        Caporegime retrievedCaporegime = session.get(Caporegime.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Caporegime retrievedCaporegime = caporegimeDAO.findById(id);
 
         Assert.assertEquals(caporegime, retrievedCaporegime);
     }
 
     @Test
     public void caporegimeDeletingTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carioka");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Group group = new Group();
         group.setClan(clan);
-        session.save(group);
+        groupDAO.saveNew(group);
         Caporegime caporegime = new Caporegime();
         caporegime.setClan(clan);
         caporegime.setGroup(group);
         caporegime.setEmail("xxx@xxx.com");
         caporegime.setMemberStatus(MemberStatus.IN_HOSPITAL);
 
-        Long id = (Long) session.save(caporegime);
-        session.delete(caporegime);
-        Caporegime retrievedCaporegime = session.get(Caporegime.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Long id = caporegimeDAO.saveNew(caporegime);
+        caporegimeDAO.delete(caporegime);
+        Caporegime retrievedCaporegime = caporegimeDAO.findById(id);
 
         Assert.assertNull(retrievedCaporegime);
     }
-
-    @After
-    public void destroy() {
-        SESSION_FACTORY.close();
-    }
-
 
 }

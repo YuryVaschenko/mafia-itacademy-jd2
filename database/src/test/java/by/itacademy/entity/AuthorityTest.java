@@ -1,75 +1,62 @@
 package by.itacademy.entity;
 
+import by.itacademy.config.TestConfig;
+import by.itacademy.dao.AuthorityDAO;
+import by.itacademy.dao.ClanDAO;
 import by.itacademy.entity.enums.MemberStatus;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Yury V. on 15.06.17.
  */
+
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
+@Transactional
 public class AuthorityTest {
 
-    private static SessionFactory SESSION_FACTORY;
-
-    @Before
-    public void init() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-    }
+    @Autowired
+    private ClanDAO clanDAO;
+    @Autowired
+    private AuthorityDAO authorityDAO;
 
     @Test
     public void authoritySaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carioka");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Authority authority = new Authority();
         authority.setBoss(true);
         authority.setClan(clan);
         authority.setMemberStatus(MemberStatus.AVAILABLE);
 
-        Long id = (Long) session.save(authority);
-        Authority retrievedAuthority = session.get(Authority.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Long id = authorityDAO.saveNew(authority);
+        Authority retrievedAuthority = authorityDAO.findById(id);
 
         Assert.assertEquals(authority, retrievedAuthority);
     }
 
     @Test
     public void authorityDeletingTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carioka");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Authority authority = new Authority();
         authority.setBoss(true);
         authority.setClan(clan);
         authority.setMemberStatus(MemberStatus.IN_JAIL);
 
-        Long id = (Long) session.save(authority);
-        session.delete(authority);
-        Authority retrievedAuthority = session.get(Authority.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Long id = authorityDAO.saveNew(authority);
+        authorityDAO.delete(authority);
+        Authority retrievedAuthority = authorityDAO.findById(id);
 
         Assert.assertNull(retrievedAuthority);
     }
-    
-    @After
-    public void destroy() {
-        SESSION_FACTORY.close();
-    }
-
 
 }

@@ -1,84 +1,74 @@
 package by.itacademy.entity;
 
+import by.itacademy.config.TestConfig;
+import by.itacademy.dao.ClanDAO;
+import by.itacademy.dao.GroupDAO;
+import by.itacademy.dao.SoldierDAO;
 import by.itacademy.entity.enums.MemberStatus;
 import by.itacademy.entity.enums.Specialization;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Yury V. on 15.06.17.
  */
+
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
+@Transactional
 public class SoldierTest {
 
-    private static SessionFactory SESSION_FACTORY;
-
-    @Before
-    public void init() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-    }
+    @Autowired
+    private ClanDAO clanDAO;
+    @Autowired
+    private GroupDAO groupDAO;
+    @Autowired
+    private SoldierDAO soldierDAO;
 
     @Test
     public void soldierSaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carioka");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Group group = new Group();
         group.setClan(clan);
-        session.save(group);
+        groupDAO.saveNew(group);
         Soldier soldier = new Soldier();
         soldier.setClan(clan);
         soldier.setSpecialization(Specialization.PIMP);
         soldier.setGroup(group);
         soldier.setMemberStatus(MemberStatus.AVAILABLE);
-        Long id = (Long) session.save(soldier);
+        Long id = soldierDAO.saveNew(soldier);
 
-        Soldier retrievedSoldier = session.get(Soldier.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Soldier retrievedSoldier = soldierDAO.findById(id);
 
         Assert.assertEquals(soldier, retrievedSoldier);
     }
 
     @Test
     public void soldierDeletingTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carioka");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Group group = new Group();
         group.setClan(clan);
-        session.save(group);
+        groupDAO.saveNew(group);
         Soldier soldier = new Soldier();
         soldier.setClan(clan);
         soldier.setSpecialization(Specialization.PIMP);
         soldier.setGroup(group);
         soldier.setMemberStatus(MemberStatus.AVAILABLE);
 
-        Long id = (Long) session.save(soldier);
-        session.delete(soldier);
-        Soldier retrievedSoldier = session.get(Soldier.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Long id = soldierDAO.saveNew(soldier);
+        soldierDAO.delete(soldier);
+        Soldier retrievedSoldier = soldierDAO.findById(id);
 
         Assert.assertNull(retrievedSoldier);
     }
-
-    @After
-    public void destroy() {
-        SESSION_FACTORY.close();
-    }
-
 
 }

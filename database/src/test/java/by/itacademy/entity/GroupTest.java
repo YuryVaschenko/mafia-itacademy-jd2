@@ -1,69 +1,57 @@
 package by.itacademy.entity;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
+import by.itacademy.config.TestConfig;
+import by.itacademy.dao.ClanDAO;
+import by.itacademy.dao.GroupDAO;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Yury V. on 08.06.17.
  */
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
+@Transactional
 public class GroupTest {
 
-    private static SessionFactory SESSION_FACTORY;
-
-    @Before
-    public void init() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-    }
+    @Autowired
+    private ClanDAO clanDAO;
+    @Autowired
+    private GroupDAO groupDAO;
 
     @Test
     public void groupSaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carleone");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Group group = new Group();
         group.setClan(clan);
-        Long id = (Long) session.save(group);
+        Long id = groupDAO.saveNew(group);
 
-        Group retrievedGroup = session.load(Group.class, id);
-        session.getTransaction().commit();
-        session.close();
+        Group retrievedGroup = groupDAO.findById(id);
 
         Assert.assertEquals(group, retrievedGroup);
     }
 
     @Test
     public void groupDeletingTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Clan clan = new Clan();
         clan.setName("Carleone");
-        session.save(clan);
+        clanDAO.saveNew(clan);
         Group group = new Group();
         group.setClan(clan);
-        Long id = (Long) session.save(group);
+        Long id = groupDAO.saveNew(group);
 
-        session.delete(group);
-        Group retrievedGroup = session.get(Group.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        groupDAO.delete(group);
+        Group retrievedGroup = groupDAO.findById(id);
 
         Assert.assertNull(retrievedGroup);
-    }
-
-    @After
-    public void destroy() {
-        SESSION_FACTORY.close();
     }
 
 }

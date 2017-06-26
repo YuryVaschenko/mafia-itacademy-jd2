@@ -1,67 +1,57 @@
 package by.itacademy.entity;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.After;
+import by.itacademy.config.TestConfig;
+import by.itacademy.dao.AddressDAO;
+import by.itacademy.dao.LocationDAO;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Yury V. on 08.06.17.
  */
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TestConfig.class})
+@Transactional
 public class LocationTest {
 
-
-    private static SessionFactory SESSION_FACTORY;
-
-    @Before
-    public void init() {
-        SESSION_FACTORY = new Configuration().configure().buildSessionFactory();
-    }
+    @Autowired
+    private LocationDAO locationDAO;
+    @Autowired
+    private AddressDAO addressDAO;
 
     @Test
     public void locationSaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Location location = new Location();
         location.setLatitude("55.55");
         location.setLongitude("55.55");
-        Long id = (Long) session.save(location);
-        Location retrievedLocation = session.load(Location.class, id);
-        session.getTransaction().commit();
-        session.close();
+        Long id = locationDAO.saveNew(location);
+        Location retrievedLocation = locationDAO.findById(id);
 
         Assert.assertEquals(location, retrievedLocation);
     }
 
     @Test
     public void AddressThroughLocationSaveAndRetrieveTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Location location = new Location();
         location.setLatitude("77.7777");
         location.setLongitude("55.5555");
         Address address = new Address();
         location.setAddress(address);
         address.setLocation(location);
-        Long id = (Long) session.save(location);
-        Location retrievedLocation = session.load(Location.class, id);
-        session.getTransaction().commit();
-        session.close();
+        Long id = locationDAO.saveNew(location);
+        Location retrievedLocation = locationDAO.findById(id);
 
         Assert.assertEquals(location.getAddress(), retrievedLocation.getAddress());
     }
 
     @Test
     public void cascadeDeletingLocationAndAddressTest() {
-        Session session = SESSION_FACTORY.openSession();
-        session.beginTransaction();
-
         Location location = new Location();
         location.setLongitude("55.555");
         location.setLatitude("55.555");
@@ -69,21 +59,14 @@ public class LocationTest {
         address.setCountry("Belarus");
         location.setAddress(address);
         address.setLocation(location);
-        Long id = (Long) session.save(location);
-        session.delete(location);
+        Long id = locationDAO.saveNew(location);
+        locationDAO.delete(location);
 
-        Location retrievedLocation = session.get(Location.class, id);
-        Address retrievedAddress = session.get(Address.class, 1L);
-        session.getTransaction().commit();
-        session.close();
+        Location retrievedLocation = locationDAO.findById(id);
+        Address retrievedAddress = addressDAO.findById(1L);
 
         Assert.assertNull(retrievedAddress);
         Assert.assertNull(retrievedLocation);
-    }
-
-    @After
-    public void destroy() {
-        SESSION_FACTORY.close();
     }
 
 }

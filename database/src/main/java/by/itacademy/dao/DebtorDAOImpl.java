@@ -36,7 +36,7 @@ public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
     }
 
     @Override
-    public List<Debtor> findOverdueDebtors() {
+    public List<Debtor> findOverdueDebtorsOrderedByExpDate() {
 
         Session session = getSessionFactory().getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -45,7 +45,7 @@ public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
         Root<Debtor> debtor = criteria.from(Debtor.class);
         Path<LocalDate> expDate = debtor.get(Debtor_.expDate);
 
-        criteria.select(debtor).where(cb.lessThan(expDate, LocalDate.now()));
+        criteria.select(debtor).where(cb.lessThan(expDate, LocalDate.now())).orderBy(cb.asc(expDate));
 
         return session.createQuery(criteria).getResultList();
     }
