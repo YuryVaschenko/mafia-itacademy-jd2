@@ -1,5 +1,6 @@
 package by.itacademy.dao.common;
 
+import by.itacademy.entity.BaseEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Yury V. on 28.05.17.
  */
 
-public abstract class GenericDAOImpl<T extends DAOEntity> implements GenericDAO<T> {
+public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -32,7 +33,7 @@ public abstract class GenericDAOImpl<T extends DAOEntity> implements GenericDAO<
     }
 
     public T findById(Long id) {
-        return getSessionFactory().getCurrentSession().get(entityClass, id);
+        return getSessionFactory().getCurrentSession().load(entityClass, id);
     }
 
     public void update(T t) {

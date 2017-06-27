@@ -18,6 +18,8 @@ public class MainPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
+
         resp.setContentType("text/html");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/db_connection_test.jsp");

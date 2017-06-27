@@ -1,6 +1,5 @@
 package by.itacademy.entity;
 
-import by.itacademy.dao.common.DAOEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @ToString
 @EqualsAndHashCode
-abstract class BaseEntity implements DAOEntity {
+public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
