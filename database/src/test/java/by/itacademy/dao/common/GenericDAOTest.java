@@ -1,4 +1,4 @@
-package by.itacademy.dao;
+package by.itacademy.dao.common;
 
 import by.itacademy.config.TestConfig;
 import by.itacademy.dao.common.GenericDAO;

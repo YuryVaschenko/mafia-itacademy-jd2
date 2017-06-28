@@ -1,10 +1,11 @@
 package by.itacademy.dao;
 
 import by.itacademy.config.TestConfig;
+import by.itacademy.dao.common.GenericDAO;
+import by.itacademy.dao.common.GenericDAOTest;
 import by.itacademy.entity.Debtor;
 import by.itacademy.entity.NameDetails;
 import by.itacademy.entity.enums.Frequency;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.junit.Assert.assertArrayEquals;
+
 /**
  * Created by Yury V. on 21.06.17.
  */
@@ -23,72 +26,75 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {TestConfig.class})
 @Transactional
-public class DebtorDAOTest {
+public class DebtorDAOTest extends GenericDAOTest<Debtor> {
 
     @Autowired
     private DebtorDAO debtorDAO;
 
-    private Debtor firstDebtor;
-    private Debtor secondDebtor;
-    private Debtor thirdDebtor;
-    private Debtor fourthDebtor;
+    private Debtor[] debtors = new Debtor[4];
 
     @Before
     public void entitiesInit() {
-
         NameDetails nameDetails = new NameDetails();
         nameDetails.setFirstName("Sirocco");
         nameDetails.setLastName("Cocube");
+        nameDetails.setNickName("LittleJoe");
 
-        firstDebtor = new Debtor();
-        firstDebtor.setDebtAmount(1000);
-        firstDebtor.setFrequency(Frequency.ONCE);
-        firstDebtor.setNameDetails(nameDetails);
-        firstDebtor.setExpDate(LocalDate.now().minusDays(3));
+        debtors[0] = new Debtor();
+        debtors[0].setDebtAmount(1000);
+        debtors[0].setFrequency(Frequency.ONCE);
+        debtors[0].setNameDetails(nameDetails);
+        debtors[0].setExpDate(LocalDate.now().minusDays(3));
 
-        secondDebtor = new Debtor();
-        secondDebtor.setDebtAmount(5000);
-        secondDebtor.setFrequency(Frequency.MONTHLY);
-        secondDebtor.setExpDate(LocalDate.now().minusMonths(1));
+        debtors[1] = new Debtor();
+        debtors[1].setDebtAmount(5000);
+        debtors[1].setFrequency(Frequency.MONTHLY);
+        debtors[1].setExpDate(LocalDate.now().minusMonths(1));
 
-        thirdDebtor = new Debtor();
-        thirdDebtor.setDebtAmount(3000);
-        thirdDebtor.setFrequency(Frequency.DECADE);
-        thirdDebtor.setExpDate(LocalDate.now().plusDays(1));
+        debtors[2] = new Debtor();
+        debtors[2].setDebtAmount(3000);
+        debtors[2].setFrequency(Frequency.DECADE);
+        debtors[2].setExpDate(LocalDate.now().plusDays(1));
 
-        fourthDebtor = new Debtor();
-        fourthDebtor.setDebtAmount(5000);
-        fourthDebtor.setFrequency(Frequency.MONTHLY);
-        fourthDebtor.setExpDate(LocalDate.now().plusWeeks(1));
+        debtors[3] = new Debtor();
+        debtors[3].setDebtAmount(5000);
+        debtors[3].setFrequency(Frequency.MONTHLY);
+        debtors[3].setExpDate(LocalDate.now().plusWeeks(1));
     }
 
     @Test
     public void findLimitedDebtorsOrderedByExpDateTest() {
+        debtorDAO.saveNew(debtors[0]);
+        debtorDAO.saveNew(debtors[1]);
+        debtorDAO.saveNew(debtors[2]);
+        debtorDAO.saveNew(debtors[3]);
 
-        debtorDAO.saveNew(firstDebtor);
-        debtorDAO.saveNew(secondDebtor);
-        debtorDAO.saveNew(thirdDebtor);
-        debtorDAO.saveNew(fourthDebtor);
-
-        Object[] debtors = {secondDebtor, firstDebtor, thirdDebtor};
+        Debtor[] debtorsToCheck = {debtors[1], debtors[0], debtors[2]};
         List<Debtor> retrievedDebtors = debtorDAO.findLimitedDebtorsOrderedByExpDate(3);
 
-        Assert.assertArrayEquals(debtors, retrievedDebtors.toArray());
+        assertArrayEquals(debtorsToCheck, retrievedDebtors.toArray());
     }
 
     @Test
     public void findOverdueDebtorsOrderedByExpDateTest() {
+        debtorDAO.saveNew(debtors[0]);
+        debtorDAO.saveNew(debtors[1]);
+        debtorDAO.saveNew(debtors[2]);
+        debtorDAO.saveNew(debtors[3]);
 
-        debtorDAO.saveNew(firstDebtor);
-        debtorDAO.saveNew(secondDebtor);
-        debtorDAO.saveNew(thirdDebtor);
-        debtorDAO.saveNew(fourthDebtor);
-
-        Object[] debtors = {secondDebtor, firstDebtor};
+        Debtor[] debtorsToCheck = {debtors[1], debtors[0]};
         List<Debtor> overdueDebtors = debtorDAO.findOverdueDebtorsOrderedByExpDate();
 
-        Assert.assertArrayEquals(debtors, overdueDebtors.toArray());
+        assertArrayEquals(debtorsToCheck, overdueDebtors.toArray());
     }
 
+    @Override
+    protected GenericDAO<Debtor> getDao() {
+        return debtorDAO;
+    }
 
+    @Override
+    protected Debtor[] getModel() {
+        return debtors;
+    }
 }

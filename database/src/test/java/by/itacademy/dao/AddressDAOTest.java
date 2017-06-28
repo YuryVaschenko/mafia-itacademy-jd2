@@ -2,6 +2,7 @@ package by.itacademy.dao;
 
 import by.itacademy.config.TestConfig;
 import by.itacademy.dao.common.GenericDAO;
+import by.itacademy.dao.common.GenericDAOTest;
 import by.itacademy.entity.Address;
 import by.itacademy.entity.Location;
 import org.hibernate.ObjectNotFoundException;
@@ -31,11 +32,10 @@ public class AddressDAOTest extends GenericDAOTest<Address> {
     @Autowired
     private LocationDAO locationDAO;
 
-    private Address[] addresses;
+    private Address[] addresses = new Address[2];
 
     @Before
     public void entitiesInit() {
-        addresses = new Address[2];
         addresses[0] = new Address();
         addresses[0].setCountry("Belarus");
         addresses[0].setCity("Minsk");
@@ -47,16 +47,6 @@ public class AddressDAOTest extends GenericDAOTest<Address> {
         addresses[1].setCity("Grodno");
         addresses[1].setStreet("Gagarina");
         addresses[1].setHouse("34");
-    }
-
-    @Override
-    protected GenericDAO<Address> getDao() {
-        return addressDAO;
-    }
-
-    @Override
-    protected Address[] getModel() {
-        return addresses;
     }
 
     @Test
@@ -95,5 +85,15 @@ public class AddressDAOTest extends GenericDAOTest<Address> {
         List<Address> retrievedAddresses = addressDAO.findAddressesByCityName(cityName);
 
         assertEquals(address, retrievedAddresses.get(0));
+    }
+
+    @Override
+    protected GenericDAO<Address> getDao() {
+        return addressDAO;
+    }
+
+    @Override
+    protected Address[] getModel() {
+        return addresses;
     }
 }
