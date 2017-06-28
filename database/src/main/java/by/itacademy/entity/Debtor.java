@@ -53,7 +53,7 @@ public class Debtor extends BaseEntity {
     @Setter
     private Frequency frequency;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "address_id")
     @Getter
     @Setter

@@ -43,7 +43,7 @@ public class Group extends BaseEntity {
     @Setter
     private Set<Soldier> soldiers = new HashSet<>();
 
-    @ManyToMany(mappedBy = "groups", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "groups")
     @Getter
     @Setter
     private Set<Affair> affairs = new HashSet<>();

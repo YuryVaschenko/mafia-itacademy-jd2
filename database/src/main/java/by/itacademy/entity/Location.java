@@ -31,7 +31,7 @@ public class Location extends BaseEntity {
     @Setter
     private String longitude;
 
-    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "location")
     @Getter
     @Setter
     private Address address;

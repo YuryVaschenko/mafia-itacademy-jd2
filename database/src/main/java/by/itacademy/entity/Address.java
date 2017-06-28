@@ -43,7 +43,7 @@ public class Address extends BaseEntity {
     @Setter
     private String house;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "location_id", unique = true)
     @Getter
     @Setter

@@ -4,8 +4,6 @@ import by.itacademy.config.TestConfig;
 import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.dao.common.GenericDAOTest;
 import by.itacademy.entity.Address;
-import by.itacademy.entity.Location;
-import org.hibernate.ObjectNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,34 +45,6 @@ public class AddressDAOTest extends GenericDAOTest<Address> {
         addresses[1].setCity("Grodno");
         addresses[1].setStreet("Gagarina");
         addresses[1].setHouse("34");
-    }
-
-    @Test
-    public void locationThroughAddressSaveAndRetrieveTest() {
-        Address address = addresses[0];
-        Location location = new Location();
-        location.setLatitude("77.7777");
-        location.setLongitude("55.5555");
-        address.setLocation(location);
-        location.setAddress(address);
-        Long id = addressDAO.saveNew(address);
-        Address retrievedAddress = addressDAO.findById(id);
-
-        assertEquals(address.getLocation(), retrievedAddress.getLocation());
-    }
-
-    @Test(expected = ObjectNotFoundException.class)
-    public void cascadeDeletingAddressAndLocationTest() {
-        Address address = addresses[0];
-        Location location = new Location();
-        location.setLongitude("55.555");
-        location.setLatitude("55.555");
-        address.setLocation(location);
-        location.setAddress(address);
-        addressDAO.saveNew(address);
-        addressDAO.delete(address);
-
-        locationDAO.findById(1L);
     }
 
     @Test

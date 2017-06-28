@@ -30,18 +30,18 @@ public class Clan extends BaseEntity {
     @Setter
     private String name;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
     @JoinColumn(name = "address_id")
     @Getter
     @Setter
     private Address address;
 
-    @OneToMany(mappedBy = "clan", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "clan")
     @Getter
     @Setter
     private Set<Group> groups;
 
-    @OneToMany(mappedBy = "clan", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "clan")
     @Getter
     @Setter
     private Set<Member> members = new HashSet<>();
