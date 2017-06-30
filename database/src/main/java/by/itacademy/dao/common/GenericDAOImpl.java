@@ -33,7 +33,7 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
     }
 
     public T findById(Long id) {
-        return getSessionFactory().getCurrentSession().load(entityClass, id);
+        return getSessionFactory().getCurrentSession().get(entityClass, id);
     }
 
     public void update(T t) {

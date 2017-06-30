@@ -1,6 +1,6 @@
 package by.itacademy.dao;
 
-import by.itacademy.config.TestConfig;
+import by.itacademy.config.TestDbConfig;
 import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.dao.common.GenericDAOTest;
 import by.itacademy.entity.Affair;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
+@ContextConfiguration(classes = TestDbConfig.class)
 @Transactional
 public class AffairDAOTest extends GenericDAOTest<Affair> {
 

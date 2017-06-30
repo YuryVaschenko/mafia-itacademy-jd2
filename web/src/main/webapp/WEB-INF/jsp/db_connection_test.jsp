@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -9,16 +10,15 @@
     <title>Mafia JD2</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
-    <link href="css/mainstyle.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/mainstyle.css" />" rel="stylesheet">
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script type="text/javascript">
         var myMap;
         ymaps.ready(init);
 
-        function init () {
-
+        function init() {
             myMap = new ymaps.Map('map', {
-                center: [${requestScope.location.coords}],
+                center: [${location.latitude}${location.longitude}],
                 zoom: 11,
                 controls: ['zoomControl', 'typeSelector']
             });
@@ -29,9 +29,9 @@
 
 <div class="wrapper">
     <header class="header">
-        <img src="images/mainlogo.png"/>
+        <img src="<c:url value="/resources/images/mainlogo.png" />"/>
         <p class="topquote">"The quiter you become, the more you are able to hear."</p>
-        <img class="bloodhand" src="images/bloodhand.png"/>
+        <img class="bloodhand" src="<c:url value="/resources/images/bloodhand.png"/>"/>
     </header><!-- .header-->
     <hr/>
     <nav class="navigation">
@@ -48,10 +48,8 @@
     <main class="content">
         <strong>Retrieved location from database:</strong>
         <br/>
-        <h1>${requestScope.location.name}</h1>
-        <br/>
         <strong>Coords:</strong>
-        <h2>${requestScope.location.coords}</h2>
+        <h2>Latitude:${location.latitude}, Longitude:${location.longitude}</h2>
         <br/>
         <div id="map" style="width: 350px; height: 350px"/>
     </main><!-- .content -->

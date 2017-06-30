@@ -20,7 +20,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = {"by.itacademy.dao"})
 @EnableTransactionManagement
 @PropertySource("classpath:database.properties")
-public class Config {
+public class DbConfig {
 
     @Value("${jdbc.url}")
     private String dbUrl;

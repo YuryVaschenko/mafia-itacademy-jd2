@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Import;
  */
 
 @Configuration
-@Import(Config.class)
-public class TestConfig {
+@Import(DbConfig.class)
+public class TestDbConfig {
 
     @Value("${jdbc.url}")
     private String dbUrl;
