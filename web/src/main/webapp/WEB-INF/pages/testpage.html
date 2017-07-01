@@ -1,7 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <!--[if lt IE 9]>
@@ -10,28 +8,33 @@
     <title>Mafia JD2</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
-    <link href="<c:url value="/resources/css/mainstyle.css" />" rel="stylesheet">
+    <link href="../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
         var myMap;
         ymaps.ready(init);
 
+        var longitude = /*[[${location.longitude}]]*/ '';
+        var latitude = /*[[${location.latitude}]]*/'';
+
         function init() {
             myMap = new ymaps.Map('map', {
-                center: [${location.latitude}${location.longitude}],
+                center: [longitude, latitude],
                 zoom: 11,
                 controls: ['zoomControl', 'typeSelector']
             });
         }
+        /*]]>*/
     </script>
 </head>
 <body>
 
 <div class="wrapper">
     <header class="header">
-        <img src="<c:url value="/resources/images/mainlogo.png" />"/>
+        <img src="../../resources/images/mainlogo.png" th:src="@{/resources/images/mainlogo.png}"/>
         <p class="topquote">"The quiter you become, the more you are able to hear."</p>
-        <img class="bloodhand" src="<c:url value="/resources/images/bloodhand.png"/>"/>
+        <img class="bloodhand" src="../../resources/images/bloodhand.png" th:src="@{/resources/images/bloodhand.png}"/>
     </header><!-- .header-->
     <hr/>
     <nav class="navigation">
@@ -49,9 +52,10 @@
         <strong>Retrieved location from database:</strong>
         <br/>
         <strong>Coords:</strong>
-        <h2>Latitude:${location.latitude}, Longitude:${location.longitude}</h2>
+        <h2>Latitude: <span th:text="${location.latitude}"></span> , Longitude:<span
+                th:text="${location.longitude}"></span></h2>
         <br/>
-        <div id="map" style="width: 350px; height: 350px"/>
+        <div id="map" style="width: 350px; height: 350px"></div>
     </main><!-- .content -->
 </div><!-- .wrapper -->
 

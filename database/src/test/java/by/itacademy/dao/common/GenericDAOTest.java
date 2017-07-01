@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Yury V. on 28.06.17.
@@ -59,12 +60,12 @@ public abstract class GenericDAOTest<T extends BaseEntity> {
         assertArrayEquals(model, retrievedList.toArray());
     }
 
-    @Test(expected = ObjectNotFoundException.class)
+    @Test//(expected = ObjectNotFoundException.class)
     public void deleteTest() {
         T model = getModel()[0];
         Long id = getDao().saveNew(model);
         getDao().delete(model);
 
-        getDao().findById(id);
+        assertNull(getDao().findById(id));
     }
 }

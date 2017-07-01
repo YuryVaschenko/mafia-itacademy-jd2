@@ -14,6 +14,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "members")
-@ToString (callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Member extends BaseEntity {
@@ -32,16 +33,21 @@ public abstract class Member extends BaseEntity {
     @Setter
     private NameDetails nameDetails;
 
-    @Column (name = "status", nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated
     @Getter
     @Setter
     private MemberStatus memberStatus;
 
-    @ManyToOne (optional = false)
-    @JoinColumn (name = "clan_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "clan_id")
     @Getter
     @Setter
     private Clan clan;
+
+    @OneToOne(mappedBy = "member")
+    @Getter
+    @Setter
+    private User user;
 
 }

@@ -28,14 +28,12 @@ public class LocationController {
         httpSession.setMaxInactiveInterval(60 * 60);
         Location retrievedLocation = locationService.findLocation(1L);
         if (retrievedLocation == null) {
-            Location location = new Location();
-            location.setLatitude("55.555");
-            location.setLongitude("55.555");
+            Location location = new Location("27.525773", "53.89079");
             Long id = locationService.saveNewLocation(location);
             retrievedLocation = locationService.findLocation(id);
         }
         model.addAttribute("location", retrievedLocation);
-        return "db_connection_test";
+        return "testpage";
     }
 
 }

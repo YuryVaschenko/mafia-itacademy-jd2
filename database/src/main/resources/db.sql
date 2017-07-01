@@ -39,7 +39,7 @@ CREATE TABLE debtors (
   last_name       VARCHAR(50),
   nickname        VARCHAR(50),
   debt_amount     INT          NOT NULL,
-  exp_date        DATE NOT NULL,
+  exp_date        DATE         NOT NULL,
   percent_per_day SMALLINT     NOT NULL        DEFAULT 10,
   frequency       VARCHAR(30)  NOT NULL,
   address_id      INT UNSIGNED,
@@ -106,7 +106,7 @@ CREATE TABLE affairs (
   title         VARCHAR(50)  NOT NULL,
   description   TEXT,
   exp_date      DATE,
-  status        VARCHAR(40) NOT NULL,
+  status        VARCHAR(40)  NOT NULL,
   debtor_id     INT UNSIGNED,
   black_list_id INT UNSIGNED,
   location_id   INT UNSIGNED,
@@ -132,6 +132,16 @@ CREATE TABLE reports (
   PRIMARY KEY (id),
   FOREIGN KEY (affair_id) REFERENCES affairs (id),
   FOREIGN KEY (caporegime_id) REFERENCES caporegimes (member_id)
+)
+  DEFAULT CHARSET = utf8;
+CREATE TABLE users (
+  id        INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  login     VARCHAR(100) NOT NULL,
+  password  VARCHAR(100) NOT NULL,
+  role      VARCHAR(50)  NOT NULL,
+  member_id INT UNSIGNED NOT NULL UNIQUE,
+  PRIMARY KEY (id),
+  FOREIGN KEY (member_id) REFERENCES members (id)
 )
   DEFAULT CHARSET = utf8;
 
