@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @ComponentScan(basePackages = "by.itacademy.controllers")
 @EnableWebMvc
-@Import(value = {ThymeleafConfig.class})
+@Import(value = {InternationalizationConfig.class, ThymeleafConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override

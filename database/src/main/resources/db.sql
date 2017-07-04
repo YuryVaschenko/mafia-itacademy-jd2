@@ -27,9 +27,9 @@ CREATE TABLE addresses (
 CREATE TABLE clans (
   id         INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
   name       VARCHAR(30)  NOT NULL UNIQUE,
-  address_id INT UNSIGNED UNIQUE,
+  location_id INT UNSIGNED UNIQUE,
   PRIMARY KEY (id),
-  FOREIGN KEY (address_id) REFERENCES addresses (id)
+  FOREIGN KEY (location_id) REFERENCES locations (id)
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE debtors (

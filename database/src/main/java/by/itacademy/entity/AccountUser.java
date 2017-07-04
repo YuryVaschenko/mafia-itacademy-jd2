@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @ToString
 @NoArgsConstructor
 @Table(name = "users")
-public class User extends BaseEntity {
+public class AccountUser extends BaseEntity {
 
     @Column(name = "login", nullable = false)
     @Getter

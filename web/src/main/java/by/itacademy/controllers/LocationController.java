@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * Created by Yury V. on 28.06.17.
  */
@@ -24,8 +22,7 @@ public class LocationController {
     }
 
     @GetMapping("/")
-    public String showLocationTestForm(Model model, HttpSession httpSession) {
-        httpSession.setMaxInactiveInterval(60 * 60);
+    public String showLocationTestForm(Model model) {
         Location retrievedLocation = locationService.findLocation(1L);
         if (retrievedLocation == null) {
             Location location = new Location("27.525773", "53.89079");

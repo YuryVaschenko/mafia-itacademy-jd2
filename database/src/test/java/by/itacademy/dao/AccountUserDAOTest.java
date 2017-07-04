@@ -3,20 +3,23 @@ package by.itacademy.dao;
 import by.itacademy.config.TestDbConfig;
 import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.dao.common.GenericDAOTest;
+import by.itacademy.entity.AccountUser;
 import by.itacademy.entity.Caporegime;
 import by.itacademy.entity.Clan;
 import by.itacademy.entity.Group;
 import by.itacademy.entity.Soldier;
-import by.itacademy.entity.User;
 import by.itacademy.entity.enums.MemberStatus;
 import by.itacademy.entity.enums.Role;
 import by.itacademy.entity.enums.Specialization;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Yury V. on 01.07.17.
@@ -25,10 +28,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestDbConfig.class)
 @Transactional
-public class UserDAOTest extends GenericDAOTest<User> {
+public class AccountUserDAOTest extends GenericDAOTest<AccountUser> {
 
     @Autowired
-    private UserDAO userDAO;
+    private AccountUserDAO accountUserDAO;
     @Autowired
     private ClanDAO clanDAO;
     @Autowired
@@ -38,7 +41,7 @@ public class UserDAOTest extends GenericDAOTest<User> {
     @Autowired
     private CaporegimeDAO caporegimeDAO;
 
-    private User[] users = new User[2];
+    private AccountUser[] accountUsers = new AccountUser[2];
 
     @Before
     public void entitiesInit() {
@@ -54,11 +57,11 @@ public class UserDAOTest extends GenericDAOTest<User> {
         soldier.setGroup(group);
         soldier.setMemberStatus(MemberStatus.AVAILABLE);
         soldierDAO.saveNew(soldier);
-        users[0] = new User();
-        users[0].setLogin("login");
-        users[0].setPassword("password");
-        users[0].setRole(Role.SOLDIER);
-        users[0].setMember(soldier);
+        accountUsers[0] = new AccountUser();
+        accountUsers[0].setLogin("login");
+        accountUsers[0].setPassword("password");
+        accountUsers[0].setRole(Role.SOLDIER);
+        accountUsers[0].setMember(soldier);
 
         Caporegime caporegime = new Caporegime();
         caporegime.setClan(clan);
@@ -66,20 +69,28 @@ public class UserDAOTest extends GenericDAOTest<User> {
         caporegime.setEmail("xxx@xxx.com");
         caporegime.setMemberStatus(MemberStatus.AVAILABLE);
         caporegimeDAO.saveNew(caporegime);
-        users[1] = new User();
-        users[1].setLogin("log");
-        users[1].setPassword("pass");
-        users[1].setRole(Role.CAPOREGIME);
-        users[1].setMember(caporegime);
+        accountUsers[1] = new AccountUser();
+        accountUsers[1].setLogin("log");
+        accountUsers[1].setPassword("pass");
+        accountUsers[1].setRole(Role.CAPOREGIME);
+        accountUsers[1].setMember(caporegime);
+    }
+
+    @Test
+    public void findAccountUserByLogin() {
+        accountUserDAO.saveNew(accountUsers[0]);
+        AccountUser retrievedAccountUser = accountUserDAO.findAccountUserByLogin("login");
+
+        assertNotNull(retrievedAccountUser);
     }
 
     @Override
-    protected GenericDAO<User> getDao() {
-        return userDAO;
+    protected GenericDAO<AccountUser> getDao() {
+        return accountUserDAO;
     }
 
     @Override
-    protected User[] getModel() {
-        return users;
+    protected AccountUser[] getModel() {
+        return accountUsers;
     }
 }

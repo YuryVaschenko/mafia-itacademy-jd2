@@ -31,10 +31,10 @@ public class Clan extends BaseEntity {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "location_id")
     @Getter
     @Setter
-    private Address address;
+    private Location location;
 
     @OneToMany(mappedBy = "clan")
     @Getter

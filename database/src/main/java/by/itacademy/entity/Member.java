@@ -48,6 +48,6 @@ public abstract class Member extends BaseEntity {
     @OneToOne(mappedBy = "member")
     @Getter
     @Setter
-    private User user;
+    private AccountUser accountUser;
 
 }
