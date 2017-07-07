@@ -33,9 +33,6 @@ public class ClanDAOImpl extends GenericDAOImpl<Clan> implements ClanDAO {
 
         List<Clan> resultList = session.createQuery(criteria).getResultList();
 
-        if (resultList.size() > 0) {
-            return resultList.get(0);
-        }
-        return null;
+        return resultList.isEmpty() ? null : resultList.get(0);
     }
 }

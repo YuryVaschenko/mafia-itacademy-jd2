@@ -9,6 +9,7 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -33,8 +34,8 @@ public abstract class Member extends BaseEntity {
     @Setter
     private NameDetails nameDetails;
 
-    @Column(name = "status", nullable = false)
-    @Enumerated
+    @Column(name = "status", nullable = false, columnDefinition = "varchar")
+    @Enumerated(EnumType.STRING)
     @Getter
     @Setter
     private MemberStatus memberStatus;

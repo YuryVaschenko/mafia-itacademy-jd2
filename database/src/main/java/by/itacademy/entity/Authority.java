@@ -26,7 +26,7 @@ public class Authority extends Member {
     @Setter
     private Integer votes;
 
-    @Column(name = "is_boss")
+    @Column(name = "is_boss", columnDefinition = "smallint")
     @Getter
     @Setter
     private boolean isBoss;

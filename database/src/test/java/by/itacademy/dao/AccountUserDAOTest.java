@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Yury V. on 01.07.17.
@@ -82,6 +83,13 @@ public class AccountUserDAOTest extends GenericDAOTest<AccountUser> {
         AccountUser retrievedAccountUser = accountUserDAO.findAccountUserByLogin("login");
 
         assertNotNull(retrievedAccountUser);
+    }
+
+    @Test
+    public void findAbsentAccountUserByLogin() {
+        AccountUser retrievedAccountUser = accountUserDAO.findAccountUserByLogin("login");
+
+        assertNull(retrievedAccountUser);
     }
 
     @Override

@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,7 +34,8 @@ public class AccountUser extends BaseEntity {
     @Setter
     private String password;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, columnDefinition = "varchar")
+    @Enumerated (EnumType.STRING)
     @Getter
     @Setter
     private Role role;

@@ -37,4 +37,6 @@ public class UserServiceImpl implements UserService {
                 .authorities(foundUser.getRole().name())
                 .build();
     }
+
+
 }

@@ -2,10 +2,7 @@ package by.itacademy.dao;
 
 import by.itacademy.dao.common.GenericDAOImpl;
 import by.itacademy.entity.AccountUser;
-import by.itacademy.entity.AccountUser;
 import by.itacademy.entity.AccountUser_;
-import by.itacademy.entity.Clan;
-import by.itacademy.entity.Clan_;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -36,9 +33,6 @@ public class AccountUserDAOImpl extends GenericDAOImpl<AccountUser> implements A
 
         List<AccountUser> resultList = session.createQuery(criteria).getResultList();
 
-        if (resultList.size() > 0) {
-            return resultList.get(0);
-        }
-        return null;
+        return resultList.isEmpty() ? null : resultList.get(0);
     }
 }

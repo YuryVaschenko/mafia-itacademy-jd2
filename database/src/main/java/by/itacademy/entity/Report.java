@@ -33,7 +33,7 @@ public class Report extends BaseEntity {
     @Setter
     private Caporegime caporegime;
 
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "text")
     @Getter
     @Setter
     private String content;

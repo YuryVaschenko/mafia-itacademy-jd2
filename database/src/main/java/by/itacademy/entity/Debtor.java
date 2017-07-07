@@ -42,7 +42,7 @@ public class Debtor extends BaseEntity {
     @Setter
     private LocalDate expDate;
 
-    @Column(name = "percent_per_day")
+    @Column(name = "percent_per_day", columnDefinition = "smallint")
     @Getter
     @Setter
     private Integer percentPerDay;

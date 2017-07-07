@@ -8,6 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -33,7 +35,7 @@ public class Affair extends BaseEntity {
     @Setter
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "text")
     @Getter
     @Setter
     private String description;
@@ -43,7 +45,8 @@ public class Affair extends BaseEntity {
     @Setter
     private LocalDateTime expDateTime;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status", nullable = false, columnDefinition = "varchar")
+    @Enumerated (EnumType.STRING)
     @Getter
     @Setter
     private AffairStatus status;
