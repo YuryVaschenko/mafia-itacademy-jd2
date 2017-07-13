@@ -5,19 +5,17 @@
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
-    <title>Mafia JD2</title>
+    <title th:text="#{page.title}">Mafia JD2</title>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
-    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script th:src="@{http://api-maps.yandex.ru/2.1/(lang=#{page.locale})}" type="text/javascript"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
         var myMap;
         ymaps.ready(init);
-
         var longitude = /*[[${location.longitude}]]*/ '';
         var latitude = /*[[${location.latitude}]]*/'';
-
         function init() {
             myMap = new ymaps.Map('map', {
                 center: [longitude, latitude],
@@ -33,8 +31,12 @@
 <div class="wrapper">
     <header class="header">
         <img src="../../resources/images/mainlogo.png" th:src="@{/resources/images/mainlogo.png}"/>
-        <p class="topquote">"The quiter you become, the more you are able to hear."</p>
+        <p class="topquote" th:text="#{header.topquote}">"The quiter you become, the more you are able to hear."</p>
         <img class="bloodhand" src="../../resources/images/bloodhand.png" th:src="@{/resources/images/bloodhand.png}"/>
+        <!--suppress ThymeleafVariablesResolveInspection -->
+        <a th:href="@{''(lang=en_US)}">En</a>&nbsp;|&nbsp;
+        <!--suppress ThymeleafVariablesResolveInspection -->
+        <a th:href="@{''(lang=ru_RU)}">Ru</a>
     </header><!-- .header-->
     <hr/>
     <nav class="navigation">
@@ -52,6 +54,7 @@
         <strong>Retrieved location from database:</strong>
         <br/>
         <strong>Coords:</strong>
+        <h2 th:text="#{page.locale}"></h2><br/>
         <h2>Latitude: <span th:text="${location.latitude}"></span> , Longitude:<span
                 th:text="${location.longitude}"></span></h2>
         <br/>
@@ -62,7 +65,7 @@
 <br/>
 <footer class="footer">
     <hr/>
-    <strong>Mafia:</strong> ItAcademy final JD2 project. Copyright &#169; Yury Vaschenko 2017
+    <span th:text="#{footer.info}">"Mafia" ItAcademy final JD2 project. Yury Vaschenko 2017</span>
 </footer><!-- .footer -->
 
 </body>

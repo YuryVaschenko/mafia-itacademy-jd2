@@ -2,6 +2,7 @@ package by.itacademy.services;
 
 import by.itacademy.dao.LocationDAO;
 import by.itacademy.entity.Location;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,9 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location findLocation(Long id) {
-        return locationDAO.findById(id);
+        Location retrievedLocation = locationDAO.findById(id);
+        Hibernate.initialize(retrievedLocation);
+        return retrievedLocation;
     }
 
     @Override

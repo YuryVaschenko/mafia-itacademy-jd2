@@ -2,6 +2,7 @@ package by.itacademy.controllers;
 
 import by.itacademy.entity.Location;
 import by.itacademy.services.LocationService;
+import org.hibernate.Hibernate;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,12 +25,7 @@ public class LocationController {
 
     @GetMapping("/")
     public String showLocationTestForm(Model model) {
-        Location retrievedLocation = null;
-        //try {
-            retrievedLocation = locationService.findLocation(1L);
-        //} catch (ObjectNotFoundException ex){
-            /* NOP */
-        //}
+        Location retrievedLocation = locationService.findLocation(1L);
         if (retrievedLocation == null) {
             Location location = new Location("27.525773", "53.89079");
             Long id = locationService.saveNewLocation(location);

@@ -1,6 +1,7 @@
 package by.itacademy.dao.common;
 
 import by.itacademy.entity.BaseEntity;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,13 @@ public abstract class GenericDAOImpl<T extends BaseEntity> implements GenericDAO
     }
 
     public T findById(Long id) {
-        return getSessionFactory().getCurrentSession().get(entityClass, id);
+        T load = null;
+        try {
+            load = getSessionFactory().getCurrentSession().load(entityClass, id);
+        } catch (ObjectNotFoundException e) {
+            return null;
+        }
+        return load;
     }
 
     public void update(T t) {
