@@ -12,27 +12,28 @@
     <script th:src="@{http://api-maps.yandex.ru/2.1/(lang=#{page.locale})}"
             src="http://api-maps.yandex.ru/2.1/?lang=en_US" type="text/javascript"></script>
     <script th:inline="javascript">
-        ymaps.ready(function() {
-            var myMap;
+        /*<![CDATA[*/
+        ymaps.ready(function () {
+            var myMap, placemark;
             myMap = new ymaps.Map('map', {
                 center: [53.614482, 28.143763],
                 zoom: 6,
                 type: 'yandex#hybrid',
                 controls: ['zoomControl', 'typeSelector']
             });
+
+            var listOfClans = JSON.parse(/*[[${allClans}]]*/ '');
+            for (var i = 0; i < listOfClans.length; i++) {
+                placemark = new ymaps.Placemark([listOfClans[i].location.longitude, listOfClans[i].location.latitude], {
+                    iconContent: listOfClans[i].name
+                },{
+                    preset: 'islands#blackStretchyIcon'
+                });
+                myMap.geoObjects.add(placemark);
+            }
         });
-    </script>
-    <!--<script th:each="clan : ${allClans}" th:inline="javascript">
-        /*<![CDATA[*/
-        var longitude = /*[[${clan.location.longitude}]]*/ '';
-        var latitude = /*[[${clan.location.latitude}]]*/'';
-        var myPlacemark = new ymaps.Placemark([55.76, 37.64], {
-            hintContent: 'Москва!',
-            balloonContent: 'Столица России'
-        });
-        myMap.geoObjects.add(myPlacemark);
         /*]]>*/
-    </script>-->
+    </script>
 </head>
 <body>
 

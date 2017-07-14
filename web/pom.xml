@@ -32,7 +32,6 @@
             <artifactId>thymeleaf-spring4</artifactId>
             <version>3.0.6.RELEASE</version>
         </dependency>
-
     </dependencies>
 
 </project>

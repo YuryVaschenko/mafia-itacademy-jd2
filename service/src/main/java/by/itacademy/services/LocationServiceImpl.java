@@ -34,4 +34,9 @@ public class LocationServiceImpl implements LocationService {
         return locationDAO.saveNew(location);
     }
 
+    @Override
+    public void deleteLocation(Location location) {
+        locationDAO.delete(location);
+    }
+
 }

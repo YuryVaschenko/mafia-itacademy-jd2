@@ -36,7 +36,7 @@ public class Location extends BaseEntity {
     @Setter
     private Address address;
 
-    public Location(String latitude, String longitude) {
+    public Location(String longitude, String latitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
