@@ -23,7 +23,7 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/testpage")
     public String showLocationTestForm(Model model) {
         Location retrievedLocation = locationService.findLocation(1L);
         if (retrievedLocation == null) {

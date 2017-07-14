@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 
 @Configuration
-@ComponentScan(basePackages = {"by.itacademy.dao"})
+@ComponentScan(basePackages = {"by.itacademy.dao", "by.itacademy.fetch"})
 @EnableTransactionManagement
 @PropertySource("classpath:database.properties")
 public class DbConfig {

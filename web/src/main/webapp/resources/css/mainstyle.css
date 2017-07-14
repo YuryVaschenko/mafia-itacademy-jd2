@@ -1,108 +1,126 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 body {
-	font: 12px/18px Arial, sans-serif;
-	width: 100%;
-	height: 100%;
-	background-image: url(../images/31_01.jpg);
+    font: 12px/18px Arial, sans-serif;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/31_01.jpg);
 }
+
 .wrapper {
-	width: 1000px;
-	margin: 0 auto;
-	min-height: 100%;
-	height: auto !important;
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 100%;
+    height: auto !important;
 }
+
 hr {
-	clear: both;
-	border: 0;
+    clear: both;
+    border: 0;
     height: 2px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 /* Header --------------------------------------------------------------------*/
 .header {
-	height: 140px;
-	display: flex;
-	text-align: center;
-	padding-left: 20px;
-	padding-right: 20px;
+    height: 140px;
+    display: flex;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.topquote{
-	width: 450px;
-	margin: auto;
-	font-family: «Great Vibes», cursive; font-size: 22px; line-height: 25px; text-align: center; font-weight: normal;text-shadow: 0 2px 2px #fff;
-	font-style: italic;
+
+.topquote {
+    width: 450px;
+    margin: auto;
+    font-family: «Great Vibes», cursive;
+    font-size: 22px;
+    line-height: 25px;
+    text-align: center;
+    font-weight: normal;
+    text-shadow: 0 2px 2px #fff;
+    font-style: italic;
 }
-.bloodhand{
-	
-	opacity: 0.6;
-	transition: 2s;
+
+.languages {
+    font-size: 13px;
+    text-decoration: none;
+    display: block;
 }
-.bloodhand:hover{
-	opacity: 0.9;
- 	transition: 2s;
+
+.bloodhand {
+    opacity: 0.6;
+    transition: 2s;
+}
+
+.bloodhand:hover {
+    opacity: 0.9;
+    transition: 2s;
 }
 
 /* Navigation ----------------------------------------------------------------*/
 
 .navigation {
-	overflow: hidden;
-	height: 40px;
+    overflow: hidden;
+    height: 40px;
     box-shadow: 0 0 0 #777, 0 0 0 #666 inset;
-	
-}
-.navigation ul{
-	list-style: none;
-	float: left;
-	position: relative;
-	left: 50%;
-	text-align: center;
 }
 
-.navigation li {	
-	display: block;
-	position: relative;
-	right: 50%;
-	transition: 0.5s;
+.navigation ul {
+    list-style: none;
+    float: left;
+    position: relative;
+    left: 50%;
+    text-align: center;
+}
+
+.navigation li {
+    display: block;
+    position: relative;
+    right: 50%;
+    transition: 0.5s;
     float: left;
     width: 120px;
     background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 0 #777, 1px 0 0 #666 inset;
-	text-align: center;
+    box-shadow: 1px 0 0 #777, 1px 0 0 #666 inset;
+    text-align: center;
 }
-.navigation a{
-	color: black;
-	font-size: 15px;
+
+.navigation a {
+    color: black;
+    font-size: 15px;
     font-weight: bold;
     display: block;
     text-decoration: none;
     padding: 11px 11px;
 }
-.navigation li:hover{
-	transition: 0.5s;
-     background-color:rgba(139, 0, 0, 0.4);
+
+.navigation li:hover {
+    transition: 0.5s;
+    background-color: rgba(139, 0, 0, 0.4);
 }
 
 /* Content --------------------------------------------------------------------*/
 .content {
-	box-shadow: 3px 3px 2px #777, 0 0 0 #666 inset;
-	background-color:rgba(0, 0, 0, 0.3);
-	padding: 15px;
-	margin: auto;
-	width: 800px;
-	height: 500px;
+    box-shadow: 3px 3px 2px #777, 0 0 0 #666 inset;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    margin: auto;
+    width: 800px;
+    height: 500px;
 }
 
 /* Footer --------------------------------------------------------------------*/
 .footer {
-	text-align: center;
-	width: 1000px;
-	margin: 0 auto 0;
-	height: 50px;
-	position: relative;
+    text-align: center;
+    width: 1000px;
+    margin: 0 auto 0;
+    height: 50px;
+    position: relative;
 }

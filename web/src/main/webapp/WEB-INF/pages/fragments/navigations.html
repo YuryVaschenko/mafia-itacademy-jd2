@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Start navigation menu</title>
+    <link href="../../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<nav class="navigation" th:fragment="base_navigation">
+<ul>
+    <li><a href="#" onclick="return false;" th:text="#{nav.sign_in}">Log In</a></li>
+    <li><a href="#" onclick="return false;" th:text="#{nav.register_clan}">Register clan</a></li>
+</ul>
+</nav>
+<br/>
+<nav class="navigation" th:fragment="authority_navigation">
+    <ul>
+        <li><a href="#">Dummy</a></li>
+        <li><a href="#" onclick="return false;">Dummy</a></li>
+        <li><a href="#" onclick="return false;">Dummy</a></li>
+        <li><a href="#" onclick="return false;">About</a></li>
+        <li><a href="#" onclick="return false;">Sign out</a></li>
+    </ul>
+</nav>
+<br/>
+<nav class="navigation" th:fragment="caporegime_navigation">
+    <ul>
+        <li><a href="#">Dummy</a></li>
+        <li><a href="#" onclick="return false;">Dummy</a></li>
+        <li><a href="#" onclick="return false;">Dummy</a></li>
+        <li><a href="#" onclick="return false;">About</a></li>
+        <li><a href="#" onclick="return false;">Sign out</a></li>
+    </ul>
+</nav>
+<br/>
+<nav class="navigation" th:fragment="soldier_navigation">
+    <ul>
+        <li><a href="#">Dummy</a></li>
+        <li><a href="#" onclick="return false;">Dummy</a></li>
+        <li><a href="#" onclick="return false;">Dummy</a></li>
+        <li><a href="#" onclick="return false;">About</a></li>
+        <li><a href="#" onclick="return false;">Sign out</a></li>
+    </ul>
+</nav>
+</body>
+</html>

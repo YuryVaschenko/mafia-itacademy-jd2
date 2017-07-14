@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link href="../../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+<header class="header" th:fragment="header">
+    <img src="../../../resources/images/mainlogo.png" th:src="@{/resources/images/mainlogo.png}"/>
+    <p class="topquote" th:text="#{header.topquote}">"The quiter you become, the more you are able to hear."</p>
+    <img class="bloodhand" src="../../../resources/images/bloodhand.png" th:src="@{/resources/images/bloodhand.png}"/>
+    <!--suppress ThymeleafVariablesResolveInspection -->
+    <a class="languages" th:href="@{''(lang=en_US)}">En</a>&nbsp;|&nbsp;
+    <!--suppress ThymeleafVariablesResolveInspection -->
+    <a class="languages" th:href="@{''(lang=ru_RU)}">Ru</a>
+</header>
+</body>
+</html>
