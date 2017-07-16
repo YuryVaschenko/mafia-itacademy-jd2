@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
@@ -24,9 +25,9 @@ public class StartController {
         this.clanService = clanService;
     }
 
+    //Start page
     @GetMapping("/")
     public String showStartPage(Model model) {
-
         ObjectMapper mapper = new ObjectMapper();
         String jsonClans = "";
 
@@ -40,16 +41,26 @@ public class StartController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String showLoginPage() {
+    //Login page
+    @RequestMapping("/login")
+    public String login() {
         return "login";
     }
 
+    //Login with error page
+    @RequestMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
+    }
+
+    //Register new clan page
     @GetMapping("/register")
     public String showRegisterClanPage() {
         return "registerclan";
     }
 
+    //Redirect to page depending on the user role after authentication
     @GetMapping("/redirect")
     public String redirectToAuthenticatedPage(Principal principal) {
         switch (principal.getName().toUpperCase()) {

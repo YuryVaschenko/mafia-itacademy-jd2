@@ -113,7 +113,7 @@ hr {
     padding: 15px;
     margin: auto;
     width: 800px;
-    height: 500px;
+    min-height: 450px;
 }
 
 /* Footer --------------------------------------------------------------------*/

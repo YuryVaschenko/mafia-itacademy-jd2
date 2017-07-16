@@ -6,6 +6,8 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
+    <link href="../../resources/css/login_page_style.css" th:href="@{/resources/css/login_page_style.css}"
+          rel="stylesheet">
 </head>
 <body>
 
@@ -16,9 +18,18 @@
     <hr/>
     <br/><br/>
     <main class="content">
-
-        <h1>Sign In Form Here</h1>
-
+        <div id="login-form">
+            <h2 th:if="${loginError}" th:text="#{login_page.error_mesage}">Wrong user or password</h2>
+            <fieldset>
+                <form th:action="@{/login}" method="post">
+                    <label for="username" th:text="#{login}">Login</label><br/>
+                    <input type="text" id="username" name="username" autofocus="autofocus" required/>
+                    <label for="password" th:text="#{password}">Password</label><br/>
+                    <input type="password" id="password" name="password" required/>
+                    <input type="submit" th:value="#{nav.sign_in}" value="Log in"/>
+                </form>
+            </fieldset>
+        </div>
     </main><!-- .content -->
 </div><!-- .wrapper -->
 <br/>
