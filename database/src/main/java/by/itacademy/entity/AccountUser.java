@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class AccountUser extends BaseEntity {
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
     @Getter
     @Setter
     private String login;

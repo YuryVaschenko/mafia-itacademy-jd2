@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Start navigation menu</title>
@@ -8,8 +8,9 @@
 <body>
 <nav class="navigation" th:fragment="base_navigation">
 <ul>
-    <li><a href="#" onclick="return false;" th:text="#{nav.sign_in}">Log In</a></li>
-    <li><a href="#" onclick="return false;" th:text="#{nav.register_clan}">Register clan</a></li>
+    <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="../login.html" th:text="#{nav.sign_in}">Log In</a></li>
+    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
+    <li><a th:href="@{/register}" href="../registerclan.html" th:text="#{nav.register_clan}">Register clan</a></li>
 </ul>
 </nav>
 <br/>

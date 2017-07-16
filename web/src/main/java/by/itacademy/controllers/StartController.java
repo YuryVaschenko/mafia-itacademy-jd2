@@ -1,15 +1,14 @@
 package by.itacademy.controllers;
 
-import by.itacademy.entity.Clan;
-import by.itacademy.entity.Location;
 import by.itacademy.services.ClanService;
-import by.itacademy.services.LocationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 
 /**
  * Created by Yury V. on 13.07.17.
@@ -19,12 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class StartController {
 
     private final ClanService clanService;
-    private final LocationService locationService;
 
     @Autowired
-    public StartController(ClanService clanService, LocationService locationService) {
+    public StartController(ClanService clanService) {
         this.clanService = clanService;
-        this.locationService = locationService;
     }
 
     @GetMapping("/")
@@ -41,6 +38,30 @@ public class StartController {
         model.addAttribute("allClans", jsonClans);
 
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String showRegisterClanPage() {
+        return "registerclan";
+    }
+
+    @GetMapping("/redirect")
+    public String redirectToAuthenticatedPage(Principal principal) {
+        switch (principal.getName().toUpperCase()) {
+            case "AUTHORITY":
+                return "redirect: /authority";
+            case "CAPOREGIME":
+                return "redirect: /caporegime";
+            case "SOLDIER":
+                return "redirect: /soldier";
+            default:
+                return "redirect: /";
+        }
     }
 
 }
