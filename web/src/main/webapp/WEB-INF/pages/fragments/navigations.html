@@ -7,11 +7,15 @@
 </head>
 <body>
 <nav class="navigation" th:fragment="base_navigation">
-<ul>
-    <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="../login.html" th:text="#{nav.sign_in}">Log In</a></li>
-    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
-    <li><a th:href="@{/register}" href="../registerclan.html" th:text="#{nav.register_clan}">Register clan</a></li>
-</ul>
+    <ul>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}" href="../login.html" th:text="#{nav.sign_in}">Log In</a>
+        </li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a>
+        </li>
+        <li><a th:href="@{/register}" href="../registerclan.html" th:text="#{nav.register_clan}">Register clan</a>
+        </li>
+    </ul>
 </nav>
 <br/>
 <nav class="navigation" th:fragment="authority_navigation">
@@ -20,7 +24,7 @@
         <li><a href="#" onclick="return false;">Dummy</a></li>
         <li><a href="#" onclick="return false;">Dummy</a></li>
         <li><a href="#" onclick="return false;">About</a></li>
-        <li><a href="#" onclick="return false;">Sign out</a></li>
+        <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
     </ul>
 </nav>
 <br/>
@@ -30,7 +34,7 @@
         <li><a href="#" onclick="return false;">Dummy</a></li>
         <li><a href="#" onclick="return false;">Dummy</a></li>
         <li><a href="#" onclick="return false;">About</a></li>
-        <li><a href="#" onclick="return false;">Sign out</a></li>
+        <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
     </ul>
 </nav>
 <br/>
@@ -40,7 +44,7 @@
         <li><a href="#" onclick="return false;">Dummy</a></li>
         <li><a href="#" onclick="return false;">Dummy</a></li>
         <li><a href="#" onclick="return false;">About</a></li>
-        <li><a href="#" onclick="return false;">Sign out</a></li>
+        <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
     </ul>
 </nav>
 </body>

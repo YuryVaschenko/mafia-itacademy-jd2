@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -7,7 +7,18 @@
 </head>
 <body>
 <header class="header" th:fragment="header">
-    <a th:href="@{/}"><img src="../../../resources/images/mainlogo.png" th:src="@{/resources/images/mainlogo.png}"/></a>
+    <a sec:authorize="isAnonymous()" th:href="@{/}">
+        <img src="../../../resources/images/mainlogo.png"
+             th:src="@{/resources/images/mainlogo.png}"/></a>
+    <a sec:authorize="hasAuthority('AUTHORITY')" th:href="@{/authority}">
+        <img src="../../../resources/images/mainlogo.png"
+             th:src="@{/resources/images/mainlogo.png}"/></a>
+    <a sec:authorize="hasAuthority('CAPOREGIME')" th:href="@{/caporegime}">
+        <img src="../../../resources/images/mainlogo.png"
+             th:src="@{/resources/images/mainlogo.png}"/></a>
+    <a sec:authorize="hasAuthority('SOLDIER')" th:href="@{/soldier}">
+        <img src="../../../resources/images/mainlogo.png"
+             th:src="@{/resources/images/mainlogo.png}"/></a>
     <p class="topquote" th:text="#{header.topquote}">"The quiter you become, the more you are able to hear."</p>
     <img class="bloodhand" src="../../../resources/images/bloodhand.png" th:src="@{/resources/images/bloodhand.png}"/>
     <!--suppress ThymeleafVariablesResolveInspection -->

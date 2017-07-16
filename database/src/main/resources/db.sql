@@ -25,8 +25,8 @@ CREATE TABLE addresses (
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE clans (
-  id         INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-  name       VARCHAR(30)  NOT NULL UNIQUE,
+  id          INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  name        VARCHAR(30)  NOT NULL UNIQUE,
   location_id INT UNSIGNED UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (location_id) REFERENCES locations (id)
@@ -137,12 +137,22 @@ CREATE TABLE reports (
 CREATE TABLE users (
   id        INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
   login     VARCHAR(100) NOT NULL UNIQUE,
-  password  VARCHAR(60) NOT NULL,
+  password  VARCHAR(60)  NOT NULL,
   role      VARCHAR(50)  NOT NULL,
   member_id INT UNSIGNED NOT NULL UNIQUE,
   PRIMARY KEY (id),
   FOREIGN KEY (member_id) REFERENCES members (id)
 )
   DEFAULT CHARSET = utf8;
+
+INSERT INTO locations (latitude, longitude) VALUES ('27.525773', '53.89079');
+INSERT INTO locations (latitude, longitude) VALUES ('23.832701', '53.656356');
+INSERT INTO locations (latitude, longitude) VALUES ('30.201058', '55.191204');
+INSERT INTO locations (latitude, longitude) VALUES ('31.016844', '52.421810');
+
+INSERT INTO clans (name, location_id) VALUES ('Corleone', 1);
+INSERT INTO clans (name, location_id) VALUES ('Benedetti', 2);
+INSERT INTO clans (name, location_id) VALUES ('Alcamo', 3);
+INSERT INTO clans (name, location_id) VALUES ('Trapani', 4);
 
 

@@ -14,7 +14,7 @@ public class AuthorityController {
 
     @GetMapping
     public String showStartAuthorityPage() {
-        return "testpage";
+        return "index";
     }
 
 }

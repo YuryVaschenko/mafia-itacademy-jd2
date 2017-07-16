@@ -26,7 +26,7 @@
             for (var i = 0; i < listOfClans.length; i++) {
                 placemark = new ymaps.Placemark([listOfClans[i].location.longitude, listOfClans[i].location.latitude], {
                     iconContent: listOfClans[i].name
-                },{
+                }, {
                     preset: 'islands#blackStretchyIcon'
                 });
                 myMap.geoObjects.add(placemark);
