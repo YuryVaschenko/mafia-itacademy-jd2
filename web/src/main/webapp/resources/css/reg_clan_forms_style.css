@@ -1,3 +1,46 @@
+.find_location {
+    width: 700px;
+    margin: 10px auto;
+    padding: 5px;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: white;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.find_location input[type=text] {
+    width: 200px;
+    padding: 3px 2px 4px 6px;
+    margin-bottom: 15px;
+
+    border: 1px solid #4e3043;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 1px 1px rgba(0, 0, 0, 0.1);
+
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 12px;
+}
+
+.find_location input[type=button] {
+    width: 130px;
+    padding: 3px 2px;
+
+    background: linear-gradient(rgba(255, 89, 86, 0.5), rgba(127, 27, 9, 0.7));
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.4),
+    0 2px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    color: white;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
 .new_clan_form {
     width: 300px;
     margin: 30px auto;
@@ -25,10 +68,6 @@
     border-radius: 2px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 1px 1px rgba(0, 0, 0, 0.1);
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
 
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
     color: #fff;
@@ -58,13 +97,12 @@
     width: 100%;
     padding: 8px 5px;
 
-    background: linear-gradient(rgba(99, 64, 86, 0.5), rgba(76, 49, 65, 0.7));
+    background: linear-gradient(rgba(255, 89, 86, 0.5), rgba(127, 27, 9, 0.7));
     border-radius: 5px;
     border: 1px solid #4e3043;
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.4),
     0 2px 1px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease-out;
 
     color: white;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
@@ -75,24 +113,27 @@
 
 .new_clan_form input[type=submit]:hover {
     box-shadow: inset 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 20px 30px rgba(99, 64, 86, 0.5);
+    inset 0 20px 30px rgba(99, 58, 51, 0.5);
 }
 
 .no-boxshadow .new_clan_form input[type=submit]:hover {
     background: #594642;
 }
 
-.new_clan_form input::-webkit-input-placeholder {
+.new_clan_form input::-webkit-input-placeholder,
+.find_location input::-webkit-input-placeholder {
     color: rgba(37, 21, 26, 0.9);
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.new_clan_form input:-moz-placeholder {
+.new_clan_form input:-moz-placeholder,
+.find_location input:-moz-placeholder {
     color: rgba(37, 21, 26, 0.9);
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.new_clan_form input:-ms-input-placeholder {
+.new_clan_form input:-ms-input-placeholder,
+.find_location input:-ms-input-placeholder {
     color: rgba(37, 21, 26, 0.9);
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
 }
