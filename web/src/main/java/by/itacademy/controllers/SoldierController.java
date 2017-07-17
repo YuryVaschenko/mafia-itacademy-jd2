@@ -14,7 +14,22 @@ public class SoldierController {
 
     @GetMapping
     public String showStartSoldierPage() {
-        return "index";
+        return "redirect: /soldier/profile";
+    }
+
+    @GetMapping("/debtors")
+    public String showDebtorsPage() {
+        return "debtors";
+    }
+
+    @GetMapping("/affairs")
+    public String showAffairsPage() {
+        return "affairs";
+    }
+
+    @GetMapping("/profile")
+    public String showProfilePage() {
+        return "profile";
     }
 
 }

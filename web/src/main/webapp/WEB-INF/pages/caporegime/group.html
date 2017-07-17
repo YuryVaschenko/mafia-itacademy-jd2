@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <title th:text="#{page.title}">Mafia JD2</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="../../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+    <header class="header" th:replace="fragments/header :: header"></header>
+    <hr/>
+    <nav class="navigation" th:replace="fragments/navigations :: base_navigation"></nav>
+    <hr/>
+    <br/><br/>
+    <main class="content">
+
+
+
+    </main><!-- .content -->
+</div><!-- .wrapper -->
+<br/>
+<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

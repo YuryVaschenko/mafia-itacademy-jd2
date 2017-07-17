@@ -14,6 +14,26 @@ public class CaporegimeController {
 
     @GetMapping
     public String showStartCaporegimePage() {
-        return "index";
+        return "redirect: /caporegime/profile";
+    }
+
+    @GetMapping("/affairs")
+    public String showAffairsPage() {
+        return "affairs";
+    }
+
+    @GetMapping("/group")
+    public String showGroupPage() {
+        return "/caporegime/group";
+    }
+
+    @GetMapping("/debtors")
+    public String showDebtorsPage() {
+        return "debtors";
+    }
+
+    @GetMapping("/profile")
+    public String showProfilePage() {
+        return "profile";
     }
 }

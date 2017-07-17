@@ -8,43 +8,35 @@
 <body>
 <nav class="navigation" th:fragment="base_navigation">
     <ul>
-        <li sec:authorize="isAnonymous()">
-            <a th:href="@{/login}" href="../login.html" th:text="#{nav.sign_in}">Log In</a>
-        </li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a>
-        </li>
-        <li><a th:href="@{/register}" href="../registerclan.html" th:text="#{nav.register_clan}">Register clan</a>
-        </li>
-    </ul>
-</nav>
-<br/>
-<nav class="navigation" th:fragment="authority_navigation">
-    <ul>
-        <li><a href="#">Dummy</a></li>
-        <li><a href="#" onclick="return false;">Dummy</a></li>
-        <li><a href="#" onclick="return false;">Dummy</a></li>
-        <li><a href="#" onclick="return false;">About</a></li>
-        <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
-    </ul>
-</nav>
-<br/>
-<nav class="navigation" th:fragment="caporegime_navigation">
-    <ul>
-        <li><a href="#">Dummy</a></li>
-        <li><a href="#" onclick="return false;">Dummy</a></li>
-        <li><a href="#" onclick="return false;">Dummy</a></li>
-        <li><a href="#" onclick="return false;">About</a></li>
-        <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
-    </ul>
-</nav>
-<br/>
-<nav class="navigation" th:fragment="soldier_navigation">
-    <ul>
-        <li><a href="#">Dummy</a></li>
-        <li><a href="#" onclick="return false;">Dummy</a></li>
-        <li><a href="#" onclick="return false;">Dummy</a></li>
-        <li><a href="#" onclick="return false;">About</a></li>
-        <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
+        <div sec:authorize="hasAuthority('AUTHORITY')">
+            <li><a th:href="@{/authority/members}" href="../authority/members.html" th:text="#{nav.authority.members}">Members</a>
+            </li>
+            <li><a th:href="@{/authority/groups}" href="../authority/groups.html" th:text="#{nav.authority.groups}">Groups</a>
+            </li>
+            <li><a th:href="@{/authority/affairs}" href="../affairs.html" th:text="#{nav.affairs}">Affairs</a></li>
+            <li><a th:href="@{/authority/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
+            <li><a th:href="@{/authority/profile}" href="../profile.html" th:text="#{nav.profile}">Profile</a></li>
+            <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
+        </div>
+        <div sec:authorize="hasAuthority('CAPOREGIME')">
+            <li><a th:href="@{/caporegime/group}" href="../caporegime/group.html" th:text="#{nav.caporegime.group}">Group</a>
+            </li>
+            <li><a th:href="@{/caporegime/affairs}" href="../affairs.html" th:text="#{nav.affairs}">Affairs</a></li>
+            <li><a th:href="@{/caporegime/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
+            <li><a th:href="@{/caporegime/profile}" href="../profile.html" th:text="#{nav.profile}">Profile</a></li>
+            <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
+        </div>
+        <div sec:authorize="hasAuthority('SOLDIER')">
+            <li><a th:href="@{/soldier/affairs}" href="../affairs.html" th:text="#{nav.affairs}">Affairs</a></li>
+            <li><a th:href="@{/soldier/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
+            <li><a th:href="@{/soldier/profile}" href="../profile.html" th:text="#{nav.profile}">Profile</a></li>
+            <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <li><a th:href="@{/register}" href="../registerclan.html" th:text="#{nav.register_clan}">Register clan</a>
+            </li>
+            <li><a th:href="@{/login}" href="../login.html" th:text="#{nav.sign_in}">Log In</a></li>
+        </div>
     </ul>
 </nav>
 </body>

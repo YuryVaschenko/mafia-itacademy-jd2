@@ -14,7 +14,31 @@ public class AuthorityController {
 
     @GetMapping
     public String showStartAuthorityPage() {
-        return "index";
+        return "redirect: /authority/profile";
     }
 
+    @GetMapping("/groups")
+    public String showGroupsPage() {
+        return "/authority/groups";
+    }
+
+    @GetMapping("/affairs")
+    public String showAffairsPage() {
+        return "affairs";
+    }
+
+    @GetMapping("/debtors")
+    public String showDebtorsPage() {
+        return "debtors";
+    }
+
+    @GetMapping("/profile")
+    public String showProfilePage() {
+        return "profile";
+    }
+
+    @GetMapping("/members")
+    public String showMembersPage() {
+        return "/authority/members";
+    }
 }
