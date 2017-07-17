@@ -21,11 +21,6 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "member_id")
 public class Authority extends Member {
 
-    @Column(name = "votes")
-    @Getter
-    @Setter
-    private Integer votes;
-
     @Column(name = "is_boss", columnDefinition = "smallint")
     @Getter
     @Setter

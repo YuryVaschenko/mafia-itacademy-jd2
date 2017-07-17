@@ -84,7 +84,6 @@ CREATE TABLE soldiers (
   DEFAULT CHARSET = utf8;
 CREATE TABLE authorities (
   member_id INT UNSIGNED      NOT NULL,
-  votes     INT               NOT NULL DEFAULT 0,
   is_boss   SMALLINT UNSIGNED NOT NULL DEFAULT 0,
   FOREIGN KEY (member_id) REFERENCES members (id)
 )

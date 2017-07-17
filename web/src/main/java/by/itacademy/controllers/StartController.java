@@ -1,5 +1,6 @@
 package by.itacademy.controllers;
 
+import by.itacademy.dto.RegisterNewClanInfoSample;
 import by.itacademy.services.ClanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -23,6 +26,11 @@ public class StartController {
     @Autowired
     public StartController(ClanService clanService) {
         this.clanService = clanService;
+    }
+
+    @ModelAttribute("regClanSample")
+    public RegisterNewClanInfoSample regClanSample() {
+        return new RegisterNewClanInfoSample();
     }
 
     //Start page
@@ -58,6 +66,13 @@ public class StartController {
     @GetMapping("/register")
     public String showRegisterClanPage() {
         return "registerclan";
+    }
+
+    //Register new clan form data
+    @PostMapping("/register")
+    public String registerClan(RegisterNewClanInfoSample regClanSample) {
+        clanService.registerNewClanBossAndAccountUser(regClanSample);
+        return "redirect: /";
     }
 
     //Redirect to page depending on the user role after authentication

@@ -1,5 +1,6 @@
 package by.itacademy.services;
 
+import by.itacademy.dto.RegisterNewClanInfoSample;
 import by.itacademy.entity.Clan;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public interface ClanService {
 
     List<Clan> getAllClans();
-    Long saveNewClan(Clan clan);
+
+    void registerNewClanBossAndAccountUser(RegisterNewClanInfoSample sample);
 
 }
