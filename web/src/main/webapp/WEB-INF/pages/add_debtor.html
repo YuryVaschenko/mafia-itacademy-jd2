@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <title th:text="#{page.title}">Mafia JD2</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
+    <link href="../../resources/css/main_forms_style.css" th:href="@{/resources/css/main_forms_style.css}"
+          rel="stylesheet">
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet"
+          type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({dateFormat: 'dd.mm.yy'});
+        });
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <header class="header" th:replace="fragments/header :: header"></header>
+    <hr/>
+    <nav class="navigation" th:replace="fragments/navigations :: base_navigation"></nav>
+    <hr/>
+    <br/><br/>
+    <main class="content">
+        <form class="form" th:action="@{/debtor/add}" method="post" th:object="${debtorSample}">
+            <h2 th:text="#{add_debtor}">Add debtor</h2>
+            <label for="firstname" th:for="login" th:text="#{first_name}">First name</label>
+            <input type="text" id="firstname" placeholder="First name" th:placeholder="#{first_name}"
+                   th:field="*{firstName}"
+                   autofocus="autofocus"/><br/>
+            <label for="lastname" th:for="lastname" th:text="#{last_name}">Last name</label>
+            <input type="text" id="lastname" placeholder="Last name" th:placeholder="#{last_name}"
+                   th:field="*{lastName}"/><br/>
+            <label for="middlename" th:for="middlename" th:text="#{middle_name}">Middle name</label>
+            <input type="text" id="middlename" placeholder="Middle name" th:placeholder="#{middle_name}"
+                   th:field="*{middleName}"/><br/>
+            <label for="nickname" th:for="nickname" th:text="#{nick_name}">Nickname</label>
+            <input type="text" id="nickname" placeholder="Nickname" th:placeholder="#{nick_name}"
+                   th:field="*{nickName}"/><br/>
+
+            <label for="country" th:for="country" th:text="#{country}">Country</label>
+            <input type="text" id="country" placeholder="Country" th:placeholder="#{country}"
+                   th:field="*{country}"/><br/>
+            <label for="city" th:for="city" th:text="#{city}">City</label>
+            <input type="text" id="city" placeholder="City" th:placeholder="#{city}"
+                   th:field="*{city}"/><br/>
+            <label for="street" th:for="street" th:text="#{street}">Street</label>
+            <input type="text" id="street" placeholder="Street" th:placeholder="#{street}"
+                   th:field="*{street}"/><br/>
+            <label for="house" th:for="house" th:text="#{house}">House</label>
+            <input type="text" id="house" placeholder="House" th:placeholder="#{house}"
+                   th:field="*{house}"/><br/>
+
+            <label for="debt_amount" th:for="debt_amount" th:text="#{debt_amount}+'*'">Debt amount</label>
+            <input type="text" id="debt_amount" placeholder="Debt amount" th:placeholder="#{debt_amount}+'*'"
+                   th:field="*{debtAmount}"
+                   required/><br/>
+            <label for="datepicker" th:for="datepicker" th:text="#{exp_date}+'*'">Expiration date</label>
+            <input class="datepicker" id="datepicker" type="text"
+                   placeholder="Expiration date" th:placeholder="#{exp_date}+'*'" th:field="*{expDate}"
+                   required
+                   pattern="(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d"/><br/>
+            <label for="perc_per_day" th:for="perc_per_day" th:text="#{percent_per_day}+'*'">Percent per day</label>
+            <input type="number" id="perc_per_day" th:value="0" value="0" min="0" max="999" step="5"
+                   contenteditable="false"
+                   th:field="*{percentPerDay}"/><br/>
+            <input type="submit" th:value="#{page.submit}" value="Submit"/>
+
+        </form>
+    </main><!-- .content -->
+</div><!-- .wrapper -->
+<br/>
+<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

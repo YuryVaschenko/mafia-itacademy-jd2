@@ -41,23 +41,23 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         nameDetails.setNickName("LittleJoe");
 
         debtors[0] = new Debtor();
-        debtors[0].setDebtAmount(1000);
+        debtors[0].setDebtAmount(1000L);
         debtors[0].setFrequency(Frequency.ONCE);
         debtors[0].setNameDetails(nameDetails);
         debtors[0].setExpDate(LocalDate.now().minusDays(3));
 
         debtors[1] = new Debtor();
-        debtors[1].setDebtAmount(5000);
+        debtors[1].setDebtAmount(5000L);
         debtors[1].setFrequency(Frequency.MONTHLY);
         debtors[1].setExpDate(LocalDate.now().minusMonths(1));
 
         debtors[2] = new Debtor();
-        debtors[2].setDebtAmount(3000);
+        debtors[2].setDebtAmount(3000L);
         debtors[2].setFrequency(Frequency.DECADE);
         debtors[2].setExpDate(LocalDate.now().plusDays(1));
 
         debtors[3] = new Debtor();
-        debtors[3].setDebtAmount(5000);
+        debtors[3].setDebtAmount(5000L);
         debtors[3].setFrequency(Frequency.MONTHLY);
         debtors[3].setExpDate(LocalDate.now().plusWeeks(1));
     }

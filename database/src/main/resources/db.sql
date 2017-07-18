@@ -38,7 +38,7 @@ CREATE TABLE debtors (
   middle_name     VARCHAR(50),
   last_name       VARCHAR(50),
   nickname        VARCHAR(50),
-  debt_amount     INT          NOT NULL,
+  debt_amount     BIGINT       NOT NULL,
   exp_date        DATE         NOT NULL,
   percent_per_day SMALLINT     NOT NULL        DEFAULT 10,
   frequency       VARCHAR(30)  NOT NULL,

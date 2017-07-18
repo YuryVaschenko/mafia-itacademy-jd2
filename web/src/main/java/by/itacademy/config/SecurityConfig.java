@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/authority**").hasAuthority("AUTHORITY")
                 .antMatchers("/caporegime**").hasAuthority("CAPOREGIME")
                 .antMatchers("/soldier**").hasAuthority("SOLDIER")
+                .antMatchers("/debtor/add").hasAnyAuthority("AUTHORITY", "CAPOREGIME")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

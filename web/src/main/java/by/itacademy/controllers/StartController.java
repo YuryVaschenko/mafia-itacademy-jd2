@@ -77,7 +77,7 @@ public class StartController {
     }
 
     //Redirect to page depending on the user role after authentication
-    @GetMapping("/redirect")
+    @RequestMapping("/redirect")
     public String redirectToAuthenticatedPage(Principal principal) {
         switch (principal.getName().toUpperCase()) {
             case "AUTHORITY":
