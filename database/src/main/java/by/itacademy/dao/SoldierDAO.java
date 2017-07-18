@@ -9,4 +9,6 @@ import by.itacademy.entity.Soldier;
 
 public interface SoldierDAO extends GenericDAO<Soldier> {
 
+    Soldier findByAccountUserLogin(String login);
+
 }

@@ -5,6 +5,7 @@ import by.itacademy.dao.AddressDAO;
 import by.itacademy.dao.DebtorDAO;
 import by.itacademy.dto.RegisterNewDebtorInfoSample;
 import by.itacademy.entity.Address;
+import by.itacademy.entity.Clan;
 import by.itacademy.entity.Debtor;
 import by.itacademy.entity.NameDetails;
 import by.itacademy.entity.enums.Frequency;
@@ -31,8 +32,10 @@ public class DebtorServiceImpl implements DebtorService {
     }
 
     @Override
-    public void registerNewDebtor(RegisterNewDebtorInfoSample sample) {
+    public void registerNewDebtor(RegisterNewDebtorInfoSample sample, Clan clan) {
+
         Debtor debtor = new Debtor();
+        debtor.setClan(clan);
         Address address = getAddressFromSample(sample);
         if (address != null) {
             addressDAO.saveNew(address);

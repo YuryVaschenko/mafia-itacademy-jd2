@@ -1,13 +1,11 @@
 package by.itacademy.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,7 +20,7 @@ import java.util.Set;
  */
 
 @Entity
-@ToString(exclude = {"members", "groups"}, callSuper = true)
+@ToString(exclude = {"members", "groups", "debtors"}, callSuper = true)
 @NoArgsConstructor
 @Table(name = "clans")
 public class Clan extends BaseEntity {
@@ -49,5 +47,11 @@ public class Clan extends BaseEntity {
     @Setter
     @JsonIgnore
     private Set<Member> members = new HashSet<>();
+
+    @OneToMany(mappedBy = "clan")
+    @Getter
+    @Setter
+    @JsonIgnore
+    private Set<Debtor> debtors = new HashSet<>();
 
 }

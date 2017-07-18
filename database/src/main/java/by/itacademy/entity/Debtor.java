@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -41,7 +40,7 @@ public class Debtor extends BaseEntity {
     @Column(name = "exp_date", nullable = false)
     @Getter
     @Setter
-    @DateTimeFormat (pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private LocalDate expDate;
 
     @Column(name = "percent_per_day", columnDefinition = "smallint")
@@ -60,5 +59,11 @@ public class Debtor extends BaseEntity {
     @Getter
     @Setter
     private Address address;
+
+    @ManyToOne
+    @JoinColumn(name = "clan_id", nullable = false)
+    @Getter
+    @Setter
+    private Clan clan;
 
 }

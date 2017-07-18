@@ -9,4 +9,6 @@ import by.itacademy.entity.Caporegime;
 
 public interface CaporegimeDAO extends GenericDAO<Caporegime> {
 
+    Caporegime findByAccountUserLogin(String login);
+
 }

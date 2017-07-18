@@ -1,10 +1,12 @@
 package by.itacademy.controllers;
 
 import by.itacademy.dto.RegisterNewDebtorInfoSample;
+import by.itacademy.entity.Member;
 import by.itacademy.services.DebtorService;
+import by.itacademy.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,10 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CommonController {
 
     private final DebtorService debtorService;
+    private final MemberService memberService;
 
     @Autowired
-    public CommonController(DebtorService debtorService) {
+    public CommonController(DebtorService debtorService, MemberService memberService) {
         this.debtorService = debtorService;
+        this.memberService = memberService;
     }
 
     @ModelAttribute("debtorSample")
@@ -36,7 +40,9 @@ public class CommonController {
 
     @PostMapping("/debtor/add")
     public String addNewDebtor(RegisterNewDebtorInfoSample sample) {
-        debtorService.registerNewDebtor(sample);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Member member = memberService.findMemberByLogin(user.getUsername());
+        debtorService.registerNewDebtor(sample, member.getClan());
         return "redirect: /redirect";
     }
 }

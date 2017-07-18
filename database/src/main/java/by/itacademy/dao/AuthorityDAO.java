@@ -9,4 +9,6 @@ import by.itacademy.entity.Authority;
 
 public interface AuthorityDAO extends GenericDAO<Authority> {
 
+    Authority findByAccountUserLogin(String login);
+
 }

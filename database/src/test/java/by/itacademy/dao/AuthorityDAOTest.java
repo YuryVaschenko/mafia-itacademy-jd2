@@ -10,11 +10,14 @@ import by.itacademy.entity.NameDetails;
 import by.itacademy.entity.enums.MemberStatus;
 import by.itacademy.entity.enums.Role;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Yury V. on 28.06.17.
@@ -49,12 +52,6 @@ public class AuthorityDAOTest extends GenericDAOTest<Authority> {
         user.setPassword("pass");
         user.setRole(Role.CAPOREGIME);
         accountUserDAO.saveNew(user);
-        AccountUser nextUser = new AccountUser();
-        nextUser.setLogin("log");
-        nextUser.setPassword("password");
-        nextUser.setRole(Role.SOLDIER);
-        accountUserDAO.saveNew(nextUser);
-
         authorities[0] = new Authority();
         authorities[0].setNameDetails(nameDetails);
         authorities[0].setBoss(true);
@@ -62,11 +59,26 @@ public class AuthorityDAOTest extends GenericDAOTest<Authority> {
         authorities[0].setMemberStatus(MemberStatus.AVAILABLE);
         authorities[0].setAccountUser(user);
 
+        AccountUser nextUser = new AccountUser();
+        nextUser.setLogin("log");
+        nextUser.setPassword("password");
+        nextUser.setRole(Role.SOLDIER);
+        accountUserDAO.saveNew(nextUser);
         authorities[1] = new Authority();
         authorities[1].setBoss(false);
         authorities[1].setClan(clan);
         authorities[1].setMemberStatus(MemberStatus.IN_JAIL);
         authorities[1].setAccountUser(nextUser);
+    }
+
+    @Test
+    public void findByAccountUserLoginTest() {
+        authorityDAO.saveNew(authorities[0]);
+        authorityDAO.saveNew(authorities[1]);
+
+        Authority retrievedAuthority = authorityDAO.findByAccountUserLogin("login");
+
+        assertNotNull(retrievedAuthority);
     }
 
     @Override

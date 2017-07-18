@@ -10,11 +10,14 @@ import by.itacademy.entity.Group;
 import by.itacademy.entity.enums.MemberStatus;
 import by.itacademy.entity.enums.Role;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Yury V. on 28.06.17.
@@ -68,6 +71,15 @@ public class CaporegimeDAOTest extends GenericDAOTest<Caporegime> {
         caporegimes[1].setEmail("yyy@yyy.net");
         caporegimes[1].setMemberStatus(MemberStatus.IN_HOSPITAL);
         caporegimes[1].setAccountUser(nextUser);
+    }
+
+    @Test
+    public void findByAccountUserLoginTest() {
+        caporegimeDAO.saveNew(caporegimes[0]);
+        caporegimeDAO.saveNew(caporegimes[1]);
+
+        Caporegime caporegime = caporegimeDAO.findByAccountUserLogin("login");
+        assertNotNull(caporegime);
     }
 
     @Override

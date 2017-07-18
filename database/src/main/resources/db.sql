@@ -50,8 +50,10 @@ CREATE TABLE debtors (
   percent_per_day SMALLINT     NOT NULL        DEFAULT 10,
   frequency       VARCHAR(30)  NOT NULL,
   address_id      INT UNSIGNED,
+  clan_id         INT UNSIGNED NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (address_id) REFERENCES addresses (id)
+  FOREIGN KEY (address_id) REFERENCES addresses (id),
+  FOREIGN KEY (clan_id) REFERENCES clans (id)
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE members (

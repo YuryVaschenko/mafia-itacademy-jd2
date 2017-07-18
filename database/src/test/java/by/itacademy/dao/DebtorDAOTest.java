@@ -3,6 +3,7 @@ package by.itacademy.dao;
 import by.itacademy.config.TestDbConfig;
 import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.dao.common.GenericDAOTest;
+import by.itacademy.entity.Clan;
 import by.itacademy.entity.Debtor;
 import by.itacademy.entity.NameDetails;
 import by.itacademy.entity.enums.Frequency;
@@ -31,6 +32,9 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
     @Autowired
     private DebtorDAO debtorDAO;
 
+    @Autowired
+    private ClanDAO clanDAO;
+
     private Debtor[] debtors = new Debtor[4];
 
     @Before
@@ -40,26 +44,34 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         nameDetails.setLastName("Cocube");
         nameDetails.setNickName("LittleJoe");
 
+        Clan clan = new Clan();
+        clan.setName("Benedetti");
+        clanDAO.saveNew(clan);
+
         debtors[0] = new Debtor();
         debtors[0].setDebtAmount(1000L);
         debtors[0].setFrequency(Frequency.ONCE);
         debtors[0].setNameDetails(nameDetails);
         debtors[0].setExpDate(LocalDate.now().minusDays(3));
+        debtors[0].setClan(clan);
 
         debtors[1] = new Debtor();
         debtors[1].setDebtAmount(5000L);
         debtors[1].setFrequency(Frequency.MONTHLY);
         debtors[1].setExpDate(LocalDate.now().minusMonths(1));
+        debtors[1].setClan(clan);
 
         debtors[2] = new Debtor();
         debtors[2].setDebtAmount(3000L);
         debtors[2].setFrequency(Frequency.DECADE);
         debtors[2].setExpDate(LocalDate.now().plusDays(1));
+        debtors[2].setClan(clan);
 
         debtors[3] = new Debtor();
         debtors[3].setDebtAmount(5000L);
         debtors[3].setFrequency(Frequency.MONTHLY);
         debtors[3].setExpDate(LocalDate.now().plusWeeks(1));
+        debtors[3].setClan(clan);
     }
 
     @Test

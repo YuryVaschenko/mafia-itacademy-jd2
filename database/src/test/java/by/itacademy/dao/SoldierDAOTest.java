@@ -12,11 +12,14 @@ import by.itacademy.entity.enums.MemberStatus;
 import by.itacademy.entity.enums.Role;
 import by.itacademy.entity.enums.Specialization;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Yury V. on 28.06.17.
@@ -52,12 +55,6 @@ public class SoldierDAOTest extends GenericDAOTest<Soldier> {
         user.setPassword("pass");
         user.setRole(Role.CAPOREGIME);
         accountUserDAO.saveNew(user);
-        AccountUser nextUser = new AccountUser();
-        nextUser.setLogin("log");
-        nextUser.setPassword("password");
-        nextUser.setRole(Role.SOLDIER);
-        accountUserDAO.saveNew(nextUser);
-
         soldiers[0] = new Soldier();
         soldiers[0].setClan(clan);
         soldiers[0].setSpecialization(Specialization.PIMP);
@@ -70,6 +67,11 @@ public class SoldierDAOTest extends GenericDAOTest<Soldier> {
         nameDetails.setLastName("Kurkul");
         nameDetails.setNickName("Rushed");
 
+        AccountUser nextUser = new AccountUser();
+        nextUser.setLogin("log");
+        nextUser.setPassword("password");
+        nextUser.setRole(Role.SOLDIER);
+        accountUserDAO.saveNew(nextUser);
         soldiers[1] = new Soldier();
         soldiers[1].setNameDetails(nameDetails);
         soldiers[1].setClan(clan);
@@ -77,6 +79,16 @@ public class SoldierDAOTest extends GenericDAOTest<Soldier> {
         soldiers[1].setGroup(group);
         soldiers[1].setMemberStatus(MemberStatus.AVAILABLE);
         soldiers[1].setAccountUser(nextUser);
+    }
+
+    @Test
+    public void findByAccountUserLoginTest() {
+        soldierDAO.saveNew(soldiers[0]);
+        soldierDAO.saveNew(soldiers[1]);
+
+        Soldier soldier = soldierDAO.findByAccountUserLogin("login");
+
+        assertNotNull(soldier);
     }
 
     @Override
