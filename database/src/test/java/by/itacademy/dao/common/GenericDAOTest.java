@@ -60,13 +60,13 @@ public abstract class GenericDAOTest<T extends BaseEntity> {
         assertArrayEquals(model, retrievedList.toArray());
     }
 
-    @Test(expected = ObjectNotFoundException.class)
+    @Test
     public void deleteTest() {
         T model = getModel()[0];
         Long id = getDao().saveNew(model);
         getDao().delete(model);
 
         getDao().findById(id);
-        //assertNull(getDao().findById(id));
+        assertNull(getDao().findById(id));
     }
 }

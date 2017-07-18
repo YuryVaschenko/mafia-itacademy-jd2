@@ -60,18 +60,18 @@ public class ClanServiceImpl implements ClanService {
         clan.setLocation(clanLocation);
         clanDAO.saveNew(clan);
 
-        Authority godFather = new Authority();
-        godFather.setBoss(true);
-        godFather.setMemberStatus(MemberStatus.AVAILABLE);
-        godFather.setClan(clan);
-        authorityDAO.saveNew(godFather);
-
         AccountUser accountUser = new AccountUser();
         accountUser.setLogin(sample.getLogin());
         accountUser.setPassword(passwordEncoder.encode(sample.getPassword()));
         accountUser.setRole(Role.AUTHORITY);
-        accountUser.setMember(godFather);
         accountUserDAO.saveNew(accountUser);
+
+        Authority godFather = new Authority();
+        godFather.setBoss(true);
+        godFather.setMemberStatus(MemberStatus.AVAILABLE);
+        godFather.setClan(clan);
+        godFather.setAccountUser(accountUser);
+        authorityDAO.saveNew(godFather);
 
     }
 

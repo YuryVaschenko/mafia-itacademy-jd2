@@ -59,7 +59,7 @@ public class DebtorServiceImpl implements DebtorService {
             address.setCountry(sample.getCountry());
             if (sample.getCity() != null) {           // city can`t exists without country
                 address.setCity(sample.getCity());
-                if (sample.getStreet() != null) {    // street can`t exists without city
+                if (sample.getStreet() != null) {     // street can`t exists without city
                     address.setStreet(sample.getStreet());
                     if (sample.getHouse() != null) {  // house can`t exists without street
                         address.setHouse(sample.getHouse());

@@ -3,10 +3,12 @@ package by.itacademy.dao;
 import by.itacademy.config.TestDbConfig;
 import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.dao.common.GenericDAOTest;
+import by.itacademy.entity.AccountUser;
 import by.itacademy.entity.Caporegime;
 import by.itacademy.entity.Clan;
 import by.itacademy.entity.Group;
 import by.itacademy.entity.enums.MemberStatus;
+import by.itacademy.entity.enums.Role;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class CaporegimeDAOTest extends GenericDAOTest<Caporegime> {
     @Autowired
     private CaporegimeDAO caporegimeDAO;
     @Autowired
+    private AccountUserDAO accountUserDAO;
+    @Autowired
     private GroupDAO groupDAO;
     @Autowired
     private ClanDAO clanDAO;
@@ -40,17 +44,30 @@ public class CaporegimeDAOTest extends GenericDAOTest<Caporegime> {
         Group group = new Group();
         group.setClan(clan);
         groupDAO.saveNew(group);
+        AccountUser user = new AccountUser();
+        user.setLogin("login");
+        user.setPassword("pass");
+        user.setRole(Role.CAPOREGIME);
+        accountUserDAO.saveNew(user);
+        AccountUser nextUser = new AccountUser();
+        nextUser.setLogin("log");
+        nextUser.setPassword("password");
+        nextUser.setRole(Role.SOLDIER);
+        accountUserDAO.saveNew(nextUser);
+
         caporegimes[0] = new Caporegime();
         caporegimes[0].setClan(clan);
         caporegimes[0].setGroup(group);
         caporegimes[0].setEmail("xxx@xxx.com");
         caporegimes[0].setMemberStatus(MemberStatus.AVAILABLE);
+        caporegimes[0].setAccountUser(user);
 
         caporegimes[1] = new Caporegime();
         caporegimes[1].setClan(clan);
         caporegimes[1].setGroup(group);
         caporegimes[1].setEmail("yyy@yyy.net");
         caporegimes[1].setMemberStatus(MemberStatus.IN_HOSPITAL);
+        caporegimes[1].setAccountUser(nextUser);
     }
 
     @Override

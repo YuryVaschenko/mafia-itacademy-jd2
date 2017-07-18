@@ -5,7 +5,14 @@ CREATE DATABASE mafia_july2017_jd2;
 USE mafia_july2017_jd2;
 
 DROP TABLE IF EXISTS locations;
-
+CREATE TABLE users (
+  id       INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+  login    VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(60)  NOT NULL,
+  role     VARCHAR(50)  NOT NULL,
+  PRIMARY KEY (id)
+)
+  DEFAULT CHARSET = utf8;
 CREATE TABLE locations (
   id        INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
   latitude  VARCHAR(20)  NOT NULL,
@@ -55,8 +62,10 @@ CREATE TABLE members (
   nickname    VARCHAR(50),
   status      VARCHAR(50)  NOT NULL,
   clan_id     INT UNSIGNED NOT NULL,
+  user_id     INT UNSIGNED NOT NULL UNIQUE,
   PRIMARY KEY (id),
-  FOREIGN KEY (clan_id) REFERENCES clans (id)
+  FOREIGN KEY (clan_id) REFERENCES clans (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
 )
   DEFAULT CHARSET = utf8;
 CREATE TABLE groups (
@@ -131,16 +140,6 @@ CREATE TABLE reports (
   PRIMARY KEY (id),
   FOREIGN KEY (affair_id) REFERENCES affairs (id),
   FOREIGN KEY (caporegime_id) REFERENCES caporegimes (member_id)
-)
-  DEFAULT CHARSET = utf8;
-CREATE TABLE users (
-  id        INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
-  login     VARCHAR(100) NOT NULL UNIQUE,
-  password  VARCHAR(60)  NOT NULL,
-  role      VARCHAR(50)  NOT NULL,
-  member_id INT UNSIGNED NOT NULL UNIQUE,
-  PRIMARY KEY (id),
-  FOREIGN KEY (member_id) REFERENCES members (id)
 )
   DEFAULT CHARSET = utf8;
 

@@ -3,11 +3,13 @@ package by.itacademy.dao;
 import by.itacademy.config.TestDbConfig;
 import by.itacademy.dao.common.GenericDAO;
 import by.itacademy.dao.common.GenericDAOTest;
+import by.itacademy.entity.AccountUser;
 import by.itacademy.entity.Clan;
 import by.itacademy.entity.Group;
 import by.itacademy.entity.NameDetails;
 import by.itacademy.entity.Soldier;
 import by.itacademy.entity.enums.MemberStatus;
+import by.itacademy.entity.enums.Role;
 import by.itacademy.entity.enums.Specialization;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -28,6 +30,8 @@ public class SoldierDAOTest extends GenericDAOTest<Soldier> {
     @Autowired
     private SoldierDAO soldierDAO;
     @Autowired
+    private AccountUserDAO accountUserDAO;
+    @Autowired
     private ClanDAO clanDAO;
     @Autowired
     private GroupDAO groupDAO;
@@ -42,11 +46,24 @@ public class SoldierDAOTest extends GenericDAOTest<Soldier> {
         Group group = new Group();
         group.setClan(clan);
         groupDAO.saveNew(group);
+
+        AccountUser user = new AccountUser();
+        user.setLogin("login");
+        user.setPassword("pass");
+        user.setRole(Role.CAPOREGIME);
+        accountUserDAO.saveNew(user);
+        AccountUser nextUser = new AccountUser();
+        nextUser.setLogin("log");
+        nextUser.setPassword("password");
+        nextUser.setRole(Role.SOLDIER);
+        accountUserDAO.saveNew(nextUser);
+
         soldiers[0] = new Soldier();
         soldiers[0].setClan(clan);
         soldiers[0].setSpecialization(Specialization.PIMP);
         soldiers[0].setGroup(group);
         soldiers[0].setMemberStatus(MemberStatus.AVAILABLE);
+        soldiers[0].setAccountUser(user);
 
         NameDetails nameDetails = new NameDetails();
         nameDetails.setFirstName("Grisha");
@@ -59,6 +76,7 @@ public class SoldierDAOTest extends GenericDAOTest<Soldier> {
         soldiers[1].setSpecialization(Specialization.PIMP);
         soldiers[1].setGroup(group);
         soldiers[1].setMemberStatus(MemberStatus.AVAILABLE);
+        soldiers[1].setAccountUser(nextUser);
     }
 
     @Override

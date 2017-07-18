@@ -46,7 +46,8 @@ public abstract class Member extends BaseEntity {
     @Setter
     private Clan clan;
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
     @Getter
     @Setter
     private AccountUser accountUser;
