@@ -1,5 +1,6 @@
 package by.itacademy.services;
 
+import by.itacademy.aspect.LogInvokedMethods;
 import by.itacademy.dao.AccountUserDAO;
 import by.itacademy.dao.AuthorityDAO;
 import by.itacademy.dao.ClanDAO;
@@ -24,6 +25,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@LogInvokedMethods
 public class ClanServiceImpl implements ClanService {
 
     private final ClanDAO clanDAO;

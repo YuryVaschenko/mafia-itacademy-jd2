@@ -23,7 +23,7 @@
     <main class="content">
         <div class="find_location">
             <input type="text" name="address" id="address" placeholder="Address" th:placeholder="#{address}"/>
-            <input type="button" value="Find location coords" onclick="get_coords()"/>
+            <input type="button" value="Find location coords" th:value="#{find_coords}" onclick="get_coords()"/>
         </div>
         <form class="new_clan_form" th:action="@{/register}" method="post" th:object="${regClanSample}">
             <h2 th:text="#{nav.register_clan}">Register new clan</h2>

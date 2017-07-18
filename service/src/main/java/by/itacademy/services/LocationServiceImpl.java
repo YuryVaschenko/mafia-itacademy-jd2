@@ -1,5 +1,6 @@
 package by.itacademy.services;
 
+import by.itacademy.aspect.LogInvokedMethods;
 import by.itacademy.dao.LocationDAO;
 import by.itacademy.entity.Location;
 import org.hibernate.Hibernate;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@LogInvokedMethods
 public class LocationServiceImpl implements LocationService {
 
     private final LocationDAO locationDAO;

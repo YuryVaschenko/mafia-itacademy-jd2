@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  */
 
 @Configuration
-@Import(DbConfig.class)
+@Import(value = {DbConfig.class, AspectConfig.class})
 @ComponentScan(basePackages = {"by.itacademy.services", "by.itacademy.dto"})
 public class ServiceConfig {
 

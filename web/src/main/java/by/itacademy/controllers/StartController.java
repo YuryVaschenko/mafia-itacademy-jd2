@@ -4,6 +4,7 @@ import by.itacademy.dto.RegisterNewClanInfoSample;
 import by.itacademy.services.ClanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

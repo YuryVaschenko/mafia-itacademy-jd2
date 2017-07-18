@@ -27,7 +27,7 @@ CREATE TABLE addresses (
 CREATE TABLE clans (
   id          INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
   name        VARCHAR(30)  NOT NULL UNIQUE,
-  location_id INT UNSIGNED UNIQUE,
+  location_id INT UNSIGNED,
   PRIMARY KEY (id),
   FOREIGN KEY (location_id) REFERENCES locations (id)
 )
