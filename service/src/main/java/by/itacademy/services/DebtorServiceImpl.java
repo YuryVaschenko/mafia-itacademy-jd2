@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Yury V. on 18.07.17.
  */
@@ -53,6 +55,11 @@ public class DebtorServiceImpl implements DebtorService {
         }
 
         debtorDAO.saveNew(debtor);
+    }
+
+    @Override
+    public List<Debtor> getPaginatedListOfDebtors(int firstResult, int maxResult) {
+        return debtorDAO.getPaginatedListOfDebtors(firstResult, maxResult);
     }
 
     private Address getAddressFromSample(RegisterNewDebtorInfoSample sample) {

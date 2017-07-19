@@ -30,7 +30,7 @@
     <hr/>
     <br/><br/>
     <main class="content">
-        <form class="form" th:action="@{/debtor/add}" method="post" th:object="${debtorSample}">
+        <form class="form" th:action="@{/debtors/add}" method="post" th:object="${debtorSample}">
             <h2 th:text="#{add_debtor}">Add debtor</h2>
             <label for="firstname" th:for="login" th:text="#{first_name}">First name</label>
             <input type="text" id="firstname" placeholder="First name" th:placeholder="#{first_name}"
@@ -69,7 +69,7 @@
                    required
                    pattern="(0[1-9]|[12][0-9]|3[01])[.](0[1-9]|1[012])[.](19|20)\d\d"/><br/>
             <label for="perc_per_day" th:for="perc_per_day" th:text="#{percent_per_day}+'*'">Percent per day</label>
-            <input type="number" id="perc_per_day" th:value="0" value="0" min="0" max="999" step="5"
+            <input type="number" id="perc_per_day" th:value="0" value="0" min="0" max="999" step="2"
                    contenteditable="false"
                    th:field="*{percentPerDay}"/><br/>
             <input type="submit" th:value="#{page.submit}" value="Submit"/>

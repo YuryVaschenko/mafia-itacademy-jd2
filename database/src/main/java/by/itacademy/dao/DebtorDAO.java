@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface DebtorDAO extends GenericDAO<Debtor> {
 
+    List<Debtor> getPaginatedListOfDebtors(int firstResult, int maxResult);
+
     List<Debtor> findLimitedDebtorsOrderedByExpDate(int limit);
 
     List<Debtor> findOverdueDebtorsOrderedByExpDate();

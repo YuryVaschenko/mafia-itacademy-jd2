@@ -155,4 +155,72 @@ INSERT INTO clans (name, location_id) VALUES ('Benedetti', 2);
 INSERT INTO clans (name, location_id) VALUES ('Alcamo', 3);
 INSERT INTO clans (name, location_id) VALUES ('Trapani', 4);
 
+INSERT INTO users (login, password, role)
+VALUES ('root', '$2a$10$HyYGyqAgSplcIpFuhTk/4eVsbfpcETSgCAHJMcyZkIG/841rIn4fq', 'AUTHORITY');
 
+INSERT INTO members (first_name, last_name, status, clan_id, user_id)
+VALUES ('Leonardo', 'Ortolano', 'AVAILABLE', 4, 1);
+
+INSERT INTO authorities (member_id, is_boss) VALUES (1, 1);
+
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Kolasa', '55');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Pushkina', '20');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Vitebsk', 'Babushkina', '3');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Grodno', 'Pobedy', '9');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Grodno', 'Zavodskaya', '12');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Gagarina', '30');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Nemanskaya', '23');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Gurskogo', '8');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Gurskogo', '15');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Alibegova', '5');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Nahimova', '33');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Storozhevskaya', '7');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Golodeda', '12');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Minsk', 'Golodeda', '35');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Gomel', 'Svetlaya', '4');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Gomel', 'Lenina', '19');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Mogilev', 'Lenina', '56');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Lida', 'Sovetskaya', '64');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Vitebsk', 'Nagornaya', '37');
+INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Vitebsk', 'Lidskaya', '41');
+
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Pietro', '', 'Diliberto', '', 100000, '13.10.2017', 10, 'ONCE', 1, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Ciro', '', 'Coniglio', '', 350000, '13.12.2017', 5, 'ONCE', 2, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Mensel', '', 'Jusuph', '', 50000, '06.09.2017', 5, 'ONCE', 3, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Alfonso', '', '', '', 75000, '01.03.2018', 5, 'ONCE', 4, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Stefano', '', 'Bontade', '', 45000, '02.02.2018', 10, 'ONCE', 5, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Francesco', 'Paolo', 'Bontade', '', 45000, '15.10.2017', 10, 'ONCE', 6, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Pietro', '', 'Scaglione', '', 120000, '25.09.2017', 10, 'ONCE', 7, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('John', '', 'Gambino', '', 90000, '10.08.2017', 10, 'ONCE', 8, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Angelo', '', 'Bruno', '', 30000, '10.08.2017', 15, 'ONCE', 9, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Boris', '', 'Giuliano', '', 15000, '26.08.2017', 10, 'ONCE', 10, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Giulio', '', 'Andreotti', '', 7000, '29.08.2017', 15, 'ONCE', 11, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Croceverde', '', 'Giardini', '', 39000, '15.08.2017', 20, 'ONCE', 12, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Pietro', '', 'Greco', 'the engineer', 17000, '09.09.2017', 15, 'ONCE', 13, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Salvatore', '', 'Pisa', '', 45000, '14.08.2017', 10, 'ONCE', 14, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Tommaso', '', 'Buscetta', 'toto the tall', 60000, '23.08.2017', 10, 'ONCE', 15, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Gaetano', '', 'Badalametti', '', 86000, '19.08.2017', 10, 'ONCE', 16, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Salvatore', '', 'Inzerillo', '', 95000, '14.07.2017', 10, 'ONCE', 17, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Vincenzo', '', 'Puccio', '', 65000, '16.07.2017', 10, 'ONCE', 18, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Bernardo', '', 'Povenzano', '', 45000, '04.07.2017', 5, 'ONCE', 19, 4);
+INSERT INTO debtors (first_name, middle_name, last_name, nickname, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Salvatore', '', 'Riina', '', 34000, '06.07.2017', 10, 'ONCE', 20, 4);

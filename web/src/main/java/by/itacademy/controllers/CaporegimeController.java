@@ -27,11 +27,6 @@ public class CaporegimeController {
         return "/caporegime/group";
     }
 
-    @GetMapping("/debtors")
-    public String showDebtorsPage() {
-        return "debtors";
-    }
-
     @GetMapping("/profile")
     public String showProfilePage() {
         return "profile";

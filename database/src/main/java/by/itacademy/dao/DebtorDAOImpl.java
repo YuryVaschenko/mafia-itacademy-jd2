@@ -21,11 +21,23 @@ import java.util.List;
 public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
 
     @Override
+    public List<Debtor> getPaginatedListOfDebtors(int firstResult, int maxResult) {
+
+        Session session = getSessionFactory().getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Debtor> criteria = cb.createQuery(Debtor.class);
+        Root<Debtor> debtor = criteria.from(Debtor.class);
+
+        criteria.select(debtor);
+
+        return session.createQuery(criteria).setFirstResult(firstResult).setMaxResults(maxResult).getResultList();
+    }
+
+    @Override
     public List<Debtor> findLimitedDebtorsOrderedByExpDate(int limit) {
         Session session = getSessionFactory().getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Debtor> criteria = cb.createQuery(Debtor.class);
-
         Root<Debtor> debtor = criteria.from(Debtor.class);
         Path<LocalDate> date = debtor.get(Debtor_.expDate);
 
@@ -41,7 +53,6 @@ public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
         Session session = getSessionFactory().getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Debtor> criteria = cb.createQuery(Debtor.class);
-
         Root<Debtor> debtor = criteria.from(Debtor.class);
         Path<LocalDate> expDate = debtor.get(Debtor_.expDate);
 

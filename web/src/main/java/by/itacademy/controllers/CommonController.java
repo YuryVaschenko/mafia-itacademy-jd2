@@ -1,6 +1,7 @@
 package by.itacademy.controllers;
 
 import by.itacademy.dto.RegisterNewDebtorInfoSample;
+import by.itacademy.entity.Debtor;
 import by.itacademy.entity.Member;
 import by.itacademy.services.DebtorService;
 import by.itacademy.services.MemberService;
@@ -8,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 /**
  * Created by Yury V. on 18.07.17.
@@ -33,12 +37,19 @@ public class CommonController {
         return new RegisterNewDebtorInfoSample();
     }
 
-    @GetMapping("/debtor/add")
+    @GetMapping("/debtors")
+    public String showDebtorsPage(Model model) {
+        List<Debtor> listOfDebtors = debtorService.getPaginatedListOfDebtors(0, 10);
+        model.addAttribute("listOfDebtors", listOfDebtors);
+        return "debtors";
+    }
+
+    @GetMapping("/debtors/add")
     public String showAddDebtorPage() {
         return "add_debtor";
     }
 
-    @PostMapping("/debtor/add")
+    @PostMapping("/debtors/add")
     public String addNewDebtor(RegisterNewDebtorInfoSample sample) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Member member = memberService.findMemberByLogin(user.getUsername());

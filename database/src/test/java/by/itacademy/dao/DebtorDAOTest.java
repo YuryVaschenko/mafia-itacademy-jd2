@@ -75,6 +75,19 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
     }
 
     @Test
+    public void getPaginatedListOfDebtorsTest() {
+        debtorDAO.saveNew(debtors[0]);
+        debtorDAO.saveNew(debtors[1]);
+        debtorDAO.saveNew(debtors[2]);
+        debtorDAO.saveNew(debtors[3]);
+
+        List<Debtor> retrievedDebtors = debtorDAO.getPaginatedListOfDebtors(1, 2);
+        Debtor[] debtorsToCheck = {debtors[1], debtors[2]};
+
+        assertArrayEquals(debtorsToCheck, retrievedDebtors.toArray());
+    }
+
+    @Test
     public void findLimitedDebtorsOrderedByExpDateTest() {
         debtorDAO.saveNew(debtors[0]);
         debtorDAO.saveNew(debtors[1]);

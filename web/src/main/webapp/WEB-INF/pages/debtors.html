@@ -9,6 +9,7 @@
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
     <link href="../../resources/css/mainstyle.css" th:href="@{/resources/css/mainstyle.css}" rel="stylesheet">
+    <link href="../../resources/css/tables_style.css" th:href="@{/resources/css/tables_style.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -19,8 +20,36 @@
     <hr/>
     <br/><br/>
     <main class="content">
+
+        <div>
+            <table border="1" th:border="1">
+                <tr>
+                    <th>First name</th>
+                    <th>Middle Name</th>
+                    <th>Last name</th>
+                    <th>Nickname</th>
+                    <th>Debt amount</th>
+                    <th>Exp. date</th>
+                    <th>Country</th>
+                    <th>City</th>
+                    <th>Frequency</th>
+                </tr>
+                <tr th:each="deb : ${listOfDebtors}">
+                    <td th:text="${deb.nameDetails.firstName}"></td>
+                    <td th:text="${deb.nameDetails.middleName}"></td>
+                    <td th:text="${deb.nameDetails.lastName}"></td>
+                    <td th:text="${deb.nameDetails.nickName}"></td>
+                    <td th:text="${deb.debtAmount}"></td>
+                    <td th:text="${deb.expDate}"></td>
+                    <td th:text="${deb.address.country}"></td>
+                    <td th:text="${deb.address.city}"></td>
+                    <td th:text="${deb.frequency}"></td>
+                </tr>
+            </table>
+        </div>
+        <br/>
         <div sec:authorize="hasAnyAuthority('AUTHORITY', 'CAPOREGIME')">
-            <a th:href="@{/debtor/add}" href="./add_debtor.html" th:text="#{add_debtor}">Add debtor</a>
+            <a th:href="@{/debtors/add}" href="./add_debtor.html" th:text="#{add_debtor}">Add debtor</a>
         </div>
     </main><!-- .content -->
 </div><!-- .wrapper -->

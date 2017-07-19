@@ -14,7 +14,7 @@
             <li><a th:href="@{/authority/groups}" href="../authority/groups.html" th:text="#{nav.authority.groups}">Groups</a>
             </li>
             <li><a th:href="@{/authority/affairs}" href="../affairs.html" th:text="#{nav.affairs}">Affairs</a></li>
-            <li><a th:href="@{/authority/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
+            <li><a th:href="@{/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
             <li><a th:href="@{/authority/profile}" href="../profile.html" th:text="#{nav.profile}">Profile</a></li>
             <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
         </div>
@@ -22,13 +22,13 @@
             <li><a th:href="@{/caporegime/group}" href="../caporegime/group.html" th:text="#{nav.caporegime.group}">Group</a>
             </li>
             <li><a th:href="@{/caporegime/affairs}" href="../affairs.html" th:text="#{nav.affairs}">Affairs</a></li>
-            <li><a th:href="@{/caporegime/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
+            <li><a th:href="@{/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
             <li><a th:href="@{/caporegime/profile}" href="../profile.html" th:text="#{nav.profile}">Profile</a></li>
             <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
         </div>
         <div sec:authorize="hasAuthority('SOLDIER')">
             <li><a th:href="@{/soldier/affairs}" href="../affairs.html" th:text="#{nav.affairs}">Affairs</a></li>
-            <li><a th:href="@{/soldier/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
+            <li><a th:href="@{/debtors}" href="../debtors.html" th:text="#{nav.debtors}">Debtors</a></li>
             <li><a th:href="@{/soldier/profile}" href="../profile.html" th:text="#{nav.profile}">Profile</a></li>
             <li><a th:href="@{/logout}" th:text="#{nav.sign_out}">Log out</a></li>
         </div>

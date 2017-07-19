@@ -4,8 +4,11 @@ import by.itacademy.dto.RegisterNewClanInfoSample;
 import by.itacademy.services.ClanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.security.Principal;
+import java.util.Collection;
+
+import static by.itacademy.entity.enums.Role.AUTHORITY;
+import static by.itacademy.entity.enums.Role.CAPOREGIME;
+import static by.itacademy.entity.enums.Role.SOLDIER;
 
 /**
  * Created by Yury V. on 13.07.17.
@@ -77,18 +84,20 @@ public class StartController {
     }
 
     //Redirect to page depending on the user role after authentication
-    @RequestMapping("/redirect")
-    public String redirectToAuthenticatedPage(Principal principal) {
-        switch (principal.getName().toUpperCase()) {
-            case "AUTHORITY":
-                return "redirect: /authority";
-            case "CAPOREGIME":
-                return "redirect: /caporegime";
-            case "SOLDIER":
-                return "redirect: /soldier";
-            default:
-                return "redirect: /";
+    @GetMapping("/redirect")
+    public String redirectToAuthenticatedPage() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        if (authorities.contains(new SimpleGrantedAuthority(AUTHORITY.name()))) {
+            return "redirect: /authority";
         }
+        if (authorities.contains(new SimpleGrantedAuthority(CAPOREGIME.name()))) {
+            return "redirect: /caporegime";
+        }
+        if (authorities.contains(new SimpleGrantedAuthority(SOLDIER.name()))) {
+            return "redirect: /soldier";
+        }
+        return "redirect: /";
     }
 
 }
