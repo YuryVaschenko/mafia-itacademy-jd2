@@ -1,6 +1,12 @@
 package by.itacademy.controllers;
 
+import by.itacademy.entity.Caporegime;
+import by.itacademy.services.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/caporegime")
 public class CaporegimeController {
+
+    private final MemberService memberService;
+
+    @Autowired
+    public CaporegimeController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
     @GetMapping
     public String showStartCaporegimePage() {
@@ -28,7 +41,10 @@ public class CaporegimeController {
     }
 
     @GetMapping("/profile")
-    public String showProfilePage() {
+    public String showProfilePage(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Caporegime caporegime = (Caporegime) memberService.findMemberByLogin(user.getUsername());
+        model.addAttribute("caporegime", caporegime);
         return "profile";
     }
 }

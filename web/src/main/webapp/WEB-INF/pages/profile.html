@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8"/>
     <!--[if lt IE 9]>
@@ -19,9 +19,33 @@
     <hr/>
     <br/><br/>
     <main class="content">
-
-
-
+        <div sec:authorize="hasAuthority('AUTHORITY')">
+            <label th:text="#{first_name}+': '+${authority.nameDetails.firstName}"></label><br/>
+            <label th:text="#{middle_name}+': '+${authority.nameDetails.middleName}"></label><br/>
+            <label th:text="#{last_name}+': '+${authority.nameDetails.lastName}"></label><br/>
+            <label th:text="#{nick_name}+': '+${authority.nameDetails.nickName}"></label><br/>
+            <label th:text="#{clanname}+': '+${authority.clan.name}"></label><br/>
+            <label th:text="#{godfather}+': '+${authority.isBoss()}"></label><br/>
+            <label th:text="#{status}+': '+${authority.memberStatus}"></label><br/>
+        </div>
+        <div sec:authorize="hasAuthority('CAPOREGIME')">
+            <label th:text="#{first_name}+': '+${caporegime.nameDetails.firstName}"></label><br/>
+            <label th:text="#{middle_name}+': '+${caporegime.nameDetails.middleName}"></label><br/>
+            <label th:text="#{last_name}+': '+${caporegime.nameDetails.lastName}"></label><br/>
+            <label th:text="#{nick_name}+': '+${caporegime.nameDetails.nickName}"></label><br/>
+            <label th:text="#{clanname}+': '+${caporegime.clan.name}"></label><br/>
+            <label th:text="#{status}+': '+${caporegime.memberStatus}"></label><br/>
+            <label th:text="#{godfather}+': '+${caporegime.email}"></label><br/>
+        </div>
+        <div sec:authorize="hasAuthority('SOLDIER')">
+            <label th:text="#{first_name}+': '+${soldier.nameDetails.firstName}"></label><br/>
+            <label th:text="#{middle_name}+': '+${soldier.nameDetails.middleName}"></label><br/>
+            <label th:text="#{last_name}+': '+${soldier.nameDetails.lastName}"></label><br/>
+            <label th:text="#{nick_name}+': '+${soldier.nameDetails.nickName}"></label><br/>
+            <label th:text="#{clanname}+': '+${soldier.clan.name}"></label><br/>
+            <label th:text="#{status}+': '+${soldier.memberStatus}"></label><br/>
+            <label th:text="#{godfather}+': '+${soldier.specialization}"></label><br/>
+        </div>
     </main><!-- .content -->
 </div><!-- .wrapper -->
 <br/>
