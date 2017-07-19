@@ -1,6 +1,7 @@
 package by.itacademy.entity;
 
 import by.itacademy.entity.enums.Frequency;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by Yury V. on 09.06.17.
@@ -66,4 +69,10 @@ public class Debtor extends BaseEntity {
     @Setter
     private Clan clan;
 
+    @Version
+    @Column(name = "last_updated")
+    @Getter
+    @Setter
+    @JsonIgnore
+    private LocalDateTime updateTime;
 }

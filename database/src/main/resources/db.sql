@@ -49,6 +49,7 @@ CREATE TABLE debtors (
   exp_date        DATE         NOT NULL,
   percent_per_day SMALLINT     NOT NULL        DEFAULT 10,
   frequency       VARCHAR(30)  NOT NULL,
+  last_updated    DATE,
   address_id      INT UNSIGNED,
   clan_id         INT UNSIGNED NOT NULL,
   PRIMARY KEY (id),
