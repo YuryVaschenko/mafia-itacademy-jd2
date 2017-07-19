@@ -27,19 +27,22 @@
         </div>
         <form class="form" th:action="@{/register}" method="post" th:object="${regClanSample}">
             <h2 th:text="#{nav.register_clan}">Register new clan</h2>
-            <label for="login" th:for="login" th:text="#{login}">Login</label>
+            <label for="login" th:for="login" th:each="err : ${#fields.errors('login')}"
+                   th:text="#{${err}}">Login</label>
             <input type="text" id="login" placeholder="Login" th:placeholder="#{login}" th:field="*{login}"
                    autofocus="autofocus" required/><br/>
-            <label for="password" th:for="password" th:text="#{password}">Password</label>
+            <label for="password" th:for="password" th:each="err : ${#fields.errors('password')}" th:text="#{${err}}">Password</label>
             <input type="password" id="password" placeholder="Password" th:placeholder="#{password}"
                    th:field="*{password}" required/><br/>
-            <label for="clanname" th:for="clanName" th:text="#{clanname}">Clan name</label>
+            <label for="clanname" th:for="clanName" th:each="err : ${#fields.errors('clanName')}" th:text="#{${err}}">Clan
+                name</label>
             <input type="text" id="clanname" placeholder="Clan name" th:placeholder="#{clanname}" th:field="*{clanName}"
                    required/><br/>
-            <label for="longitude" th:for="longitude" th:text="#{longitude}">Longitude</label>
+            <label for="longitude" th:for="longitude" th:each="err : ${#fields.errors('longitude')}"
+                   th:text="#{${err}}">Longitude</label>
             <input type="text" id="longitude" placeholder="Longitude" th:placeholder="#{longitude}"
                    th:field="*{longitude}" required/>
-            <label for="latitude" th:for="latitude" th:text="#{latitude}">Latitude</label>
+            <label for="latitude" th:for="latitude" th:each="err : ${#fields.errors('latitude')}" th:text="#{${err}}">Latitude</label>
             <input type="text" id="latitude" placeholder="Latitude" th:placeholder="#{latitude}" th:field="*{latitude}"
                    required/><br/>
             <input type="submit" th:value="#{page.submit}" value="Submit"/>

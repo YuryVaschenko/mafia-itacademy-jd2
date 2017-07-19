@@ -11,12 +11,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 
 import static by.itacademy.entity.enums.Role.AUTHORITY;
 import static by.itacademy.entity.enums.Role.CAPOREGIME;
@@ -78,9 +82,13 @@ public class StartController {
 
     //Register new clan form data
     @PostMapping("/register")
-    public String registerClan(RegisterNewClanInfoSample regClanSample) {
-        clanService.registerNewClanBossAndAccountUser(regClanSample);
-        return "redirect: /";
+    public String registerClan(@Valid RegisterNewClanInfoSample regClanSample, BindingResult bindingResult) {
+        List<ObjectError> allErrors = bindingResult.getAllErrors();
+        if (allErrors.isEmpty()) {
+            clanService.registerNewClanBossAndAccountUser(regClanSample);
+            return "redirect: /";
+        }
+        return "registerclan";
     }
 
     //Redirect to page depending on the user role after authentication
