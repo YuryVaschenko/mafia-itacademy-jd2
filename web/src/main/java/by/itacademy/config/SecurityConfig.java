@@ -1,6 +1,5 @@
 package by.itacademy.config;
 
-import by.itacademy.entity.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,13 +68,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
 
         http.userDetailsService(userDetailsService);
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("authority").password("pass").authorities(Role.AUTHORITY.name());
-        auth.inMemoryAuthentication().withUser("caporegime").password("pass").authorities(Role.CAPOREGIME.name());
-        auth.inMemoryAuthentication().withUser("soldier").password("pass").authorities(Role.SOLDIER.name());
     }
 
     @Bean

@@ -52,4 +52,19 @@ public class AuthorityController {
     public String showMembersPage() {
         return "/authority/members";
     }
+
+    @GetMapping("/members/add-authority")
+    public String showAddAuthorityPage() {
+        return "/authority/add_authority";
+    }
+
+    @GetMapping("/members/add-caporegime")
+    public String showAddCaporegimePage() {
+        return "/authority/add_caporegime";
+    }
+
+    @GetMapping("/members/add-soldier")
+    public String showAddSoldierPage() {
+        return "/authority/add_soldier";
+    }
 }

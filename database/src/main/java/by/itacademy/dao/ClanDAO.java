@@ -11,4 +11,6 @@ public interface ClanDAO extends GenericDAO<Clan> {
 
     Clan findClanByName(String clanName);
 
+    Long findClanIdByAccountUserLogin(String login);
+
 }

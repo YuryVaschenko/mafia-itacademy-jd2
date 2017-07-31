@@ -27,6 +27,7 @@
             <label th:text="#{clanname}+': '+${authority.clan.name}"></label><br/>
             <label th:text="#{godfather}+': '+${authority.isBoss()}"></label><br/>
             <label th:text="#{status}+': '+${authority.memberStatus}"></label><br/>
+            <label th:text="'ClanId: '+${session.clan_id}"></label><br/>
         </div>
         <div sec:authorize="hasAuthority('CAPOREGIME')">
             <label th:text="#{first_name}+': '+${caporegime.nameDetails.firstName}"></label><br/>

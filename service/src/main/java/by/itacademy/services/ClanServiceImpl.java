@@ -75,4 +75,9 @@ public class ClanServiceImpl implements ClanService {
 
     }
 
+    @Override
+    public Long findClanIdByLogin(String login) {
+        return clanDAO.findClanIdByAccountUserLogin(login);
+    }
+
 }

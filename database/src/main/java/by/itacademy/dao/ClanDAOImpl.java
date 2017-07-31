@@ -35,4 +35,15 @@ public class ClanDAOImpl extends GenericDAOImpl<Clan> implements ClanDAO {
 
         return resultList.isEmpty() ? null : resultList.get(0);
     }
+
+    @Override
+    public Long findClanIdByAccountUserLogin(String login) {
+
+        Session session = getSessionFactory().getCurrentSession();
+        List<Long> resultList =
+                session.createQuery("select mb.clan.id from Member as mb where mb.accountUser.login = :login",
+                        Long.class).setParameter("login", login).getResultList();
+
+        return resultList.isEmpty() ? null : resultList.get(0);
+    }
 }
