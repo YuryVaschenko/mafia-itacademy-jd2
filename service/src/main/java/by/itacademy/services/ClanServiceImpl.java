@@ -80,4 +80,9 @@ public class ClanServiceImpl implements ClanService {
         return clanDAO.findClanIdByAccountUserLogin(login);
     }
 
+    @Override
+    public boolean isClanNameExists(String clanName) {
+        return null != clanDAO.findClanByName(clanName);
+    }
+
 }

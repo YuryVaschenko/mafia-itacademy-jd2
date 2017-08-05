@@ -142,14 +142,6 @@
 
 .form label {
     padding: 0 0 5px 2px;
-    cursor: pointer;
-}
-
-.form label:hover ~ input {
-    border-color: #333;
-}
-
-.no-placeholder .form label {
-    display: block;
+    color: #780000;
 }
 

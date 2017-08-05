@@ -1,6 +1,5 @@
 package by.itacademy.controllers;
 
-import by.itacademy.dto.RegisterNewClanInfoSample;
 import by.itacademy.services.ClanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,17 +11,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.Collection;
-import java.util.List;
 
 import static by.itacademy.entity.enums.Role.AUTHORITY;
 import static by.itacademy.entity.enums.Role.CAPOREGIME;
@@ -42,11 +35,6 @@ public class StartController {
     @Autowired
     public StartController(ClanService clanService) {
         this.clanService = clanService;
-    }
-
-    @ModelAttribute("regClanSample")
-    public RegisterNewClanInfoSample regClanSample() {
-        return new RegisterNewClanInfoSample();
     }
 
     //Start page
@@ -78,23 +66,6 @@ public class StartController {
         return "login";
     }
 
-    //Register new clan page
-    @GetMapping("/register")
-    public String showRegisterClanPage() {
-        return "registerclan";
-    }
-
-    //Register new clan form data
-    @PostMapping("/register")
-    public String registerClan(@Valid RegisterNewClanInfoSample regClanSample, BindingResult bindingResult) {
-        List<ObjectError> allErrors = bindingResult.getAllErrors();
-        if (allErrors.isEmpty()) {
-            clanService.registerNewClanBossAndAccountUser(regClanSample);
-            return "redirect: /";
-        }
-        return "registerclan";
-    }
-
     //Redirect to page depending on the user role after authentication
     @GetMapping("/redirect")
     public String redirectToAuthenticatedPage(HttpSession session) {
@@ -103,7 +74,7 @@ public class StartController {
 
         Long clan_id = clanService.findClanIdByLogin(auth.getName());
         session.setAttribute("clan_id", clan_id);
-        session.setMaxInactiveInterval(20*60);
+        session.setMaxInactiveInterval(20 * 60);
 
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
         if (authorities.contains(new SimpleGrantedAuthority(AUTHORITY.name()))) {

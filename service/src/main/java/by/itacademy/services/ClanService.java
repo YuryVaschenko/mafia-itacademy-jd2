@@ -16,4 +16,7 @@ public interface ClanService {
     void registerNewClanBossAndAccountUser(RegisterNewClanInfoSample sample);
 
     Long findClanIdByLogin(String login);
+
+    boolean isClanNameExists(String clanName);
+
 }

@@ -25,26 +25,28 @@
             <input type="text" name="address" id="address" placeholder="Address" th:placeholder="#{address}"/>
             <input type="button" value="Find location coords" th:value="#{find_coords}" onclick="get_coords()"/>
         </div>
+        <br/>
         <form class="form" th:action="@{/register}" method="post" th:object="${regClanSample}">
             <h2 th:text="#{nav.register_clan}">Register new clan</h2>
-            <label for="login" th:for="login" th:each="err : ${#fields.errors('login')}"
-                   th:text="#{${err}}">Login</label>
-            <input type="text" id="login" placeholder="Login" th:placeholder="#{login}" th:field="*{login}"
+            <label th:for="login" th:each="err : ${#fields.errors('login')}" th:text="#{${err}}">Login error</label>
+            <label th:for="login" th:text="${existsLogin != null} ? #{${existsLogin}}">Login exists</label>
+            <input type="text" placeholder="Login" th:value="*{login}" th:placeholder="#{login}" th:field="*{login}"
                    autofocus="autofocus" required/><br/>
-            <label for="password" th:for="password" th:each="err : ${#fields.errors('password')}" th:text="#{${err}}">Password</label>
+            <label th:each="err : ${#fields.errors('password')}" th:text="#{${err}}">Password error</label>
             <input type="password" id="password" placeholder="Password" th:placeholder="#{password}"
                    th:field="*{password}" required/><br/>
-            <label for="clanname" th:for="clanName" th:each="err : ${#fields.errors('clanName')}" th:text="#{${err}}">Clan
-                name</label>
-            <input type="text" id="clanname" placeholder="Clan name" th:placeholder="#{clanname}" th:field="*{clanName}"
-                   required/><br/>
-            <label for="longitude" th:for="longitude" th:each="err : ${#fields.errors('longitude')}"
-                   th:text="#{${err}}">Longitude</label>
-            <input type="text" id="longitude" placeholder="Longitude" th:placeholder="#{longitude}"
-                   th:field="*{longitude}" required/>
-            <label for="latitude" th:for="latitude" th:each="err : ${#fields.errors('latitude')}" th:text="#{${err}}">Latitude</label>
-            <input type="text" id="latitude" placeholder="Latitude" th:placeholder="#{latitude}" th:field="*{latitude}"
-                   required/><br/>
+            <label th:each="err : ${#fields.errors('clanName')}" th:text="#{${err}}">Clan name error</label>
+            <label th:for="clanName" th:text="${existsClanName != null} ? #{${existsClanName}}">Clan name
+                exists</label>
+            <input type="text" id="clanname" placeholder="Clan name" th:value="*{clanName}" th:placeholder="#{clanname}"
+                   th:field="*{clanName}" required/><br/>
+            <label th:each="err : ${#fields.errors('longitude')}" th:text="#{${err}}">Longitude error</label>
+            <input type="text" id="longitude" placeholder="Longitude" th:value="*{longitude}"
+                   th:placeholder="#{longitude}" th:field="*{longitude}" required pattern="\d{2}[.]\d{1,6}"/>
+            <label for="latitude" th:for="latitude" th:each="err : ${#fields.errors('latitude')}" th:text="#{${err}}">Latitude
+                error</label>
+            <input type="text" id="latitude" placeholder="Latitude" th:value="*{latitude}" th:placeholder="#{latitude}"
+                   th:field="*{latitude}" required pattern="\d{2}[.]\d{1,6}"/><br/>
             <input type="submit" th:value="#{page.submit}" value="Submit"/>
         </form>
     </main><!-- .content -->

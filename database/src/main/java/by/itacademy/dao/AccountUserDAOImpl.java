@@ -35,4 +35,5 @@ public class AccountUserDAOImpl extends GenericDAOImpl<AccountUser> implements A
 
         return resultList.isEmpty() ? null : resultList.get(0);
     }
+
 }

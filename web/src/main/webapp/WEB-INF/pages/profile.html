@@ -20,14 +20,18 @@
     <br/><br/>
     <main class="content">
         <div sec:authorize="hasAuthority('AUTHORITY')">
-            <label th:text="#{first_name}+': '+${authority.nameDetails.firstName}"></label><br/>
-            <label th:text="#{middle_name}+': '+${authority.nameDetails.middleName}"></label><br/>
-            <label th:text="#{last_name}+': '+${authority.nameDetails.lastName}"></label><br/>
-            <label th:text="#{nick_name}+': '+${authority.nameDetails.nickName}"></label><br/>
-            <label th:text="#{clanname}+': '+${authority.clan.name}"></label><br/>
-            <label th:text="#{godfather}+': '+${authority.isBoss()}"></label><br/>
+            <label th:text="#{first_name}+': '+${authority.nameDetails.firstName}"
+                   th:unless="${authority.nameDetails.firstName == null}"></label><br/>
+            <label th:text="#{middle_name}+': '+${authority.nameDetails.middleName}"
+                   th:unless="${authority.nameDetails.middleName == null}"></label><br/>
+            <label th:text="#{last_name}+': '+${authority.nameDetails.lastName}"
+                   th:unless="${authority.nameDetails.lastName == null}"></label><br/>
+            <label th:text="#{nick_name}+': '+${authority.nameDetails.nickName}"
+                   th:unless="${authority.nameDetails.nickName == null}"></label><br/>
+            <label th:text="#{clanname}+': '+${authority.clan.name}"
+                   th:unless="${authority.clan.name == null}"></label><br/>
+            <label th:text="${authority.isBoss()?'Godfather':'Underboss'}"></label><br/>
             <label th:text="#{status}+': '+${authority.memberStatus}"></label><br/>
-            <label th:text="'ClanId: '+${session.clan_id}"></label><br/>
         </div>
         <div sec:authorize="hasAuthority('CAPOREGIME')">
             <label th:text="#{first_name}+': '+${caporegime.nameDetails.firstName}"></label><br/>

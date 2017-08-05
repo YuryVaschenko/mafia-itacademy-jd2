@@ -43,5 +43,8 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
-
+    @Override
+    public boolean isAccountUserExists(String login) {
+        return null != accountUserDAO.findAccountUserByLogin(login);
+    }
 }
