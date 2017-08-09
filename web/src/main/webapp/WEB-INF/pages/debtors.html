@@ -24,6 +24,7 @@
         <div>
             <table border="1" th:border="1">
                 <tr>
+                    <th>Clan</th>
                     <th>First name</th>
                     <th>Middle Name</th>
                     <th>Last name</th>
@@ -35,6 +36,7 @@
                     <th>Frequency</th>
                 </tr>
                 <tr th:each="deb : ${listOfDebtors}">
+                    <td th:text="${deb.clan.name}"></td>
                     <td th:text="${deb.nameDetails.firstName}"></td>
                     <td th:text="${deb.nameDetails.middleName}"></td>
                     <td th:text="${deb.nameDetails.lastName}"></td>

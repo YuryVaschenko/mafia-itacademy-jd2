@@ -42,7 +42,7 @@
                    th:field="*{clanName}" required/><br/>
             <label th:each="err : ${#fields.errors('longitude')}" th:text="#{${err}}">Longitude error</label>
             <input type="text" id="longitude" placeholder="Longitude" th:value="*{longitude}"
-                   th:placeholder="#{longitude}" th:field="*{longitude}" required pattern="\d{2}[.]\d{1,6}"/>
+                   th:placeholder="#{longitude}" th:field="*{longitude}" required pattern="\d{2}[.]\d{1,6}"/></br>
             <label for="latitude" th:for="latitude" th:each="err : ${#fields.errors('latitude')}" th:text="#{${err}}">Latitude
                 error</label>
             <input type="text" id="latitude" placeholder="Latitude" th:value="*{latitude}" th:placeholder="#{latitude}"

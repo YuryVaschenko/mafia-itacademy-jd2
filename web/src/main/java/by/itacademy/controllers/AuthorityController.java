@@ -1,14 +1,22 @@
 package by.itacademy.controllers;
 
+import by.itacademy.dto.RegisterNewAuthorityInfoSample;
 import by.itacademy.entity.Authority;
 import by.itacademy.services.MemberService;
+import by.itacademy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * Created by Yury V. on 15.07.17.
@@ -19,10 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthorityController {
 
     private final MemberService memberService;
+    private final UserService userService;
 
     @Autowired
-    public AuthorityController(MemberService memberService) {
+    public AuthorityController(MemberService memberService, UserService userService) {
         this.memberService = memberService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -54,8 +64,26 @@ public class AuthorityController {
     }
 
     @GetMapping("/members/add-authority")
-    public String showAddAuthorityPage() {
+    public String showAddAuthorityPage(Model model) {
+        model.addAttribute("authority", new RegisterNewAuthorityInfoSample());
         return "/authority/add_authority";
+    }
+
+    @PostMapping("/members/add-authority")
+    public String registerAuthority(@Valid @ModelAttribute("authority") RegisterNewAuthorityInfoSample authorityInfoSample, BindingResult bindingResult, Model model, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            return "/authority/add_authority";
+        }
+
+        if (userService.isAccountUserExists(authorityInfoSample.getLogin())) {
+            model.addAttribute("existsLogin", "error.login_exists");
+            return "/authority/add_authority";
+        }
+
+        memberService.saveNewAuthority((Long) session.getAttribute("clan_id"), authorityInfoSample);
+
+        return "redirect:/authority/members";
     }
 
     @GetMapping("/members/add-caporegime")

@@ -1,5 +1,6 @@
 package by.itacademy.services;
 
+import by.itacademy.dto.RegisterNewAuthorityInfoSample;
 import by.itacademy.entity.Member;
 
 /**
@@ -9,5 +10,7 @@ import by.itacademy.entity.Member;
 public interface MemberService {
 
     Member findMemberByLogin(String login);
+
+    Long saveNewAuthority(Long clanId, RegisterNewAuthorityInfoSample authorityInfoSample);
 
 }
