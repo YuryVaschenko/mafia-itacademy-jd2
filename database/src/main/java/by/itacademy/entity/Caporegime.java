@@ -37,7 +37,7 @@ public class Caporegime extends Member {
     @Setter
     private Group group;
 
-    @OneToMany (mappedBy = "caporegime")
+    @OneToMany(mappedBy = "caporegime")
     @Getter
     @Setter
     private Set<Report> reports = new HashSet<>();

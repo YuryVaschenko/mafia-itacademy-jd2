@@ -27,13 +27,13 @@ import javax.persistence.Table;
 public class Soldier extends Member {
 
     @Column(name = "specialization", nullable = false)
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Getter
     @Setter
     private Specialization specialization;
 
     @ManyToOne
-    @JoinColumn (name = "group_id")
+    @JoinColumn(name = "group_id")
     @Getter
     @Setter
     private Group group;

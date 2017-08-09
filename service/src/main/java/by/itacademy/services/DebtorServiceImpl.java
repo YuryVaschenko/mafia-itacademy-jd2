@@ -65,13 +65,13 @@ public class DebtorServiceImpl implements DebtorService {
     private Address getAddressFromSample(RegisterNewDebtorInfoSample sample) {
         Address address = new Address();
 
-        if (sample.getCountry() != null) {
+        if (sample.getCountry() != null && !"".equals(sample.getCountry().trim())) {
             address.setCountry(sample.getCountry());
-            if (sample.getCity() != null) {           // city can`t exists without country
+            if (sample.getCity() != null && !"".equals(sample.getCity().trim())) {           // city can`t exists without country
                 address.setCity(sample.getCity());
-                if (sample.getStreet() != null) {     // street can`t exists without city
+                if (sample.getStreet() != null && !"".equals(sample.getStreet().trim())) {     // street can`t exists without city
                     address.setStreet(sample.getStreet());
-                    if (sample.getHouse() != null) {  // house can`t exists without street
+                    if (sample.getHouse() != null && !"".equals(sample.getHouse().trim())) {  // house can`t exists without street
                         address.setHouse(sample.getHouse());
                     }
                 }
@@ -84,16 +84,16 @@ public class DebtorServiceImpl implements DebtorService {
 
     private NameDetails getNameDetailsFromSample(RegisterNewDebtorInfoSample sample) {
         NameDetails nameDetails = new NameDetails();
-        if (sample.getFirstName() != null) {
+        if (!"".equals(sample.getFirstName().trim())) {
             nameDetails.setFirstName(sample.getFirstName());
         }
-        if (sample.getLastName() != null) {
+        if (!"".equals(sample.getLastName().trim())) {
             nameDetails.setLastName(sample.getLastName());
         }
-        if (sample.getMiddleName() != null) {
+        if (!"".equals(sample.getMiddleName().trim())) {
             nameDetails.setMiddleName(sample.getMiddleName());
         }
-        if (sample.getNickName() != null) {
+        if (!"".equals(sample.getNickName().trim())) {
             nameDetails.setNickName(sample.getNickName());
         }
         return nameDetails;

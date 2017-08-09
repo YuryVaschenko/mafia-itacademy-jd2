@@ -1,6 +1,7 @@
 package by.itacademy.services;
 
 import by.itacademy.dto.RegisterNewAuthorityInfoSample;
+import by.itacademy.dto.RegisterNewCaporegimeInfoSample;
 import by.itacademy.entity.Member;
 
 /**
@@ -12,5 +13,7 @@ public interface MemberService {
     Member findMemberByLogin(String login);
 
     Long saveNewAuthority(Long clanId, RegisterNewAuthorityInfoSample authorityInfoSample);
+
+    Long saveNewCaporegime(Long clanId, RegisterNewCaporegimeInfoSample caporegimeInfoSample);
 
 }

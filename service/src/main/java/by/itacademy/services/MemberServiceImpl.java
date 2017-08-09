@@ -7,8 +7,10 @@ import by.itacademy.dao.CaporegimeDAO;
 import by.itacademy.dao.ClanDAO;
 import by.itacademy.dao.SoldierDAO;
 import by.itacademy.dto.RegisterNewAuthorityInfoSample;
+import by.itacademy.dto.RegisterNewCaporegimeInfoSample;
 import by.itacademy.entity.AccountUser;
 import by.itacademy.entity.Authority;
+import by.itacademy.entity.Caporegime;
 import by.itacademy.entity.Clan;
 import by.itacademy.entity.Member;
 import by.itacademy.entity.NameDetails;
@@ -87,6 +89,32 @@ public class MemberServiceImpl implements MemberService {
         authority.setNameDetails(nameDetails);
 
         return authorityDAO.saveNew(authority);
+    }
+
+    @Override
+    public Long saveNewCaporegime(Long clanId, RegisterNewCaporegimeInfoSample caporegimeInfoSample) {
+
+        AccountUser accountUser = new AccountUser();
+        accountUser.setRole(Role.CAPOREGIME);
+        accountUser.setLogin(caporegimeInfoSample.getLogin());
+        accountUser.setPassword(passwordEncoder.encode(caporegimeInfoSample.getPassword()));
+        accountUserDAO.saveNew(accountUser);
+
+        Clan clan = clanDAO.findById(clanId);
+
+        Caporegime caporegime = new Caporegime();
+        caporegime.setClan(clan);
+        caporegime.setMemberStatus(MemberStatus.AVAILABLE);
+        caporegime.setEmail(caporegimeInfoSample.getEmail());
+        caporegime.setAccountUser(accountUser);
+        NameDetails nameDetails = setNameDetailsAvoidingEmptyStringsInDataBase(
+                caporegimeInfoSample.getFirstName(),
+                caporegimeInfoSample.getMiddleName(),
+                caporegimeInfoSample.getLastName(),
+                caporegimeInfoSample.getNickName());
+        caporegime.setNameDetails(nameDetails);
+
+        return caporegimeDAO.saveNew(caporegime);
     }
 
     private NameDetails setNameDetailsAvoidingEmptyStringsInDataBase(String firstName, String middleName, String lastName, String nickname) {

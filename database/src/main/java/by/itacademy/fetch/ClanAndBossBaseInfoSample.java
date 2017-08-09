@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-@Scope ("prototype")
+@Scope("prototype")
 @Data
 public class ClanAndBossBaseInfoSample {
 

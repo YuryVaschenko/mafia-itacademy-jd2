@@ -2,7 +2,6 @@ package by.itacademy.dao.common;
 
 import by.itacademy.config.TestDbConfig;
 import by.itacademy.entity.BaseEntity;
-import org.hibernate.ObjectNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

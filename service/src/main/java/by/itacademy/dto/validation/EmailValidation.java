@@ -12,20 +12,21 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by Yury V. on 05.08.17.
+ * Created by Yury V. on 10.08.17.
  */
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @NotEmpty
-@Pattern(regexp = "\\d{2}[.]\\d{1,6}")
+@Pattern(regexp = "([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}")
 @Constraint(validatedBy = {})
 @ReportAsSingleViolation
-public @interface LongLatValidation {
+public @interface EmailValidation {
 
-    String message() default "validation.error.longlat_incorrect";
+    String message() default "validation.error.email_incorrect";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 }

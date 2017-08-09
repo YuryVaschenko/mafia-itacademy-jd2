@@ -1,6 +1,7 @@
 package by.itacademy.controllers;
 
 import by.itacademy.dto.RegisterNewAuthorityInfoSample;
+import by.itacademy.dto.RegisterNewCaporegimeInfoSample;
 import by.itacademy.entity.Authority;
 import by.itacademy.services.MemberService;
 import by.itacademy.services.UserService;
@@ -75,20 +76,34 @@ public class AuthorityController {
         if (bindingResult.hasErrors()) {
             return "/authority/add_authority";
         }
-
         if (userService.isAccountUserExists(authorityInfoSample.getLogin())) {
             model.addAttribute("existsLogin", "error.login_exists");
             return "/authority/add_authority";
         }
-
         memberService.saveNewAuthority((Long) session.getAttribute("clan_id"), authorityInfoSample);
 
         return "redirect:/authority/members";
     }
 
     @GetMapping("/members/add-caporegime")
-    public String showAddCaporegimePage() {
+    public String showAddCaporegimePage(Model model) {
+        model.addAttribute("caporegime", new RegisterNewCaporegimeInfoSample());
         return "/authority/add_caporegime";
+    }
+
+    @PostMapping("/members/add-caporegime")
+    public String registerCaporegime(@Valid @ModelAttribute("caporegime") RegisterNewCaporegimeInfoSample caporegimeInfoSample, BindingResult bindingResult, Model model, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            return "/authority/add_caporegime";
+        }
+        if (userService.isAccountUserExists(caporegimeInfoSample.getLogin())) {
+            model.addAttribute("existsLogin", "error.login_exists");
+            return "/authority/add_caporegime";
+        }
+        memberService.saveNewCaporegime((Long) session.getAttribute("clan_id"), caporegimeInfoSample);
+
+        return "redirect:/authority/members";
     }
 
     @GetMapping("/members/add-soldier")

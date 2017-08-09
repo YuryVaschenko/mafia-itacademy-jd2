@@ -46,7 +46,7 @@ public class Affair extends BaseEntity {
     private LocalDateTime expDateTime;
 
     @Column(name = "status", nullable = false, columnDefinition = "varchar")
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Getter
     @Setter
     private AffairStatus status;

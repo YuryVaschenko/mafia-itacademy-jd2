@@ -4,8 +4,6 @@ import by.itacademy.dto.validation.LongLatValidation;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.Pattern;
-
 /**
  * Created by Yury V. on 17.07.17.
  */

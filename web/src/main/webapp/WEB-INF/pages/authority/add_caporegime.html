@@ -23,7 +23,31 @@
     <hr/>
     <br/><br/>
     <main class="content">
-
+        <form class="form" th:action="@{/authority/members/add-caporegime}" method="post" th:object="${caporegime}">
+            <h2 th:text="#{reg_new_caporegime}">New caporegime</h2>
+            <input type="text" id="firstName" placeholder="First name" th:value="*{firstName}"
+                   th:placeholder="#{first_name}"
+                   th:field="*{firstName}"/><br/>
+            <input type="text" id="middleName" placeholder="Middle name" th:value="*{middleName}"
+                   th:placeholder="#{middle_name}"
+                   th:field="*{middleName}"/><br/>
+            <input type="text" id="lastName" placeholder="Last name" th:value="*{lastName}"
+                   th:placeholder="#{last_name}"
+                   th:field="*{lastName}"/><br/>
+            <input type="text" id="nickName" placeholder="Nickname" th:value="*{nickName}" th:placeholder="#{nick_name}"
+                   th:field="*{nickName}"/><br/>
+            <label th:for="email" th:each="err : ${#fields.errors('email')}" th:text="#{${err}}">Email error</label>
+            <input type="text" placeholder="Email" th:value="*{email}" th:placeholder="#{email}" th:field="*{email}"
+                   required pattern="([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}"/><br/>
+            <label th:for="login" th:each="err : ${#fields.errors('login')}" th:text="#{${err}}">Login error</label>
+            <label th:for="login" th:text="${existsLogin != null} ? #{${existsLogin}}">Login exists</label>
+            <input type="text" placeholder="Login" th:value="*{login}" th:placeholder="#{login}" th:field="*{login}"
+                   required/><br/>
+            <label th:each="err : ${#fields.errors('password')}" th:text="#{${err}}">Password error</label>
+            <input type="password" id="password" placeholder="Password" th:placeholder="#{password}"
+                   th:field="*{password}" required/><br/>
+            <input type="submit" th:value="#{page.submit}" value="Submit"/>
+        </form>
     </main><!-- .content -->
 </div><!-- .wrapper -->
 <br/>

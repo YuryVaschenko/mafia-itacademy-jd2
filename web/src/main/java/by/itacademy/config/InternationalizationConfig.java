@@ -16,7 +16,7 @@ import java.util.Locale;
  */
 
 @Configuration
-public class InternationalizationConfig extends WebMvcConfigurerAdapter{
+public class InternationalizationConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public MessageSource messageSource() {

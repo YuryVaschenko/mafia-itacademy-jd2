@@ -40,7 +40,7 @@
             <label th:text="#{nick_name}+': '+${caporegime.nameDetails.nickName}"></label><br/>
             <label th:text="#{clanname}+': '+${caporegime.clan.name}"></label><br/>
             <label th:text="#{status}+': '+${caporegime.memberStatus}"></label><br/>
-            <label th:text="#{godfather}+': '+${caporegime.email}"></label><br/>
+            <label th:text="#{email}+': '+${caporegime.email}"></label><br/>
         </div>
         <div sec:authorize="hasAuthority('SOLDIER')">
             <label th:text="#{first_name}+': '+${soldier.nameDetails.firstName}"></label><br/>

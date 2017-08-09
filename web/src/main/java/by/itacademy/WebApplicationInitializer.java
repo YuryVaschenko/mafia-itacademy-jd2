@@ -1,8 +1,8 @@
 package by.itacademy;
 
+import by.itacademy.config.SecurityConfig;
 import by.itacademy.config.ServiceConfig;
 import by.itacademy.config.WebConfig;
-import by.itacademy.config.SecurityConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

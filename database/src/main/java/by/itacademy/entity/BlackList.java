@@ -30,14 +30,14 @@ public class BlackList extends BaseEntity {
     @Setter
     private NameDetails nameDetails;
 
-    @Column (name = "status")
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
     private BlackListStatus blackListStatus;
 
     @ManyToOne
-    @JoinColumn (name = "location_id")
+    @JoinColumn(name = "location_id")
     @Getter
     @Setter
     private Location location;
