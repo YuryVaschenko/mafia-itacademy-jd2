@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Yury V. on 21.06.17.
@@ -111,6 +112,24 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         List<Debtor> overdueDebtors = debtorDAO.findOverdueDebtorsOrderedByExpDate();
 
         assertArrayEquals(debtorsToCheck, overdueDebtors.toArray());
+    }
+
+    @Override
+    @Test
+    public void updateTest() {
+        Debtor debtor = debtors[0];
+        Long id = debtorDAO.saveNew(debtor);
+        NameDetails nameDetails = new NameDetails();
+        nameDetails.setFirstName("NewFirstName");
+        nameDetails.setMiddleName("NewMiddleName");
+        nameDetails.setLastName("NewLastName");
+        nameDetails.setNickName("NewNickname");
+        debtor.setNameDetails(nameDetails);
+        debtor.setDebtAmount(100000L);
+        debtorDAO.update(debtor);
+        Debtor retrievedDebtor = debtorDAO.findById(id);
+
+        assertEquals(debtor, retrievedDebtor);
     }
 
     @Override
