@@ -2,7 +2,9 @@ package by.itacademy.controllers;
 
 import by.itacademy.dto.RegisterNewAuthorityInfoSample;
 import by.itacademy.dto.RegisterNewCaporegimeInfoSample;
+import by.itacademy.dto.RegisterNewSoldierInfoSample;
 import by.itacademy.entity.Authority;
+import by.itacademy.entity.enums.Specialization;
 import by.itacademy.services.MemberService;
 import by.itacademy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Yury V. on 15.07.17.
@@ -34,6 +38,11 @@ public class AuthorityController {
     public AuthorityController(MemberService memberService, UserService userService) {
         this.memberService = memberService;
         this.userService = userService;
+    }
+
+    @ModelAttribute("allSpecTypes")
+    public List<Specialization> allSpecializationTypes() {
+        return Arrays.asList(Specialization.values());
     }
 
     @GetMapping
@@ -107,7 +116,27 @@ public class AuthorityController {
     }
 
     @GetMapping("/members/add-soldier")
-    public String showAddSoldierPage() {
+    public String showAddSoldierPage(Model model) {
+        model.addAttribute("soldier", new RegisterNewSoldierInfoSample());
         return "/authority/add_soldier";
+    }
+
+    @PostMapping("/members/add-soldier")
+    public String registerSoldier(@Valid @ModelAttribute("soldier") RegisterNewSoldierInfoSample soldierInfoSample,
+                                  BindingResult bindingResult,
+                                  Model model,
+                                  HttpSession session) {
+        System.out.println("------------------------------->>>" + soldierInfoSample.getSpecialization());
+
+        if (bindingResult.hasErrors()) {
+            return "/authority/add_soldier";
+        }
+        if (userService.isAccountUserExists(soldierInfoSample.getLogin())) {
+            model.addAttribute("existsLogin", "error.login_exists");
+            return "/authority/add_soldier";
+        }
+        memberService.saveNewSoldier((Long) session.getAttribute("clan_id"), soldierInfoSample);
+
+        return "redirect:/authority/members";
     }
 }

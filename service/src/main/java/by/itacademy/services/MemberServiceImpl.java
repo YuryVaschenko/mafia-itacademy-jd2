@@ -8,14 +8,17 @@ import by.itacademy.dao.ClanDAO;
 import by.itacademy.dao.SoldierDAO;
 import by.itacademy.dto.RegisterNewAuthorityInfoSample;
 import by.itacademy.dto.RegisterNewCaporegimeInfoSample;
+import by.itacademy.dto.RegisterNewSoldierInfoSample;
 import by.itacademy.entity.AccountUser;
 import by.itacademy.entity.Authority;
 import by.itacademy.entity.Caporegime;
 import by.itacademy.entity.Clan;
 import by.itacademy.entity.Member;
 import by.itacademy.entity.NameDetails;
+import by.itacademy.entity.Soldier;
 import by.itacademy.entity.enums.MemberStatus;
 import by.itacademy.entity.enums.Role;
+import by.itacademy.entity.enums.Specialization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -115,6 +118,31 @@ public class MemberServiceImpl implements MemberService {
         caporegime.setNameDetails(nameDetails);
 
         return caporegimeDAO.saveNew(caporegime);
+    }
+
+    @Override
+    public Long saveNewSoldier(Long clanId, RegisterNewSoldierInfoSample soldierInfoSample) {
+        AccountUser accountUser = new AccountUser();
+        accountUser.setRole(Role.SOLDIER);
+        accountUser.setLogin(soldierInfoSample.getLogin());
+        accountUser.setPassword(passwordEncoder.encode(soldierInfoSample.getPassword()));
+        accountUserDAO.saveNew(accountUser);
+
+        Clan clan = clanDAO.findById(clanId);
+
+        Soldier soldier = new Soldier();
+        soldier.setClan(clan);
+        soldier.setMemberStatus(MemberStatus.AVAILABLE);
+        soldier.setSpecialization(Specialization.valueOf(soldierInfoSample.getSpecialization()));
+        soldier.setAccountUser(accountUser);
+        NameDetails nameDetails = setNameDetailsAvoidingEmptyStringsInDataBase(
+                soldierInfoSample.getFirstName(),
+                soldierInfoSample.getMiddleName(),
+                soldierInfoSample.getLastName(),
+                soldierInfoSample.getNickName());
+        soldier.setNameDetails(nameDetails);
+
+        return soldierDAO.saveNew(soldier);
     }
 
     private NameDetails setNameDetailsAvoidingEmptyStringsInDataBase(String firstName, String middleName, String lastName, String nickname) {

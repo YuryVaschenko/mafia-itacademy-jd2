@@ -2,6 +2,7 @@ package by.itacademy.services;
 
 import by.itacademy.dto.RegisterNewAuthorityInfoSample;
 import by.itacademy.dto.RegisterNewCaporegimeInfoSample;
+import by.itacademy.dto.RegisterNewSoldierInfoSample;
 import by.itacademy.entity.Member;
 
 /**
@@ -15,5 +16,7 @@ public interface MemberService {
     Long saveNewAuthority(Long clanId, RegisterNewAuthorityInfoSample authorityInfoSample);
 
     Long saveNewCaporegime(Long clanId, RegisterNewCaporegimeInfoSample caporegimeInfoSample);
+
+    Long saveNewSoldier(Long clanId, RegisterNewSoldierInfoSample soldierInfoSample);
 
 }
