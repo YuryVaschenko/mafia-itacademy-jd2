@@ -4,4 +4,4 @@
 
 **Used technologies:** Spring MVC, Spring Security, Hibernate, Thymeleaf, JUnit, Log4j, HTML, CSS and little bit JavaScript and Yandex API.
 
-*This project is still in development.*
+*This project is still in development. Account with test data: (login, pass) root, root.*

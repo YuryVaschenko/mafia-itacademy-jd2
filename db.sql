@@ -184,6 +184,7 @@ INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Mogilev
 INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Lida', 'Sovetskaya', '64');
 INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Vitebsk', 'Nagornaya', '37');
 INSERT INTO addresses (country, city, street, house) VALUES ('Belarus', 'Vitebsk', 'Lidskaya', '41');
+INSERT INTO addresses (country, city, street, house) VALUES ('Беларусь', 'Брест', 'Нахимова', '2');
 
 INSERT INTO debtors (first_name, last_name, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
 VALUES ('Pietro', 'Diliberto', 100000, '13.10.2017', 10, 'ONCE', 1, 4);
@@ -225,3 +226,5 @@ INSERT INTO debtors (first_name, last_name, debt_amount, exp_date, percent_per_d
 VALUES ('Bernardo', 'Povenzano', 45000, '04.07.2017', 5, 'ONCE', 19, 4);
 INSERT INTO debtors (first_name, last_name, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
 VALUES ('Salvatore', 'Riina', 34000, '06.07.2017', 10, 'ONCE', 20, 4);
+INSERT INTO debtors (first_name, last_name, debt_amount, exp_date, percent_per_day, frequency, address_id, clan_id)
+VALUES ('Тест', 'Фамилия', 30000, '06.07.2018', 5, 'ONCE', 21, 4);

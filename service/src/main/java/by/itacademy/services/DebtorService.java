@@ -13,6 +13,8 @@ public interface DebtorService {
 
     void registerNewDebtor(RegisterNewDebtorInfoSample sample, Clan clan);
 
-    List<Debtor> getPaginatedListOfDebtors(int firstResult, int maxResult);
+    List<Debtor> getPaginatedListOfDebtors(Long clanId, int firstResult, int maxResult);
+
+    int getDebtorsCount(Long clanId);
 
 }

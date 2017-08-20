@@ -40,7 +40,7 @@
                    th:text="#{${err}}">Specialization error></label>
             <select id="specialization" th:field="*{specialization}">
                 <option th:each="spec : ${allSpecTypes}" th:value="${spec}"
-                        th:text="${#strings.capitalize(#strings.toLowerCase(spec))}">Specializations
+                        th:text="#{${#strings.toLowerCase(spec)}}">Specializations
                 </option>
             </select>
             <label th:for="login" th:each="err : ${#fields.errors('login')}" th:text="#{${err}}">Login error</label>

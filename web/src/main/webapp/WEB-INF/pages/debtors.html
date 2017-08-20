@@ -24,19 +24,16 @@
         <div>
             <table border="1" th:border="1">
                 <tr>
-                    <th>Clan</th>
-                    <th>First name</th>
-                    <th>Middle Name</th>
-                    <th>Last name</th>
-                    <th>Nickname</th>
-                    <th>Debt amount</th>
-                    <th>Exp. date</th>
-                    <th>Country</th>
-                    <th>City</th>
-                    <th>Frequency</th>
+                    <th th:text="#{first_name}">First name</th>
+                    <th th:text="#{middle_name}">Middle Name</th>
+                    <th th:text="#{last_name}">Last name</th>
+                    <th th:text="#{nick_name}">Nickname</th>
+                    <th th:text="#{debt_amount}">Debt amount</th>
+                    <th th:text="#{exp_date}">Exp. date</th>
+                    <th th:text="#{country}">Country</th>
+                    <th th:text="#{city}">City</th>
                 </tr>
                 <tr th:each="deb : ${listOfDebtors}">
-                    <td th:text="${deb.clan.name}"></td>
                     <td th:text="${deb.nameDetails.firstName}"></td>
                     <td th:text="${deb.nameDetails.middleName}"></td>
                     <td th:text="${deb.nameDetails.lastName}"></td>
@@ -45,10 +42,29 @@
                     <td th:text="${deb.expDate}"></td>
                     <td th:text="${deb.address.country}"></td>
                     <td th:text="${deb.address.city}"></td>
-                    <td th:text="${deb.frequency}"></td>
                 </tr>
             </table>
         </div>
+        <br/>
+        <ul class="pagination_list">
+            <li th:if="${currentPage > 2}">
+                <a th:text="#{first}" th:href="@{/debtors(page=1, count=${count})}">First</a>
+                ...
+            </li>
+            <li th:if="${currentPage > 1}">
+                <a th:text="${currentPage - 1}" th:href="@{/debtors(page=${currentPage - 1}, count=${count})}">2</a>
+            </li>
+            <li>
+                <span th:text="${currentPage}">3</span>
+            </li>
+            <li th:if="${currentPage < maxPages}">
+                <a th:text="${currentPage + 1}" th:href="@{/debtors(page=${currentPage + 1}, count=${count})}">4</a>
+            </li>
+            <li th:if="${currentPage < maxPages - 1}">
+                ...
+                <a th:text="#{last}" th:href="@{/debtors(page=${maxPages}, count=${count})}">Last</a>
+            </li>
+        </ul>
         <br/>
         <div sec:authorize="hasAnyAuthority('AUTHORITY', 'CAPOREGIME')">
             <a th:href="@{/debtors/add}" href="./add_debtor.html" th:text="#{add_debtor}">Add debtor</a>

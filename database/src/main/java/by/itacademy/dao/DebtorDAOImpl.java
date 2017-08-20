@@ -21,16 +21,14 @@ import java.util.List;
 public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
 
     @Override
-    public List<Debtor> getPaginatedListOfDebtors(int firstResult, int maxResult) {
+    public List<Debtor> getPaginatedListOfDebtors(Long clanId, int firstResult, int maxResult) {
 
         Session session = getSessionFactory().getCurrentSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Debtor> criteria = cb.createQuery(Debtor.class);
-        Root<Debtor> debtor = criteria.from(Debtor.class);
 
-        criteria.select(debtor);
-
-        return session.createQuery(criteria).setFirstResult(firstResult).setMaxResults(maxResult).getResultList();
+        return session.createQuery("from Debtor deb where deb.clan.id = :clanId", Debtor.class)
+                .setParameter("clanId", clanId)
+                .setFirstResult(firstResult)
+                .setMaxResults(maxResult).getResultList();
     }
 
     @Override
@@ -59,6 +57,28 @@ public class DebtorDAOImpl extends GenericDAOImpl<Debtor> implements DebtorDAO {
         criteria.select(debtor).where(cb.lessThan(expDate, LocalDate.now())).orderBy(cb.asc(expDate));
 
         return session.createQuery(criteria).getResultList();
+    }
+
+    @Override
+    public int getDebtorsCount(Long clanId) {
+
+        Session session = getSessionFactory().getCurrentSession();
+
+        //Criteria works fine but uses join
+        /*
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
+        Root<Debtor> debtor = criteria.from(Debtor.class);
+        Join<Debtor, Clan> clan = debtor.join(Debtor_.clan);
+
+        criteria.select(cb.count(debtor))
+                .where(cb.equal(clan.get(Clan_.id), clanId));
+
+        return Math.toIntExact(session.createQuery(criteria).uniqueResult());
+        */
+
+        return Math.toIntExact(session.createQuery("select count(*) from Debtor deb where deb.clan.id = :clanId", Long.class)
+                .setParameter("clanId", clanId).uniqueResult());
     }
 
 }

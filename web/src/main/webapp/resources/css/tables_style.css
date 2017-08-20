@@ -32,3 +32,9 @@ tr {
 tr:nth-child(even) {
     background-color: #cfcfcf
 }
+
+.pagination_list ul, li{
+    list-style: none;
+    display: inline;
+    margin: 0 auto;
+}

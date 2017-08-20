@@ -126,7 +126,6 @@ public class AuthorityController {
                                   BindingResult bindingResult,
                                   Model model,
                                   HttpSession session) {
-        System.out.println("------------------------------->>>" + soldierInfoSample.getSpecialization());
 
         if (bindingResult.hasErrors()) {
             return "/authority/add_soldier";

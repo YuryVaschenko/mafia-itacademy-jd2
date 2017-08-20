@@ -49,6 +49,10 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         clan.setName("Benedetti");
         clanDAO.saveNew(clan);
 
+        Clan secondClan = new Clan();
+        secondClan.setName("Corleonesi");
+        clanDAO.saveNew(secondClan);
+
         debtors[0] = new Debtor();
         debtors[0].setDebtAmount(1000L);
         debtors[0].setFrequency(Frequency.ONCE);
@@ -72,7 +76,7 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         debtors[3].setDebtAmount(5000L);
         debtors[3].setFrequency(Frequency.MONTHLY);
         debtors[3].setExpDate(LocalDate.now().plusWeeks(1));
-        debtors[3].setClan(clan);
+        debtors[3].setClan(secondClan);
     }
 
     @Test
@@ -82,7 +86,7 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         debtorDAO.saveNew(debtors[2]);
         debtorDAO.saveNew(debtors[3]);
 
-        List<Debtor> retrievedDebtors = debtorDAO.getPaginatedListOfDebtors(1, 2);
+        List<Debtor> retrievedDebtors = debtorDAO.getPaginatedListOfDebtors(1L, 1, 2);
         Debtor[] debtorsToCheck = {debtors[1], debtors[2]};
 
         assertArrayEquals(debtorsToCheck, retrievedDebtors.toArray());
@@ -112,6 +116,18 @@ public class DebtorDAOTest extends GenericDAOTest<Debtor> {
         List<Debtor> overdueDebtors = debtorDAO.findOverdueDebtorsOrderedByExpDate();
 
         assertArrayEquals(debtorsToCheck, overdueDebtors.toArray());
+    }
+
+    @Test
+    public void getDebtorsCount() {
+        debtorDAO.saveNew(debtors[0]);
+        debtorDAO.saveNew(debtors[1]);
+        debtorDAO.saveNew(debtors[2]);
+        debtorDAO.saveNew(debtors[3]);
+
+        int resultCount = debtorDAO.getDebtorsCount(debtors[0].getClan().getId());
+
+        assertEquals(3, resultCount);
     }
 
     @Override

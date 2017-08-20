@@ -58,8 +58,13 @@ public class DebtorServiceImpl implements DebtorService {
     }
 
     @Override
-    public List<Debtor> getPaginatedListOfDebtors(int firstResult, int maxResult) {
-        return debtorDAO.getPaginatedListOfDebtors(firstResult, maxResult);
+    public List<Debtor> getPaginatedListOfDebtors(Long clanId, int firstResult, int maxResult) {
+        return debtorDAO.getPaginatedListOfDebtors(clanId, firstResult, maxResult);
+    }
+
+    @Override
+    public int getDebtorsCount(Long clanId) {
+        return debtorDAO.getDebtorsCount(clanId);
     }
 
     private Address getAddressFromSample(RegisterNewDebtorInfoSample sample) {
